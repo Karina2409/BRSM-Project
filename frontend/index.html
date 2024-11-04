@@ -1,0 +1,74 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <link rel="stylesheet" href="./styles/css/login.css">
+    <title>БРСМ БГУИР</title>
+</head>
+<body>
+
+<script src="./scripts/login.js"></script>
+
+<main>
+<div class="container" id="container">
+    <div class="form-container sign-up-container">
+        <form>
+            <h1 class="login-title">Регистрация</h1>
+            <input
+                    class="login"
+                    type="text"
+                    placeholder="Логин"
+            />
+            <input
+                    class="login"
+                    type="password"
+                    placeholder="Пароль"
+            />
+            <button class="dark-blue-button" type="submit">Зарегистрироваться</button>
+        </form>
+    </div>
+    <div class="form-container sign-in-container">
+        <form>
+            <h1>Авторизация</h1>
+            <input
+                    class="login"
+                    type="text"
+                    placeholder="Логин"
+            />
+            <input
+                    class="login"
+                    type="password"
+                    placeholder="Пароль"
+            />
+            <button class="dark-blue-button" type="submit">Войти</button>
+        </form>
+    </div>
+    <div class="overlay-container">
+        <div class="overlay">
+            <div class="overlay-panel overlay-left">
+                <h1>Добро пожаловать!</h1>
+                <p class="login-paragraph">
+                    Войдите в аккаунт, чтобы быть в курсе ближайших мероприятий в
+                    БРСМ.
+                </p>
+                <button class="ghost empty-button" id="signIn" onclick="handleSignInClick()">
+                    Войти
+                </button>
+            </div>
+            <div class="overlay-panel overlay-right">
+                <h1 class="get-greeting">Здравствуйте!</h1>
+                <p class="login-paragraph">
+                    Введите свои личные данные и начните путешествие вместе с БРСМ.
+                </p>
+                <button class="ghost empty-button" id="signUp" onclick="handleSignUpClick()">
+                    Зарегистрироваться
+                </button>
+            </div>
+        </div>
+    </div>
+</div>
+
+</main>
+
+</body>
+</html>

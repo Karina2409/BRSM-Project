@@ -1,0 +1,29 @@
+$dark-blue: #024E68;
+$light-blue: #5DACD6;
+$placeholder-color: #719CAA;
+$gray-blue: #B2C5CB;
+
+$montserrat: "Montserrat", sans-serif;
+
+* {
+  margin: 0;
+  font-family: $montserrat;
+}
+
+input {
+  border: 3px solid $dark-blue;
+  border-radius: 5px;
+  padding: 5px 20px;
+  font-weight: 400;
+  font-size: 18px;
+  color: $dark-blue;
+}
+
+input::placeholder {
+  color: $placeholder-color;
+}
+
+input:active{
+  border: 3px solid $dark-blue;
+}
+
