@@ -1,1 +1,10 @@
 @import "search-component";
+@import "student-component";
+
+
+.page{
+  display: flex;
+  flex-direction: column;
+  row-gap: 40px;
+  padding: 40px 0;
+}

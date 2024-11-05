@@ -1,0 +1,41 @@
+@import "style";
+
+.students-list{
+  display: flex;
+  flex-direction: column;
+  row-gap: 30px;
+}
+
+.student-item{
+  border: 5px solid #5dacd6;
+  border-radius: 30px;
+  padding: 20px 40px;
+  display: flex;
+  flex-direction: row;
+  justify-content: space-between;
+  align-items: center;
+}
+
+.student-text{
+  display: flex;
+  flex-direction: column;
+  row-gap: 17px;
+}
+
+.student-name{
+  font-weight: 700;
+  font-size: 28px;
+}
+
+.student-group-number{
+  font-weight: 400;
+  font-size: 15px;
+}
+
+.student-events-number{
+
+}
+
+.brsm-card{
+  height: 50px;
+}
