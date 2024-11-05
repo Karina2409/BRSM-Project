@@ -1,3 +1,1 @@
-* {
-  margin: 0;
-}
+*{margin:0;font-family:"Montserrat",sans-serif}input{border:3px solid #024E68;border-radius:5px;padding:5px 20px;font-weight:400;font-size:18px;color:#024E68}input::-webkit-input-placeholder{color:#719CAA}input::-moz-placeholder{color:#719CAA}input:-ms-input-placeholder{color:#719CAA}input::-ms-input-placeholder{color:#719CAA}input::placeholder{color:#719CAA}input:active{border:3px solid #024E68}.header{height:92px;background-color:#024E68;width:100%}

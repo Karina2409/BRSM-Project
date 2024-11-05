@@ -27,3 +27,40 @@ input:active{
   border: 3px solid $dark-blue;
 }
 
+.header {
+  height: 92px;
+  background-color: $dark-blue;
+  width: 100%;
+  display: flex;
+  align-items: center;
+  justify-content: right;
+}
+
+.header-list__item {
+  font-weight: 400;
+  font-size: 20px;
+  color: #fff;
+}
+
+.header-list__item.active {
+  font-weight: 600;
+}
+
+.header-list__item.active:hover {
+  cursor: default;
+  color: #fff;
+}
+
+.header-list__item:hover {
+  color: #e3e3e3;
+  cursor: pointer;
+}
+
+.header-list {
+  display: flex;
+  flex-wrap: wrap;
+  list-style-type: none;
+  column-gap: 35px;
+  margin-right: 204px;
+}
+
