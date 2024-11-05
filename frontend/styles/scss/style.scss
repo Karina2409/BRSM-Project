@@ -10,20 +10,26 @@ $montserrat: "Montserrat", sans-serif;
   font-family: $montserrat;
 }
 
-input {
+.main{
+  width: 1032px;
+  margin: 0 auto;
+}
+
+.input {
   border: 3px solid $dark-blue;
   border-radius: 5px;
   padding: 5px 20px;
   font-weight: 400;
   font-size: 18px;
   color: $dark-blue;
+  outline: none;
 }
 
-input::placeholder {
+.input::placeholder {
   color: $placeholder-color;
 }
 
-input:active{
+.input:active{
   border: 3px solid $dark-blue;
 }
 

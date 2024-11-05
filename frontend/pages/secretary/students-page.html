@@ -1,37 +1,46 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-  <meta charset="UTF-8">
-  <title>Students</title>
-  <link rel="stylesheet" href="../../styles/css/students-page.css">
+    <meta charset="UTF-8">
+    <title>Students</title>
+    <link rel="stylesheet" href="../../styles/css/students-page.css">
 </head>
 <body>
 
 <header class="header">
-  <nav class="header-items">
-    <ul class="header-list">
-      <li class="header-list__item active">
-        Студенты
-      </li>
-      <li class="header-list__item">
-        Пользователи
-      </li>
-      <li class="header-list__item">
-        Мероприятия
-      </li>
-      <li class="header-list__item">
-        Документация
-      </li>
-      <li class="header-list__item">
-        Статистика
-      </li>
-    </ul>
-  </nav>
+    <nav class="header-items">
+        <ul class="header-list">
+            <li class="header-list__item active">
+                Студенты
+            </li>
+            <li class="header-list__item">
+                Пользователи
+            </li>
+            <li class="header-list__item">
+                Мероприятия
+            </li>
+            <li class="header-list__item">
+                Документация
+            </li>
+            <li class="header-list__item">
+                Статистика
+            </li>
+        </ul>
+    </nav>
 </header>
 
 <main class="main">
-  <section class="search"></section>
+    <section class="search" id="search">
+        <div class="search-wrapper">
+
+        </div>
+    </section>
 </main>
+
+<script src="../../scripts/searchComponent.js"></script>
+<script>
+    renderSearchComponent();
+</script>
 
 </body>
 </html>
