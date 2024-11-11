@@ -23,21 +23,8 @@ function createStudentCard(student) {
             <img src="../../assets/icons/brsm-icon.png" alt="BRSM icon" class="brsm-card"/>
         </div>
     `
-
     return studentWrapper;
 }
-
-function renderStudentComponent() {
-    for (const student of students) {
-        const targetElement = document.querySelector('.students-list');
-        if (targetElement) {
-            targetElement.appendChild(createStudentCard());
-        } else {
-            console.error(`Target element "students-list" not found`);
-        }
-    }
-}
-
 
 document.addEventListener('DOMContentLoaded', function () {
     const list = document.querySelector('.students-list');
