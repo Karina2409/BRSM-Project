@@ -1,0 +1,92 @@
+[
+  {
+    "event_id": 1,
+    "event_name": "Конференция",
+    "event_date": "2024-05-01",
+    "event_time": "10:00:00.000000",
+    "event_place": "Учебный корпус №1",
+    "student_count": 20,
+    "opt_count": 2,
+    "for_petition": true
+  },
+  {
+    "event_id": 2,
+    "event_name": "Ярмарка",
+    "event_date": "2024-05-20",
+    "event_time": "11:00:00.000000",
+    "event_place": "Учебный корпус №3",
+    "student_count": 5,
+    "opt_count": 0,
+    "for_petition": true
+  },
+  {
+    "event_id": 3,
+    "event_name": "Возложение",
+    "event_date": "2024-05-09",
+    "event_time": "10:00:00.000000",
+    "event_place": "Учебный корпус №1",
+    "student_count": 20,
+    "opt_count": 2,
+    "for_petition": true
+  },
+  {
+    "event_id": 4,
+    "event_name": "Диалоговая площадка",
+    "event_date": "2024-06-10",
+    "event_time": "14:00:00.000000",
+    "event_place": "Учебный корпус №1",
+    "student_count": 25,
+    "opt_count": 2,
+    "for_petition": true
+  },
+  {
+    "event_id": 5,
+    "event_name": "Круглый стол \"Молодежь - будущее страны\"",
+    "event_date": "2024-06-15",
+    "event_time": "14:00:00.000000",
+    "event_place": "Учебный корпус №1",
+    "student_count": 10,
+    "opt_count": 0,
+    "for_petition": true
+  },
+  {
+    "event_id": 6,
+    "event_name": "Встреча с ветеранами Великой Отечественной войны",
+    "event_date": "2024-06-20",
+    "event_time": "11:00:00.000000",
+    "event_place": "Учебный корпус №1",
+    "student_count": 3,
+    "opt_count": 2,
+    "for_petition": true
+  },
+  {
+    "event_id": 7,
+    "event_name": "Субботник по благоустройству территории",
+    "event_date": "2024-07-06",
+    "event_time": "10:00:00.000000",
+    "event_place": "Парк Победы",
+    "student_count": 15,
+    "opt_count": 4,
+    "for_petition": true
+  },
+  {
+    "event_id": 8,
+    "event_name": "Концерт, посвященный Дню Победы",
+    "event_date": "2024-07-08",
+    "event_time": "19:00:00.000000",
+    "event_place": "Актовый зал университета",
+    "student_count": 20,
+    "opt_count": 2,
+    "for_petition": false
+  },
+  {
+    "event_id": 9,
+    "event_name": "Спортивная эстафета",
+    "event_date": "2024-07-16",
+    "event_time": "15:00:00.000000",
+    "event_place": "Стадион \"Дружба\"",
+    "student_count": 10,
+    "opt_count": 3,
+    "for_petition": true
+  }
+]
