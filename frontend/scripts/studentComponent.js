@@ -1,17 +1,18 @@
 //TODO: Изменить текст в элементе, заменить его на значения, полученные с сервера
 
-function createStudentComponent() {
+let students = [];
+
+function createStudentCard(student) {
     const studentWrapper = document.createElement("div");
     studentWrapper.classList.add("student-item");
 
     studentWrapper.innerHTML = `
         <div class="student-text">
             <div class="student-name">
-                
-                Сердюк Карина Владимировна
+                ${student.last_name} ${student.first_name} ${student.middle_name}
             </div>
             <div class="student-group-number">
-                214301
+                ${student.group_number}
             </div>
         </div>
         <div class="student-events-number">
@@ -27,10 +28,42 @@ function createStudentComponent() {
 }
 
 function renderStudentComponent() {
-    const targetElement = document.querySelector('.students-list');
-    if (targetElement) {
-        targetElement.appendChild(createStudentComponent());
-    } else {
-        console.error(`Target element "students-list" not found`);
+    for (const student of students) {
+        const targetElement = document.querySelector('.students-list');
+        if (targetElement) {
+            targetElement.appendChild(createStudentCard());
+        } else {
+            console.error(`Target element "students-list" not found`);
+        }
     }
+}
+
+
+document.addEventListener('DOMContentLoaded', function () {
+    const list = document.querySelector('.students-list');
+    if (list) {
+        fetch('../../data/students.json')
+            .then(response => {
+                if (!response.ok) {
+                    throw new Error('Network response was not ok ' + response.statusText);
+                }
+                return response.json();
+            })
+            .then(data => {
+                students = data;
+                renderStudentList(list, students);
+            })
+            .catch(error => {
+                console.error('Ошибка загрузки файла:', error);
+            });
+    }
+})
+
+function renderStudentList(list, students) {
+    list.innerHTML = '';
+
+    students.forEach(student => {
+        const card = createStudentCard(student);
+        list.append(card);
+    })
 }
