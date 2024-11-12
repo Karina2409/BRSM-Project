@@ -138,5 +138,61 @@
     "dorm_number": null,
     "student_full_name_d": null,
     "events_id": [2, 4, 7]
+  },
+  {
+    "student_id": 13,
+    "last_name": "Кузнецов",
+    "first_name": "Иван",
+    "middle_name": "Васильевич",
+    "group_number": "229012",
+    "student_faculty": "ФИТУ",
+    "email_adress": "kuznetsov@example.com",
+    "dormitory_residence": false,
+    "dorm_block_number": null,
+    "dorm_number": null,
+    "student_full_name_d": null,
+    "events_id": [2, 4, 7]
+  },
+  {
+    "student_id": 13,
+    "last_name": "Кузнецов",
+    "first_name": "Иван",
+    "middle_name": "Васильевич",
+    "group_number": "229012",
+    "student_faculty": "ФИТУ",
+    "email_adress": "kuznetsov@example.com",
+    "dormitory_residence": false,
+    "dorm_block_number": null,
+    "dorm_number": null,
+    "student_full_name_d": null,
+    "events_id": [2, 4, 7]
+  },
+  {
+    "student_id": 13,
+    "last_name": "Кузнецов",
+    "first_name": "Иван",
+    "middle_name": "Васильевич",
+    "group_number": "229012",
+    "student_faculty": "ФИТУ",
+    "email_adress": "kuznetsov@example.com",
+    "dormitory_residence": false,
+    "dorm_block_number": null,
+    "dorm_number": null,
+    "student_full_name_d": null,
+    "events_id": [2, 4, 7]
+  },
+  {
+    "student_id": 13,
+    "last_name": "Кузнецов",
+    "first_name": "Иван",
+    "middle_name": "Васильевич",
+    "group_number": "229012",
+    "student_faculty": "ФИТУ",
+    "email_adress": "kuznetsov@example.com",
+    "dormitory_residence": false,
+    "dorm_block_number": null,
+    "dorm_number": null,
+    "student_full_name_d": null,
+    "events_id": [2, 4, 7]
   }
 ]

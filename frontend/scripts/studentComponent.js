@@ -47,20 +47,30 @@ document.addEventListener('DOMContentLoaded', function () {
 
 function renderStudentList(list, students) {
     list.innerHTML = '';
+    const button = document.querySelector('.show-more');
+    if (students.length > 13) {
+        button.classList.add('visible');
+    }
+    let i = 1;
 
-    students.forEach(student => {
-        const eventStudents = generateEventsCount(student.events_id.length);
-        const card = createStudentCard(student, eventStudents);
-        list.append(card);
+    while (i <= 13) {
+        students.forEach(student => {
+            if (i <= 13) {
+                const eventStudents = generateEventsCount(student.events_id.length);
+                const card = createStudentCard(student, eventStudents);
+                list.append(card);
+                i++;
+            }
 
-    })
+        })
+    }
 }
 
 function openStudentInfoPage(student) {
-    window.location.href=`../secretary/student-info-page.html?id=${student.student_id}`;
+    window.location.href = `../secretary/student-info-page.html?id=${student.student_id}`;
 }
 
-function generateEventsCount(eventsCount){
+function generateEventsCount(eventsCount) {
     const studentEventCount = document.createElement('div');
     studentEventCount.classList.add('student-events-number');
 
@@ -83,4 +93,22 @@ function generateEventsCount(eventsCount){
     }
 
     return studentEventCount;
+}
+
+function addStudentsCard() {
+    const list = document.querySelector('.students-list');
+
+    const button = document.querySelector('.show-more');
+    button.classList.remove('visible');
+
+    let i = 1;
+    students.forEach(student => {
+        if (i > 13) {
+            const eventStudents = generateEventsCount(student.events_id.length);
+            const card = createStudentCard(student, eventStudents);
+            list.append(card);
+        }
+        i++;
+    })
+
 }

@@ -1,5 +1,6 @@
 @import "search-component";
 @import "student-component";
+@import "buttons";
 
 
 .page{
@@ -7,4 +8,18 @@
   flex-direction: column;
   row-gap: 40px;
   padding: 40px 0;
+}
+
+.button__show-more__container{
+  display: flex;
+  justify-content: center;
+}
+
+.show-more{
+  text-align: justify;
+  display: none;
+}
+
+.show-more.visible{
+  display: block;
 }
