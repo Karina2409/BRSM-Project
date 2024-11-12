@@ -16,6 +16,10 @@
   align-items: center;
 }
 
+.student-item:hover{
+  cursor: pointer;
+}
+
 .student-text{
   display: flex;
   flex-direction: column;

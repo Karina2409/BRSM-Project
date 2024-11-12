@@ -61,7 +61,6 @@ function renderStudentList(list, students) {
                 list.append(card);
                 i++;
             }
-
         })
     }
 }
