@@ -33,6 +33,8 @@ $montserrat: "Montserrat", sans-serif;
   border: 3px solid $dark-blue;
 }
 
+// HEADER STYLES
+
 .header {
   height: 92px;
   background-color: $dark-blue;
@@ -66,7 +68,60 @@ $montserrat: "Montserrat", sans-serif;
   display: flex;
   flex-wrap: wrap;
   list-style-type: none;
-  column-gap: 35px;
+  column-gap: 30px;
   margin-right: 204px;
 }
 
+// ARROW
+
+.arrow{
+  position: absolute;
+}
+
+// FOOTER STYLES
+
+.footer{
+  background-color: $dark-blue;
+  color: #fff;
+  font-weight: 400;
+  font-size: 15px;
+  height: 120px;
+}
+
+.footer_container{
+  width: 1032px;
+  display: flex;
+  margin: 0 auto;
+  justify-content: space-between;
+  align-items: center;
+  height: 100%;
+}
+
+.left_block__info{
+  display: flex;
+  flex-direction: column;
+  row-gap: 10px;
+}
+
+.phone_and_location{
+  display: flex;
+  flex-direction: column;
+  row-gap: 4px;
+}
+
+.right_block__info{
+  display: flex;
+  flex-direction: column;
+  row-gap: 10px;
+}
+
+.social-block{
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  width: 117px;
+}
+
+.social-icon{
+  width: 30px;
+}

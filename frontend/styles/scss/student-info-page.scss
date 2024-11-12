@@ -1,0 +1,64 @@
+@import "style";
+
+.main{
+  position: relative;
+}
+
+.student-info__arrow{
+  top: -30px;
+  left: -123px;
+}
+
+.student-info {
+  margin: 60px 0;
+  display: flex;
+  column-gap: 116px;
+  align-items: center;
+}
+
+.student-info__image{
+  display: flex;
+  align-items: center;
+}
+
+.student_image{
+  width: 300px;
+  border-radius: 150px;
+  border: none;
+}
+
+.student-info__block{
+  display: flex;
+  flex-direction: column;
+  row-gap: 50px;
+}
+
+.student-info__table_block{
+  display: flex;
+  flex-direction: column;
+  row-gap: 15px;
+}
+
+.student-info__table_row{
+  display: flex;
+  height: 36px;
+  align-items: center;
+}
+
+.student-info__table_column{
+  font-size: 20px;
+}
+
+.main-column-td{
+  font-weight: 600;
+  width: 164px;
+}
+
+.student-events-number{
+  display: flex;
+  column-gap: 10px;
+}
+
+.brsm-card{
+  height: 70px;
+}
