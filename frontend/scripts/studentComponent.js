@@ -2,9 +2,12 @@
 
 let students = [];
 
-function createStudentCard(student) {
+function createStudentCard(student, eventStudents) {
     const studentWrapper = document.createElement("div");
     studentWrapper.classList.add("student-item");
+    studentWrapper.addEventListener("click", (e) => {
+        openStudentInfoPage(student);
+    });
 
     studentWrapper.innerHTML = `
         <div class="student-text">
@@ -16,11 +19,7 @@ function createStudentCard(student) {
             </div>
         </div>
         <div class="student-events-number">
-            <img src="../../assets/icons/brsm-icon.png" alt="BRSM icon" class="brsm-card"/>
-            <img src="../../assets/icons/brsm-icon.png" alt="BRSM icon" class="brsm-card"/>
-            <img src="../../assets/icons/brsm-icon.png" alt="BRSM icon" class="brsm-card"/>
-            <img src="../../assets/icons/brsm-icon.png" alt="BRSM icon" class="brsm-card"/>
-            <img src="../../assets/icons/brsm-icon.png" alt="BRSM icon" class="brsm-card"/>
+        ${eventStudents.innerHTML}
         </div>
     `
     return studentWrapper;
@@ -50,7 +49,38 @@ function renderStudentList(list, students) {
     list.innerHTML = '';
 
     students.forEach(student => {
-        const card = createStudentCard(student);
+        const eventStudents = generateEventsCount(student.events_id.length);
+        const card = createStudentCard(student, eventStudents);
         list.append(card);
+
     })
+}
+
+function openStudentInfoPage(student) {
+    window.location.href=`../secretary/student-info-page.html?id=${student.student_id}`;
+}
+
+function generateEventsCount(eventsCount){
+    const studentEventCount = document.createElement('div');
+    studentEventCount.classList.add('student-events-number');
+
+    studentEventCount.innerHTML = '';
+
+    for (let i = 0; i < 5; i++) {
+        const eventImage = document.createElement('img');
+
+        if (i < eventsCount) {
+            eventImage.setAttribute('src', '../../assets/icons/brsm-icon.png');
+            eventImage.setAttribute('alt', 'BRSM Image');
+            eventImage.setAttribute('class', 'brsm-card');
+        } else {
+            eventImage.setAttribute('src', '../../assets/icons/brsm-icon-gray.png');
+            eventImage.setAttribute('alt', 'Gray BRSM Image');
+            eventImage.setAttribute('class', 'brsm-card');
+        }
+
+        studentEventCount.appendChild(eventImage);
+    }
+
+    return studentEventCount;
 }

@@ -1,0 +1,53 @@
+@import "style";
+
+.students__event-card{
+  border: 4px solid $light-blue;
+  border-radius: 20px;
+  padding: 20px;
+  width: 328px;
+  box-sizing: border-box;
+  display: flex;
+  flex-direction: column;
+  row-gap: 35px;
+}
+
+.students__event-card__image{
+  width: 100%;
+  border-radius: 20px;
+}
+
+.students__event-card__text-block{
+  display: flex;
+  flex-direction: column;
+  row-gap: 30px;
+}
+
+.students__event-card__name{
+  font-weight: 700;
+  font-size: 28px;
+  height: 68px;
+  display: flex;
+  align-items: center;
+}
+
+.students__event-card__info{
+  display: flex;
+  flex-direction: column;
+  row-gap: 20px;
+}
+
+.students__event-card__info__table_row{
+  display: flex;
+  align-items: center;
+  height: 20px;
+  column-gap: 15px;
+}
+
+.students__event-card__info__table_column{
+
+}
+
+.main-column-td-event{
+  font-weight: 600;
+  min-width: 146px;
+}

@@ -2,6 +2,12 @@ document.addEventListener('DOMContentLoaded', () => {
     const header = document.querySelector('header');
     const footer = document.querySelector('footer');
 
+    const arrow = document.querySelector('.arrow');
+    if(arrow){
+        arrow.addEventListener('click', () => {goBack()})
+    }
+
+
     header.innerHTML = `
         <nav class="header-items">
         <ul class="header-list">
@@ -53,3 +59,7 @@ document.addEventListener('DOMContentLoaded', () => {
     </div>
     `
 })
+
+function goBack() {
+    window.history.back();
+}

@@ -1,16 +1,22 @@
 @import "style";
+@import "students-info-event-card";
 
 .main{
   position: relative;
 }
 
+.student-info-page__student-info-block{
+  position: relative;
+  padding: 60px 0;
+  width: 100%;
+}
+
 .student-info__arrow{
-  top: -30px;
+  top: 30px;
   left: -123px;
 }
 
 .student-info {
-  margin: 60px 0;
   display: flex;
   column-gap: 116px;
   align-items: center;
@@ -61,4 +67,14 @@
 
 .brsm-card{
   height: 70px;
+}
+
+.student-info-page__events-info-block{
+  padding: 60px 0;
+}
+
+.students__events-list{
+  display: flex;
+  flex-wrap: wrap;
+  column-gap: 24px;
 }
