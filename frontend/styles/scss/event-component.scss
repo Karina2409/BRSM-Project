@@ -1,0 +1,12 @@
+@import "style";
+
+.event-name-card{
+  border: 5px solid $light-blue;
+  border-radius: 30px;
+  padding: 20px 40px;
+  font-weight: 700;
+  font-size: 24px;
+  height: 62px;
+  display: flex;
+  align-items: center;
+}

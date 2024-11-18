@@ -46,4 +46,11 @@ function createEventCard (event){
     return eventWrapper;
 }
 
+function createEventNameComponent (event){
+    const eventWrapper = document.createElement("div");
+    eventWrapper.classList.add("event-name-card");
+    eventWrapper.innerHTML = `${event.event_name}`
+    return eventWrapper;
+}
+
 function openEventInfoPage(event){}
