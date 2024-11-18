@@ -1,6 +1,7 @@
 function createExemptionComponent(exemption) {
     const exemptionWrapper = document.createElement("div");
     exemptionWrapper.classList.add("exemption-card");
+    exemptionWrapper.classList.add('document-card');
 
     exemptionWrapper.innerHTML = `
         <div class="exemption-card__name">${exemption.exemption_name}</div>
