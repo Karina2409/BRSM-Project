@@ -61,3 +61,17 @@
 .show-more.visible{
   display: block;
 }
+
+.button-plus{
+  background-color: $dark-blue;
+  color: #fff;
+  border-radius: 100px;
+  min-width: 44px;
+  height: 44px;
+  font-weight: 700;
+  font-size: 48px;
+  text-align: justify;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
