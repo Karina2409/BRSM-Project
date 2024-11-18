@@ -1,32 +1,23 @@
-<!DOCTYPE html>
-<html lang="en">
-<head>
-    <meta charset="UTF-8">
-    <title>Documentations</title>
-    <script src="../../scripts/script.js"></script>
-    <link rel="stylesheet" href="../../styles/css/docs-page.css">
-</head>
-<body>
+function createExemptionComponent(exemption) {
+    const exemptionWrapper = document.createElement("div");
+    exemptionWrapper.classList.add("exemption-card");
 
-<header class="header"></header>
-
-<main class="main">
-    <div class="exemption-card">
-        <div class="exemption-card__name">освобождение_11_10_2024_ФИТУ.pdf</div>
+    exemptionWrapper.innerHTML = `
+        <div class="exemption-card__name">${exemption.exemption_name}</div>
         <div class="exemption-card__info">
             <div class="exemption-card__info__row">
                 <div class="exemption-card__info__row__title">Дата:</div>
-                <div class="exemption-card__info__row__text">10.10.2024 </div>
+                <div class="exemption-card__info__row__text">${exemption.exemption_date}</div>
             </div>
 
             <div class="exemption-card__info__row">
                 <div class="exemption-card__info__row__title">Факультет:</div>
-                <div class="exemption-card__info__row__text">ФИТУ</div>
+                <div class="exemption-card__info__row__text">${exemption.students_faculty}</div>
             </div>
 
             <div class="exemption-card__info__row">
                 <div class="exemption-card__info__row__title">Мероприятие: </div>
-                <div class="exemption-card__info__row__text">Маркетинг в соц сетях</div>
+                <div class="exemption-card__info__row__text">${exemption.event_name}</div>
             </div>
         </div>
 
@@ -34,10 +25,7 @@
             <button class="dark-blue-button exemption-card__button">Скачать</button>
             <button class="empty-button exemption-card__button">Удалить</button>
         </div>
-    </div>
-</main>
+    `;
 
-<footer class="footer"></footer>
-
-</body>
-</html>
+    return exemptionWrapper;
+}

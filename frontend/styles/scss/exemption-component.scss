@@ -1,0 +1,54 @@
+@import "style";
+@import "buttons";
+
+.exemption-card{
+  border: 4px solid $light-blue;
+  border-radius: 20px;
+  padding: 20px;
+  display: flex;
+  flex-direction: column;
+  row-gap: 25px;
+  width: 328px;
+}
+
+.exemption-card__name{
+  font-weight: 700;
+  font-size: 18px;
+  word-wrap: break-word;
+}
+
+.exemption-card__info{
+  display: flex;
+  flex-direction: column;
+  row-gap: 15px;
+}
+
+.exemption-card__info__row{
+  display: flex;
+  align-items: center;
+  column-gap: 5px;
+}
+
+.exemption-card__info__row__title{
+  min-width: 146px;
+  font-weight: 600;
+  font-size: 15px;
+}
+
+.exemption-card__info__row__text{
+  font-weight: 400;
+  font-size: 15px;
+}
+
+.exemption-card__buttons{
+  display: flex;
+  justify-content: space-between;
+}
+
+.exemption-card__button{
+  font-size: 16px;
+  width: 130px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
