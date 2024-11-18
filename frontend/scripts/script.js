@@ -53,7 +53,7 @@ document.addEventListener('DOMContentLoaded', () => {
                 </div>
                 <div class="social-block">
                     <img src="../../assets/icons/instagram_logo_icon_white.png" alt="Instagram Icon" class="social-icon">
-                    <div class="social_text">Telegram</div>
+                    <div class="social_text">Instagram</div>
                 </div>
             </div>
         </div>

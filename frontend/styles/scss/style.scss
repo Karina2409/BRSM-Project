@@ -8,6 +8,7 @@ $montserrat: "Montserrat", sans-serif;
 * {
   margin: 0;
   font-family: $montserrat;
+  box-sizing: border-box;
 }
 
 .main{

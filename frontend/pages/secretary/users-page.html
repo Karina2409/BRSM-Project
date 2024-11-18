@@ -3,14 +3,63 @@
 <head>
     <meta charset="UTF-8">
     <title>Users</title>
-    <script src="../../scripts/script.js"></script>
     <link rel="stylesheet" href="../../styles/css/users-page.css">
+    <script src="../../scripts/script.js"></script>
 </head>
 <body>
 
 <header class="header"></header>
-<main class="main"></main>
+
+<main class="main">
+    <section class="search" id="search"></section>
+    <section class="user-list__container">
+        <div class="users-list">
+            <div class="user-card">
+
+            </div>
+
+            <section class="user-card">
+                <div class="user-card-wrapper">
+                    <div class="user-card__user-name">
+                        Беляева Оксана Юрьевна
+                    </div>
+                    <div class="selection__wrapper">
+                        <div class="select-user">
+                            <div class="select-user__text">
+                                Студент
+                            </div>
+                            <img src="../../assets/icons/Vector%201.png" alt="Vector" class="select-user__icon">
+                        </div>
+
+                        <div class="select-option-user unvisible">
+                            <div class="select-user__text">
+                                Секретарь
+                            </div>
+                        </div>
+
+                        <div class="select-option-user select select-option-user-2 unvisible">
+                            <div class="select-user__text">
+                                Студент
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </section>
+        </div>
+
+        <div class="button__show-more__container">
+            <button class="empty-button show-more">
+                Показать еще
+            </button>
+        </div>
+    </section>
+</main>
+
 <footer class="footer"></footer>
+
+<script src="../../scripts/components/searchComponent.js"></script>
+<script src="../../scripts/components/userComponent.js"></script>
+<script src="../../scripts/usersPage.js"></script>
 
 </body>
 </html>

@@ -1,6 +1,7 @@
 let students = [];
 
 document.addEventListener('DOMContentLoaded', function () {
+    renderSearchComponent("Введите фамилию студента");
     const list = document.querySelector('.students-list');
     if (list) {
         fetch('../../data/students.json')

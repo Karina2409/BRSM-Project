@@ -1,9 +1,10 @@
-function createSearchComponent(){
+function createSearchComponent(placeholderText){
     const searchWrapper = document.createElement('div');
     searchWrapper.classList.add('search-wrapper');
+    console.log(placeholderText);
 
     searchWrapper.innerHTML = `
-        <input type="text" class="search-input" placeholder="Введите фамилию студента">
+        <input type="text" class="search-input" placeholder="${placeholderText}">
         <button class="search-button">
             <img src="../../assets/icons/search.svg" alt="Search" class="search-img">
             Искать
@@ -19,10 +20,10 @@ function createSearchComponent(){
     return searchWrapper;
 }
 
-function renderSearchComponent() {
+function renderSearchComponent(placeholderText) {
     const targetElement = document.querySelector('#search');
     if (targetElement) {
-        targetElement.appendChild(createSearchComponent());
+        targetElement.appendChild(createSearchComponent(placeholderText));
     } else {
         console.error(`Target element "search" not found`);
     }
