@@ -12,28 +12,34 @@
 <main>
 <div class="container" id="container">
     <div class="form-container sign-up-container">
-        <form>
+        <form id="signUpForm">
             <h1 class="login-title">Регистрация</h1>
-            <input
-                    class="login input"
-                    type="text"
-                    placeholder="Логин"
-            />
-            <input
-                    class="login input"
-                    type="password"
-                    placeholder="Пароль"
-            />
+            <label>
+                <input
+                        class="login input"
+                        type="email"
+                        id="email"
+                        placeholder="Электронная почта"
+                />
+            </label>
+            <label>
+                <input
+                        class="login input"
+                        type="password"
+                        id="password"
+                        placeholder="Пароль"
+                />
+            </label>
             <button class="dark-blue-button" type="submit">Зарегистрироваться</button>
         </form>
     </div>
     <div class="form-container sign-in-container">
-        <form>
+        <form id="signInForm">
             <h1>Авторизация</h1>
             <input
                     class="login input"
-                    type="text"
-                    placeholder="Логин"
+                    type="email"
+                    placeholder="Электронная почта"
             />
             <input
                     class="login input"

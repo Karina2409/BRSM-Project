@@ -1,5 +1,41 @@
 let students = [];
 
+(async function checkAccess() {
+    const token = localStorage.getItem("authToken");
+    if (!token) {
+
+        console.log("Токен не найден, пауза перед редиректом на /index.html");
+
+        window.location.href = "/index.html";
+        return;
+    }
+
+    try {
+        const response = await fetch('http://localhost:8080/brsm/auth/validate', {
+            method: 'GET',
+            headers: {
+                'Authorization': `Bearer ${token}`,
+            }
+        });
+
+        if (response.ok) {
+            const data = await response.json();
+            console.log(data);
+            if (data.role !== 'SECRETARY') {
+                alert('Доступ запрещен роль не та');
+                window.location.href = "/index.html";
+            }
+        } else {
+            localStorage.removeItem('accessToken');
+            console.log('response не ок')
+            window.location.href = "/index.html";
+        }
+    } catch (error) {
+        console.error('Ошибка', error);
+        window.location.href = "/index.html";
+    }
+})();
+
 document.addEventListener('DOMContentLoaded', function () {
     renderSearchComponent("Введите фамилию студента");
     const list = document.querySelector('.students-list');
