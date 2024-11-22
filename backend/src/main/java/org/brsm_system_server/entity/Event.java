@@ -48,8 +48,8 @@ public class Event {
     @Column(name = "for_petition")
     private boolean forPetition;
 
-//    @OneToMany(mappedBy = "event")
-//    private Set<Exception> exceptions = new HashSet<>();
+    @OneToMany(mappedBy = "event")
+    private Set<Exemption> exceptions = new HashSet<>();
 
     public Event() {}
 
