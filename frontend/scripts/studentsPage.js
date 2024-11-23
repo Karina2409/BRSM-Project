@@ -40,10 +40,17 @@ document.addEventListener('DOMContentLoaded', function () {
     renderSearchComponent("Введите фамилию студента");
     const list = document.querySelector('.students-list');
     if (list) {
-        fetch('../../data/students.json')
+        const token = localStorage.getItem("authToken");
+        fetch('http://localhost:8080/students/get-all', {
+            method: 'GET',
+            headers: {
+                'Content-Type': 'application/json',
+                'Authorization': `Bearer ${token}`,
+            }
+        })
             .then(response => {
                 if (!response.ok) {
-                    throw new Error('Network response was not ok ' + response.statusText);
+                    throw new Error('Ошибка запроса: ' + response.statusText);
                 }
                 return response.json();
             })
@@ -52,8 +59,9 @@ document.addEventListener('DOMContentLoaded', function () {
                 renderStudentList(list, students);
             })
             .catch(error => {
-                console.error('Ошибка загрузки файла:', error);
+                console.error('Ошибка студентов:', error);
             });
+
     }
 })
 
@@ -68,7 +76,7 @@ function renderStudentList(list, students) {
     while (i <= 13) {
         students.forEach(student => {
             if (i <= 13) {
-                const eventStudents = generateEventsCount(student.events_id.length);
+                const eventStudents = generateEventsCount(2/*student.events_id.length*/);
                 const card = createStudentCard(student, eventStudents);
                 list.append(card);
                 i++;

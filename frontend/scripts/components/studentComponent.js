@@ -10,10 +10,10 @@ function createStudentCard(student, eventStudents) {
     studentWrapper.innerHTML = `
         <div class="student-text">
             <div class="student-name">
-                ${student.last_name} ${student.first_name} ${student.middle_name}
+                ${student.lastName} ${student.firstName} ${student.middleName}
             </div>
             <div class="student-group-number">
-                ${student.group_number}
+                ${student.groupNumber}, ${student.studentFaculty}
             </div>
         </div>
         <div class="student-events-number">

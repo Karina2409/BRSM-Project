@@ -36,9 +36,9 @@ public class SecurityConfiguration {
                         .requestMatchers("/brsm/auth/authenticate",
                                 "/brsm/auth/signUp")
                         .permitAll()
-                        .requestMatchers(HttpMethod.GET, "/brsm/secretary/**").hasAuthority("SECRETARY")
-                        .requestMatchers(HttpMethod.GET, "/brsm/student/**").hasAuthority("STUDENT")
-                        .requestMatchers(HttpMethod.GET, "/brsm/chief-secretary/**").hasAuthority("CHIEF_SECRETARY")
+                        .requestMatchers(HttpMethod.GET, "/students/get-all").hasAuthority("SECRETARY")
+//                        .requestMatchers(HttpMethod.GET, "/students/**").hasAuthority("SECRETARY")
+//
                         .anyRequest().authenticated())
                 .sessionManagement(session -> session.sessionCreationPolicy(SessionCreationPolicy.STATELESS))
                 .authenticationProvider(authenticationProvider)

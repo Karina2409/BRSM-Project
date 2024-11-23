@@ -30,7 +30,8 @@ public class Secretary {
     @Column(name = "telegram_username")
     private String telegramUsername;
 
-    @Column
+    @Lob
+    @Column(name = "image", columnDefinition = "LONGBLOB")
     private byte[] image;
 
 }
