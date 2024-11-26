@@ -19,14 +19,17 @@
 }
 
 .empty-button {
+  height: 44px;
+  width: 210px;
   color: $dark-blue;
+  padding: 0 25px;
   border-radius: 15px;
   border: 4px solid $dark-blue;
-  padding: 10px 30px;
   font-weight: 700;
   font-size: 20px;
   transition: background 0.3s ease;
   background-color: #fff;
+  text-align: center;
 }
 
 .empty-button:hover {

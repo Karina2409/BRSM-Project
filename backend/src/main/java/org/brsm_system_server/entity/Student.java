@@ -55,6 +55,10 @@ public class Student {
     @Column(name = "dorm_number")
     private Integer dormNumber;
 
+    @Lob
+    @Column(name = "image", columnDefinition = "LONGBLOB")
+    private byte[] image;
+
     @ManyToMany
     @JoinTable(
             name = "student_report",

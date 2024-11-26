@@ -9,11 +9,12 @@
 .student-item{
   border: 5px solid #5dacd6;
   border-radius: 30px;
-  padding: 20px 40px;
+  padding: 15px 35px;
   display: flex;
   flex-direction: row;
   justify-content: space-between;
   align-items: center;
+  height: 99px;
 }
 
 .student-item:hover{
@@ -29,15 +30,20 @@
 .student-name{
   font-weight: 700;
   font-size: 28px;
+  height: 24px;
+  display: flex;
+  align-items: center;
 }
 
 .student-group-number{
   font-weight: 400;
   font-size: 15px;
+  height: 18px;
 }
 
 .student-events-number{
-
+  display: flex;
+  column-gap: 10px;
 }
 
 .brsm-card{

@@ -3,7 +3,9 @@ package org.brsm_system_server.controller;
 import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
 import org.brsm_system_server.dto.StudentDTO;
+import org.brsm_system_server.entity.Event;
 import org.brsm_system_server.entity.Student;
+import org.brsm_system_server.service.interfaces.IEventService;
 import org.brsm_system_server.service.interfaces.IStudentService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.security.access.prepost.PreAuthorize;
@@ -20,6 +22,9 @@ public class StudentController {
 
     @Autowired
     private IStudentService studentService;
+
+    @Autowired
+    private IEventService eventService;
 
     @PreAuthorize("hasAuthority('SECRETARY')")
     @GetMapping("/get-all")
@@ -39,9 +44,19 @@ public class StudentController {
             dto.setDormitoryResidence(student.isDormitoryResidence());
             dto.setDormBlockNumber(student.getDormBlockNumber());
             dto.setDormNumber(student.getDormNumber());
-            dto.setEvents(student.getEvents());
             return dto;
         }).toList();
+    }
+
+    @GetMapping("/{studentId}")
+    public Student getStudentById(@PathVariable Long studentId){
+        return studentService.getStudentById(studentId);
+    }
+
+
+    @GetMapping("/{studentId}/events")
+    public List<Event> getEventsByStudentId(@PathVariable Long studentId) {
+        return eventService.getEventsByStudentId(studentId);
     }
 
 }

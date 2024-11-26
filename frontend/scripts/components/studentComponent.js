@@ -24,7 +24,7 @@ function createStudentCard(student, eventStudents) {
 }
 
 function openStudentInfoPage(student) {
-    window.location.href = `../secretary/student-info-page.html?id=${student.student_id}`;
+    window.location.href = `../secretary/student-info-page.html?id=${student.studentId}`;
 }
 
 function generateEventsCount(eventsCount) {

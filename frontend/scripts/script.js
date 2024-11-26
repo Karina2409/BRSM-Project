@@ -9,25 +9,27 @@ document.addEventListener('DOMContentLoaded', () => {
 
     // HTML для хедера с data-page для удобства обработки
     header.innerHTML = `
-        <nav class="header-items">
-            <ul class="header-list">
-                <li class="header-list__item active" data-page="students">
-                    Студенты
-                </li>
-                <li class="header-list__item" data-page="users">
-                    Пользователи
-                </li>
-                <li class="header-list__item" data-page="events">
-                    Мероприятия
-                </li>
-                <li class="header-list__item" data-page="documentation">
-                    Документация
-                </li>
-                <li class="header-list__item" data-page="statistics">
-                    Статистика
-                </li>
-            </ul>
-        </nav>
+        <div class="header_container">
+            <nav class="header-items">
+                <ul class="header-list">
+                    <li class="header-list__item active" data-page="students">
+                        Студенты
+                    </li>
+                    <li class="header-list__item" data-page="users">
+                        Пользователи
+                    </li>
+                    <li class="header-list__item" data-page="events">
+                        Мероприятия
+                    </li>
+                    <li class="header-list__item" data-page="documentation">
+                        Документация
+                    </li>
+                    <li class="header-list__item" data-page="statistics">
+                        Статистика
+                    </li>
+                </ul>
+            </nav>
+        </div>
     `;
 
     footer.innerHTML = `

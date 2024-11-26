@@ -7,5 +7,6 @@ import java.util.List;
 public interface IStudentService {
 
     List<Student> findAllStudents();
+    Student getStudentById(Long id);
 
 }

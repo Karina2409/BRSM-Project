@@ -1,10 +1,104 @@
-
 let students = [];
 let events = [];
 let studentsEvents = [];
-let student = {}
+let student = {};
 
-function addStudentInfo(student){
+(async function checkAccess() {
+    const token = localStorage.getItem("authToken");
+    if (!token) {
+
+        console.log("Токен не найден, пауза перед редиректом на /index.html");
+
+        window.location.href = "/index.html";
+        return;
+    }
+
+    try {
+        const response = await fetch('http://localhost:8080/brsm/auth/validate', {
+            method: 'GET',
+            headers: {
+                'Authorization': `Bearer ${token}`,
+            }
+        });
+
+        if (response.ok) {
+            const data = await response.json();
+            console.log(data);
+            if (data.role !== 'SECRETARY') {
+                alert('Доступ запрещен роль не та');
+                window.location.href = "/index.html";
+            }
+        } else {
+            localStorage.removeItem('accessToken');
+            console.log('response не ок')
+            window.location.href = "/index.html";
+        }
+    } catch (error) {
+        console.error('Ошибка', error);
+        window.location.href = "/index.html";
+    }
+})();
+
+document.addEventListener('DOMContentLoaded', function () {
+        const urlParams = new URLSearchParams(window.location.search);
+        const studentId = urlParams.get('id');
+
+        const list = document.querySelector('.students__events-list');
+
+        if (studentId) {
+            const token = localStorage.getItem("authToken");
+            fetch(`http://localhost:8080/students/${studentId}`, {
+                method: 'GET',
+                headers: {
+                    'Content-Type': 'application/json',
+                    'Authorization': `Bearer ${token}`,
+                }
+            })
+                .then(response => {
+                    if (!response.ok) {
+                        throw new Error('Network response was not ok ' + response.statusText);
+                    }
+                    return response.json();
+                })
+                .then(student => {
+                    if (student) {
+                        // Получение событий для этого студента
+                        return fetch(`http://localhost:8080/students/${studentId}/events`, {
+                            method: 'GET',
+                            headers: {
+                                'Content-Type': 'application/json',
+                                'Authorization': `Bearer ${token}`,
+                            }
+                        })
+                            .then(response => {
+                                if (!response.ok) {
+                                    throw new Error('Ошибка запроса: ' + response.statusText);
+                                }
+                                return response.json();
+                            })
+                            .then(events => {
+                                student.events = events;
+                                student.eventsId = events.map(event => event.id);
+                                return student;
+                            });
+                    } else {
+                        throw new Error("Студент с данным ID не найден");
+                    }
+                })
+                .then(student => {
+                    // Обновляем интерфейс
+                    addStudentInfo(student);
+                    generateEventsCount(student.events.length);
+                    renderEventList(list, student.events);
+                })
+                .catch(error => {
+                    console.error('Ошибка при загрузке:', error);
+                });
+        }
+    }
+);
+
+function addStudentInfo(student) {
     const studentInfoWrapper = document.querySelector('.student-info');
 
     studentInfoWrapper.innerHTML = `
@@ -15,19 +109,19 @@ function addStudentInfo(student){
                 <div class="student-info__table_block">
                     <div class="student-info__table_row">
                         <div class="student-info__table_column main-column-td">Фамилия</div>
-                        <div class="student-info__table_column">${student.last_name}</div>
+                        <div class="student-info__table_column">${student.lastName}</div>
                     </div>
                     <div class="student-info__table_row">
                         <div class="student-info__table_column main-column-td">Имя</div>
-                        <div class="student-info__table_column">${student.first_name}</div>
+                        <div class="student-info__table_column">${student.firstName}</div>
                     </div>
                     <div class="student-info__table_row">
                         <div class="student-info__table_column main-column-td">Отчество</div>
-                        <div class="student-info__table_column">${student.middle_name}</div>
+                        <div class="student-info__table_column">${student.middleName}</div>
                     </div>
                     <div class="student-info__table_row">
                         <div class="student-info__table_column main-column-td">Группа</div>
-                        <div class="student-info__table_column">${student.group_number}</div>
+                        <div class="student-info__table_column">${student.groupNumber}</div>
                     </div>
                 </div>
                 <div class="student-events-number">
@@ -37,7 +131,7 @@ function addStudentInfo(student){
     `;
 }
 
-function generateEventsCount(eventsCount){
+function generateEventsCount(eventsCount) {
     const studentEventCount = document.querySelector('.student-events-number');
 
     studentEventCount.innerHTML = '';
@@ -70,89 +164,34 @@ function createEventCard(event) {
              class="students__event-card__image">
         <div class="students__event-card__text-block">
             <div class="students__event-card__name">
-                ${event.event_name}
+                ${event.eventName}
             </div>
             <div class="students__event-card__info">
                 <div class="students__event-card__info__table_row">
                     <div class="students__event-card__info__table_column main-column-td-event">Дата:</div>
-                    <div class="students__event-card__info__table_column">${event.event_date}</div>
+                    <div class="students__event-card__info__table_column">${event.eventDate}</div>
                 </div>
                 <div class="students__event-card__info__table_row">
                     <div class="students__event-card__info__table_column main-column-td-event">Время:</div>
-                    <div class="students__event-card__info__table_column">${event.event_time}</div>
+                    <div class="students__event-card__info__table_column">${event.eventTime}</div>
                 </div>
                 <div class="students__event-card__info__table_row">
                     <div class="students__event-card__info__table_column main-column-td-event">Место встречи:</div>
-                    <div class="students__event-card__info__table_column">${event.event_place}</div>
+                    <div class="students__event-card__info__table_column">${event.eventPlace}</div>
                 </div>
                 <div class="students__event-card__info__table_row">
                     <div class="students__event-card__info__table_column main-column-td-event">Количество ОПТ:</div>
-                    <div class="students__event-card__info__table_column">${event.opt_count}ч</div>
+                    <div class="students__event-card__info__table_column">${event.optCount}ч</div>
                 </div>
                 <div class="students__event-card__info__table_row">
                     <div class="students__event-card__info__table_column main-column-td-event">Ходатайство:</div>
-                    <div class="students__event-card__info__table_column">${event.for_petition ? 'Для ходатайства' : 'Не для ходатайства'}</div>
+                    <div class="students__event-card__info__table_column">${event.forPetition ? 'Для ходатайства' : 'Не для ходатайства'}</div>
                 </div>
             </div>
         </div>
     `
     return eventWrapper;
 }
-
-document.addEventListener('DOMContentLoaded', function () {
-    const urlParams = new URLSearchParams(window.location.search);
-    const studentId = urlParams.get('id');
-
-    const list = document.querySelector('.students__events-list');
-
-    if(studentId) {
-        fetch('../../data/students.json')
-            .then(response => {
-                if (!response.ok) {
-                    throw new Error('Network response was not ok ' + response.statusText);
-                }
-                return response.json();
-            })
-            .then(data => {
-                students = data;
-                student = students.find((student) => {
-                    return student.student_id === +studentId;
-                });
-                if (student) {
-                    addStudentInfo(student);
-                    generateEventsCount(student.events_id.length);
-                    fetch('../../data/events.json')
-                        .then(response => {
-                            if (!response.ok) {
-                                throw new Error('Network response was not ok ' + response.statusText);
-                            }
-                            return response.json();
-                        })
-                        .then(data => {
-                            events = data;
-                            studentsEvents = getStudentsEvents(student, events);
-                            const list = document.querySelector('.students__events-list');
-                            if(list){
-                                renderEventList(list, studentsEvents)
-                            }
-
-                        })
-                        .catch(error => {
-                            console.error('Ошибка загрузки файла:', error);
-                        });
-
-
-                }
-                else {
-                    console.error("Студент с данным ID не найден");
-                }
-            })
-            .catch(error => {
-                console.error('Ошибка загрузки файла:', error);
-            });
-    }
-
-});
 
 function renderEventList(list, events) {
     list.innerHTML = '';
@@ -171,8 +210,8 @@ function getStudentsEvents(student, events) {
     return studentsEvents;
 }
 
-function getEventById(i, events){
-    for(event of events){
+function getEventById(i, events) {
+    for (event of events) {
         if (i === event.event_id) {
             return event;
         }

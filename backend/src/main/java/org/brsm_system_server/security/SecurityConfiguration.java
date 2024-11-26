@@ -34,7 +34,9 @@ public class SecurityConfiguration {
                 .csrf(csrf -> csrf.disable())
                 .authorizeHttpRequests(authorize -> authorize
                         .requestMatchers("/brsm/auth/authenticate",
-                                "/brsm/auth/signUp")
+                                "/brsm/auth/signUp",
+                                "/students/{studentId}/events",
+                                "/students/{studentId}")
                         .permitAll()
                         .requestMatchers(HttpMethod.GET, "/students/get-all").hasAuthority("SECRETARY")
 //                        .requestMatchers(HttpMethod.GET, "/students/**").hasAuthority("SECRETARY")
