@@ -163,8 +163,10 @@ function createEventCard(event) {
         <img src="../../assets/images/vozlozhenie%201.png" alt="Event Image"
              class="students__event-card__image">
         <div class="students__event-card__text-block">
-            <div class="students__event-card__name">
-                ${event.eventName}
+            <div class="students__event-card__name__container">
+                <div class="students__event-card__name">
+                    ${event.eventName}
+                </div>
             </div>
             <div class="students__event-card__info">
                 <div class="students__event-card__info__table_row">

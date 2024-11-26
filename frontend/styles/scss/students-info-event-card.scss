@@ -22,12 +22,21 @@
   row-gap: 30px;
 }
 
-.students__event-card__name{
-  font-weight: 700;
-  font-size: 28px;
-  height: 68px;
+.students__event-card__name__container{
   display: flex;
   align-items: center;
+  height: 87px;
+}
+
+.students__event-card__name{
+  display: -webkit-box;
+  -webkit-line-clamp: 3;
+  -webkit-box-orient: vertical;
+  overflow: hidden;
+  text-overflow: ellipsis;
+  font-weight: 700;
+  font-size: 24px;
+
 }
 
 .students__event-card__info{
@@ -44,7 +53,11 @@
 }
 
 .students__event-card__info__table_column{
-
+  display: -webkit-box;
+  -webkit-line-clamp: 2;
+  -webkit-box-orient: vertical;
+  overflow: hidden;
+  text-overflow: ellipsis;
 }
 
 .main-column-td-event{
