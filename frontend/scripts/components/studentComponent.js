@@ -17,7 +17,7 @@ function createStudentCard(student, eventStudents) {
             </div>
         </div>
         <div class="student-events-number">
-        ${eventStudents.innerHTML}
+            ${eventStudents.innerHTML}
         </div>
     `
     return studentWrapper;

@@ -56,34 +56,7 @@ document.addEventListener('DOMContentLoaded', function () {
             })
             .then(data => {
                 students = data;
-                Promise.all(
-                    students.map(student =>
-                        fetch(`http://localhost:8080/students/${student.studentId}/events`, {
-                            method: 'GET',
-                            headers: {
-                                'Content-Type': 'application/json',
-                                'Authorization': `Bearer ${token}`,
-                            }
-                        })
-                            .then(response => {
-                                if (!response.ok) {
-                                    throw new Error('Ошибка запроса: ' + response.statusText);
-                                }
-                                return response.json();
-                            })
-                            .then(data => {
-                                student.events = data;
-                                return student;
-                            })
-                    )
-                )
-                    .then(updatedStudents => {
-                        students = updatedStudents;
-                        renderStudentList(list, students);
-                    })
-                    .catch(error => {
-                        console.error('Ошибка при загрузке событий:', error);
-                    });
+                renderStudentList(list, students);
             })
             .catch(error => {
                 console.error('Ошибка студентов:', error);
@@ -103,7 +76,8 @@ function renderStudentList(list, students) {
     while (i <= 13) {
         students.forEach(student => {
             if (i <= 13) {
-                const eventStudents = generateEventsCount(student.events.length);
+                console.log(student.eventCount);
+                const eventStudents = generateEventsCount(student.eventCount);
                 const card = createStudentCard(student, eventStudents);
                 list.append(card);
                 i++;
@@ -122,7 +96,7 @@ function addStudentsCard() {
     let i = 1;
     students.forEach(student => {
         if (i > 13) {
-            const eventStudents = generateEventsCount(student.eventsId.length);
+            const eventStudents = generateEventsCount(student.eventCount);
             const card = createStudentCard(student, eventStudents);
             list.append(card);
         }

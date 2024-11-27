@@ -62,7 +62,6 @@ document.addEventListener('DOMContentLoaded', function () {
                 })
                 .then(student => {
                     if (student) {
-                        // Получение событий для этого студента
                         return fetch(`http://localhost:8080/students/${studentId}/events`, {
                             method: 'GET',
                             headers: {
