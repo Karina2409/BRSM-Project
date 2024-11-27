@@ -5,6 +5,7 @@ import lombok.extern.slf4j.Slf4j;
 import org.brsm_system_server.dto.StudentDTO;
 import org.brsm_system_server.entity.Event;
 import org.brsm_system_server.entity.Student;
+import org.brsm_system_server.mapper.StudentMapper;
 import org.brsm_system_server.service.interfaces.IEventService;
 import org.brsm_system_server.service.interfaces.IStudentService;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -30,27 +31,15 @@ public class StudentController {
     @GetMapping("/get-all")
     public List<StudentDTO> getStudents() {
         List<Student> students = studentService.findAllStudents();
-        log.info("Called allStudents endpoint");
-
         return students.stream().map(student -> {
-            StudentDTO dto = new StudentDTO();
-            dto.setStudentId(student.getStudentId());
-            dto.setStudentFullNameD(student.getStudentFullNameD());
-            dto.setLastName(student.getLastName());
-            dto.setFirstName(student.getFirstName());
-            dto.setMiddleName(student.getMiddleName());
-            dto.setGroupNumber(student.getGroupNumber());
-            dto.setStudentFaculty(student.getStudentFaculty());
-            dto.setDormitoryResidence(student.isDormitoryResidence());
-            dto.setDormBlockNumber(student.getDormBlockNumber());
-            dto.setDormNumber(student.getDormNumber());
-            return dto;
+            return StudentMapper.toDto(student, eventService);
         }).toList();
     }
 
     @GetMapping("/{studentId}")
-    public Student getStudentById(@PathVariable Long studentId){
-        return studentService.getStudentById(studentId);
+    public StudentDTO getStudentById(@PathVariable Long studentId){
+        Student student = studentService.getStudentById(studentId);
+        return StudentMapper.toDto(student, eventService);
     }
 
 

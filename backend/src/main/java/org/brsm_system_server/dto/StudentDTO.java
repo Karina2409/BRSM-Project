@@ -1,12 +1,11 @@
 package org.brsm_system_server.dto;
 
+import lombok.AllArgsConstructor;
 import lombok.Data;
-import org.brsm_system_server.entity.Event;
 import org.brsm_system_server.entity.enums.FacultyEnum;
 
-import java.util.Set;
-
 @Data
+@AllArgsConstructor
 public class StudentDTO {
     private Long studentId;
     private String studentFullNameD;
@@ -18,4 +17,5 @@ public class StudentDTO {
     private boolean dormitoryResidence;
     private String dormBlockNumber;
     private Integer dormNumber;
+    private Integer eventCount;
 }
