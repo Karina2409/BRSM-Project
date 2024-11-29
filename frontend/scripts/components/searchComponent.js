@@ -5,16 +5,26 @@ function createSearchComponent(placeholderText){
 
     searchWrapper.innerHTML = `
         <input type="text" class="search-input" placeholder="${placeholderText}">
-        <button class="search-button">
+        <button class="search-button" type="submit">
             <img src="../../assets/icons/search.svg" alt="Search" class="search-img">
             Искать
         </button>
     `;
 
+    const searchInput = searchWrapper.querySelector('.search-input');
     const searchButton = searchWrapper.querySelector('.search-button');
-    searchButton.addEventListener('click', () => {
-        const query = searchWrapper.querySelector('.search-input').value;
-        console.log(`Searching for: ${query}`);
+
+    const performSearch = () => {
+        const query = searchInput.value.trim().toLowerCase();
+        filterStudents(query);
+    };
+
+    searchButton.addEventListener('click', performSearch);
+
+    searchInput.addEventListener('keydown', (event) => {
+        if (event.key === 'Enter') {
+            performSearch();
+        }
     });
 
     return searchWrapper;

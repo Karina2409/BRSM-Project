@@ -65,23 +65,37 @@ document.addEventListener('DOMContentLoaded', function () {
     }
 })
 
+
+let pageViewCards = 13;
+
 function renderStudentList(list, students) {
     list.innerHTML = '';
     const button = document.querySelector('.show-more');
-    if (students.length > 13) {
+    if (students.length > pageViewCards) {
         button.classList.add('visible');
+    }else {
+        button.classList.remove('visible');
     }
-    let i = 1;
+    let nullStudentCount = 0;
 
-    while (i <= 13) {
+    students.forEach(student => {
+        if(student.lastName == null && student.firstName == null && student.middleName == null) {
+            nullStudentCount++;
+        }
+    })
+
+    let cards = 1;
+    while (cards <= pageViewCards && (students.length-nullStudentCount) >= cards) {
         students.forEach(student => {
-            if (i <= 13) {
-                console.log(student.eventCount);
-                const eventStudents = generateEventsCount(student.eventCount);
-                const card = createStudentCard(student, eventStudents);
-                list.append(card);
-                i++;
+            if (cards <= pageViewCards && !(cards > (students.length-nullStudentCount))) {
+                if(student.lastName !== null && student.firstName !== null && student.middleName !== null) {
+                    const eventStudents = generateEventsCount(student.eventCount);
+                    const card = createStudentCard(student, eventStudents);
+                    list.append(card);
+                    cards++;
+                }
             }
+
         })
     }
 }
@@ -89,18 +103,24 @@ function renderStudentList(list, students) {
 
 function addStudentsCard() {
     const list = document.querySelector('.students-list');
+    pageViewCards += 13;
+    console.log(pageViewCards);
+    renderStudentList(list, students);
+}
 
-    const button = document.querySelector('.show-more');
-    button.classList.remove('visible');
+function filterStudents(query) {
+    const list = document.querySelector('.students-list');
 
-    let i = 1;
-    students.forEach(student => {
-        if (i > 13) {
-            const eventStudents = generateEventsCount(student.eventCount);
-            const card = createStudentCard(student, eventStudents);
-            list.append(card);
-        }
-        i++;
-    })
+    if (!list) return;
 
+    if(!query) {
+        renderStudentList(list, students);
+        return;
+    }
+
+    const filteredStudents = students.filter(student =>
+        student.lastName.toLowerCase().includes(query)
+    );
+
+    renderStudentList(list, filteredStudents);
 }
