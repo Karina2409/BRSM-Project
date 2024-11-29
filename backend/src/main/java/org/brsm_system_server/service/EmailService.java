@@ -1,4 +1,6 @@
 package org.brsm_system_server.service;
 
-public class EmailService {
+import org.brsm_system_server.service.interfaces.IEmailService;
+
+public class EmailService implements IEmailService {
 }

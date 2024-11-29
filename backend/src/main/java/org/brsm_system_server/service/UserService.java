@@ -1,4 +1,6 @@
 package org.brsm_system_server.service;
 
-public class UserService {
+import org.brsm_system_server.service.interfaces.IUserService;
+
+public class UserService implements IUserService {
 }

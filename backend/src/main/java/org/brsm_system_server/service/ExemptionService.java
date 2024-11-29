@@ -1,4 +1,6 @@
 package org.brsm_system_server.service;
 
-public class ExemptionService {
+import org.brsm_system_server.service.interfaces.IExemptionService;
+
+public class ExemptionService implements IExemptionService {
 }

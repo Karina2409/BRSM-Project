@@ -1,4 +1,6 @@
 package org.brsm_system_server.service;
 
-public class StudentEventService {
+import org.brsm_system_server.service.interfaces.IStudentEventService;
+
+public class StudentEventService implements IStudentEventService {
 }
