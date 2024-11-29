@@ -39,6 +39,8 @@ let students = [];
 document.addEventListener('DOMContentLoaded', function () {
     renderSearchComponent("Введите фамилию студента");
     const list = document.querySelector('.students-list');
+    const facultyFilter = document.querySelector('.controls__filter');
+
     if (list) {
         const token = localStorage.getItem("authToken");
         fetch('http://localhost:8080/students/get-all', {
@@ -63,7 +65,18 @@ document.addEventListener('DOMContentLoaded', function () {
             });
 
     }
-})
+
+    facultyFilter.addEventListener('change', function () {
+        const selectedFaculty = facultyFilter.value;
+
+        const filteredStudents = selectedFaculty === 'not-choosen'
+            ? students
+            : students.filter(student => student.studentFaculty === selectedFaculty);
+
+        console.log(filteredStudents);
+        renderStudentList(list, filteredStudents);
+    });
+});
 
 
 let pageViewCards = 13;
@@ -73,22 +86,22 @@ function renderStudentList(list, students) {
     const button = document.querySelector('.show-more');
     if (students.length > pageViewCards) {
         button.classList.add('visible');
-    }else {
+    } else {
         button.classList.remove('visible');
     }
     let nullStudentCount = 0;
 
     students.forEach(student => {
-        if(student.lastName == null && student.firstName == null && student.middleName == null) {
+        if (student.lastName == null && student.firstName == null && student.middleName == null) {
             nullStudentCount++;
         }
     })
 
     let cards = 1;
-    while (cards <= pageViewCards && (students.length-nullStudentCount) >= cards) {
+    while (cards <= pageViewCards && (students.length - nullStudentCount) >= cards) {
         students.forEach(student => {
-            if (cards <= pageViewCards && !(cards > (students.length-nullStudentCount))) {
-                if(student.lastName !== null && student.firstName !== null && student.middleName !== null) {
+            if (cards <= pageViewCards && !(cards > (students.length - nullStudentCount))) {
+                if (student.lastName !== null && student.firstName !== null && student.middleName !== null) {
                     const eventStudents = generateEventsCount(student.eventCount);
                     const card = createStudentCard(student, eventStudents);
                     list.append(card);
@@ -113,14 +126,18 @@ function filterStudents(query) {
 
     if (!list) return;
 
-    if(!query) {
+    if (!query) {
         renderStudentList(list, students);
         return;
     }
 
-    const filteredStudents = students.filter(student =>
-        student.lastName.toLowerCase().includes(query)
-    );
+    const filteredStudents = students.filter(student => {
+        if (!(student.lastName == null || student.firstName == null ||
+            student.middleName == null)) {
+            return student.lastName.toLowerCase().includes(query);
+        }
+
+    });
 
     renderStudentList(list, filteredStudents);
 }
