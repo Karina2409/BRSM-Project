@@ -16,35 +16,11 @@
     <section class="search" id="search"></section>
     <section class="user-list__container">
         <div class="users-list">
-            <section class="user-card">
-                <div class="user-card__user-name">
-                    Беляева Оксана Юрьевна
-                </div>
-                <div class="selection__wrapper">
-                    <div class="select-user">
-                        <div class="select-user__text">
-                            Студент
-                        </div>
-                        <img src="../../assets/icons/Vector%201.png" alt="Vector" class="select-user__icon">
-                    </div>
 
-                    <div class="select-option-user unvisible">
-                        <div class="select-user__text">
-                            Секретарь
-                        </div>
-                    </div>
-
-                    <div class="select-option-user select select-option-user-2 unvisible">
-                        <div class="select-user__text">
-                            Студент
-                        </div>
-                    </div>
-                </div>
-            </section>
         </div>
 
         <div class="button__show-more__container">
-            <button class="empty-button show-more">
+            <button class="empty-button show-more" onclick="addUsersCard()">
                 Показать еще
             </button>
         </div>
@@ -53,9 +29,10 @@
 
 <footer class="footer"></footer>
 
-<script src="../../scripts/components/searchComponent.js"></script>
-<script src="../../scripts/components/userComponent.js"></script>
-<script src="../../scripts/usersPage.js"></script>
+<script src="../../scripts/components/searchComponent.js" defer></script>
+<script src="../../scripts/components/userComponent.js" defer></script>
+<script src="../../scripts/usersPage.js" defer></script>
 
 </body>
+
 </html>

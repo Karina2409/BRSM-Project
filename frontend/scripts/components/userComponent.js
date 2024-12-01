@@ -1,14 +1,5 @@
-document.addEventListener('DOMContentLoaded', () => {
-    const selections = document.querySelectorAll('.select-user');
+function clickOption(selection) {
 
-    for (const selection of selections) {
-        selection.addEventListener('click', (e) => {
-            clickOption(e.currentTarget);
-        })
-    }
-})
-
-function clickOption(selection){
     const options = selection.parentElement.querySelectorAll('.select-option-user');
 
     options.forEach((option) => {
@@ -22,12 +13,12 @@ function createUserCard(user) {
 
     userWrapper.innerHTML = `
         <div class="user-card__user-name">
-            ${user.last_name} ${user.first_name} ${user.middle_name}
+            ${user.lastName} ${user.firstName} ${user.middleName}
         </div>
         <div class="selection__wrapper">
             <div class="select-user">
                 <div class="select-user__text">
-                    ${user.role}
+                    ${getRole(user)}
                 </div>
                 <img src="../../assets/icons/Vector%201.png" alt="Vector" class="select-user__icon">
             </div>
@@ -46,4 +37,15 @@ function createUserCard(user) {
         </div>
     `
     return userWrapper;
+}
+
+function getRole(user) {
+    switch (user.role) {
+        case 'SECRETARY':
+            return 'Секретарь';
+        case 'STUDENT':
+            return 'Студент';
+        case 'CHIEF_SECRETARY':
+            return 'Секретарь БРСМ'
+    }
 }

@@ -23,8 +23,7 @@ let student = {};
 
         if (response.ok) {
             const data = await response.json();
-            console.log(data);
-            if (data.role !== 'SECRETARY') {
+            if (data.role !== 'SECRETARY' && data.role !== 'CHIEF_SECRETARY') {
                 alert('Доступ запрещен роль не та');
                 window.location.href = "/index.html";
             }

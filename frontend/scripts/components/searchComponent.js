@@ -1,4 +1,4 @@
-function createSearchComponent(placeholderText){
+function createSearchComponent(placeholderText, filterFunction){
     const searchWrapper = document.createElement('div');
     searchWrapper.classList.add('search-wrapper');
     console.log(placeholderText);
@@ -16,7 +16,7 @@ function createSearchComponent(placeholderText){
 
     const performSearch = () => {
         const query = searchInput.value.trim().toLowerCase();
-        filterStudents(query);
+        filterFunction(query);
     };
 
     searchButton.addEventListener('click', performSearch);
@@ -30,10 +30,10 @@ function createSearchComponent(placeholderText){
     return searchWrapper;
 }
 
-function renderSearchComponent(placeholderText) {
+function renderSearchComponent(placeholderText, filterFunction) {
     const targetElement = document.querySelector('#search');
     if (targetElement) {
-        targetElement.appendChild(createSearchComponent(placeholderText));
+        targetElement.appendChild(createSearchComponent(placeholderText, filterFunction));
     } else {
         console.error(`Target element "search" not found`);
     }

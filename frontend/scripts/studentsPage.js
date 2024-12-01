@@ -20,8 +20,8 @@ let students = [];
 
         if (response.ok) {
             const data = await response.json();
-            console.log(data);
-            if (data.role !== 'SECRETARY') {
+            if (data.role !== 'SECRETARY' && data.role !== 'CHIEF_SECRETARY') {
+
                 alert('Доступ запрещен роль не та');
                 window.location.href = "/index.html";
             }
@@ -37,7 +37,7 @@ let students = [];
 })();
 
 document.addEventListener('DOMContentLoaded', function () {
-    renderSearchComponent("Введите фамилию студента");
+    renderSearchComponent("Введите фамилию студента", filterStudents);
     const list = document.querySelector('.students-list');
     const facultyFilter = document.querySelector('.controls__filter');
 
@@ -63,7 +63,6 @@ document.addEventListener('DOMContentLoaded', function () {
             .catch(error => {
                 console.error('Ошибка студентов:', error);
             });
-
     }
 
     facultyFilter.addEventListener('change', function () {
