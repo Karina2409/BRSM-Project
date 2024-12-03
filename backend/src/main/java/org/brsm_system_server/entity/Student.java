@@ -59,6 +59,15 @@ public class Student {
     @Column(name = "image", columnDefinition = "LONGBLOB")
     private byte[] image;
 
+    @Column(name = "is_brsm_member")
+    private boolean isBrsmMember;
+
+    @Column(name = "student_telegram")
+    private String telegram;
+
+    @Column(name = "student_phone_number")
+    private String phoneNumber;
+
     @ManyToMany
     @JoinTable(
             name = "student_report",

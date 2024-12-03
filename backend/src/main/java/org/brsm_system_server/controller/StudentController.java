@@ -27,7 +27,7 @@ public class StudentController {
     @Autowired
     private IEventService eventService;
 
-    @PreAuthorize("hasAuthority('SECRETARY')")
+    @PreAuthorize("hasAnyAuthority('SECRETARY', 'CHIEF_SECRETARY')")
     @GetMapping("/get-all")
     public List<StudentDTO> getStudents() {
         List<Student> students = studentService.findAllStudents();

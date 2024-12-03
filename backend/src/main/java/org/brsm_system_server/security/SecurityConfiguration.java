@@ -38,7 +38,8 @@ public class SecurityConfiguration {
                                 "/students/{studentId}/events",
                                 "/students/{studentId}")
                         .permitAll()
-                        .requestMatchers(HttpMethod.GET, "/students/get-all").hasAuthority("SECRETARY")
+                        .requestMatchers(HttpMethod.GET, "/students/get-all").hasAnyAuthority("SECRETARY", "CHIEF_SECRETARY")
+                        .requestMatchers(HttpMethod.GET, "/users").hasAuthority("CHIEF_SECRETARY")
 //                        .requestMatchers(HttpMethod.GET, "/students/**").hasAuthority("SECRETARY")
 //
                         .anyRequest().authenticated())

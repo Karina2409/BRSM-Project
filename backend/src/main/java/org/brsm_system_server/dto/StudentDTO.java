@@ -18,4 +18,7 @@ public class StudentDTO {
     private String dormBlockNumber;
     private Integer dormNumber;
     private Integer eventCount;
+    private boolean isBrsmMember;
+    private String phoneNumber;
+    private String telegram;
 }

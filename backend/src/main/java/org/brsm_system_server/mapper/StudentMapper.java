@@ -18,7 +18,10 @@ public class StudentMapper {
                 student.isDormitoryResidence(),
                 student.getDormBlockNumber(),
                 student.getDormNumber(),
-                eventService.getEventsByStudentId(student.getStudentId()).size());
+                eventService.getEventsByStudentId(student.getStudentId()).size(),
+                student.isBrsmMember(),
+                student.getPhoneNumber(),
+                student.getTelegram());
     }
 
     public static Student toEntity(StudentDTO studentDTO) {
