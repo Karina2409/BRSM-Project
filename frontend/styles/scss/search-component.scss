@@ -26,6 +26,7 @@
 
 .search-input::placeholder{
     color: $placeholder-color;
+    user-select: none;
 }
 
 .search-button{
@@ -43,6 +44,7 @@
     border: none;
     border-radius: 0 10px 10px 0;
     height: 44px;
+    user-select: none;
 }
 
 .search-button:hover{

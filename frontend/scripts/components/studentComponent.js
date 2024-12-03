@@ -10,6 +10,7 @@ function createStudentCard(student, eventStudents) {
     studentWrapper.innerHTML = `
         <div class="student-text">
             <div class="student-name">
+                ${isBrsmMember(student)}
                 ${student.lastName} ${student.firstName} ${student.middleName}
             </div>
             <div class="student-group-number">
@@ -21,6 +22,16 @@ function createStudentCard(student, eventStudents) {
         </div>
     `
     return studentWrapper;
+}
+
+function isBrsmMember(student){
+    console.log(student)
+    if(student.brsmMember){
+        return `<pre><img src="../../assets/icons/BRSM_member.png" alt="BRSM Member" class="icon-check"> </pre>`
+    }
+    else{
+        return "";
+    }
 }
 
 function openStudentInfoPage(student) {

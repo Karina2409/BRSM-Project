@@ -106,20 +106,20 @@ function addStudentInfo(student) {
             <div class="student-info__block">
                 <div class="student-info__table_block">
                     <div class="student-info__table_row">
-                        <div class="student-info__table_column main-column-td">Фамилия</div>
-                        <div class="student-info__table_column">${student.lastName}</div>
-                    </div>
-                    <div class="student-info__table_row">
-                        <div class="student-info__table_column main-column-td">Имя</div>
-                        <div class="student-info__table_column">${student.firstName}</div>
-                    </div>
-                    <div class="student-info__table_row">
-                        <div class="student-info__table_column main-column-td">Отчество</div>
-                        <div class="student-info__table_column">${student.middleName}</div>
+                        <div class="student-info__table_column main-column-td">ФИО</div>
+                        <div class="student-info__table_column">${student.lastName} ${student.firstName} ${student.middleName}</div>
                     </div>
                     <div class="student-info__table_row">
                         <div class="student-info__table_column main-column-td">Группа</div>
                         <div class="student-info__table_column">${student.groupNumber}</div>
+                    </div>
+                    <div class="student-info__table_row">
+                        <div class="student-info__table_column main-column-td">Телеграмм</div>
+                        <div class="student-info__table_column">${isNull(student.telegram)}</div>
+                    </div>
+                    <div class="student-info__table_row">
+                        <div class="student-info__table_column main-column-td">Номер телефона</div>
+                        <div class="student-info__table_column">${isNull(student.phoneNumber)}</div>
                     </div>
                 </div>
                 <div class="student-events-number">
@@ -127,6 +127,13 @@ function addStudentInfo(student) {
                 </div>
             </div>
     `;
+}
+
+function isNull(value){
+    if(value === null){
+        return 'Неизвестно';
+    }
+    else return value;
 }
 
 function generateEventsCount(eventsCount) {

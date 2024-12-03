@@ -33,7 +33,7 @@
   position: relative;
   display: flex;
   flex-direction: column;
-  row-gap: 15px;
+  row-gap: 10px;
 }
 
 .select-user{
@@ -45,6 +45,11 @@
   display: flex;
   justify-content: space-between;
   align-items: center;
+  user-select: none;
+}
+
+.select-user:hover{
+  cursor: pointer;
 }
 
 .select-user__text{
@@ -63,9 +68,14 @@
   width: 361px;
   height: 42px;
   position: absolute;
-  top: 55px;
+  top: 45px;
   background-color: #fff;
   z-index: 1;
+  user-select: none;
+}
+
+.select-option-user:hover{
+  cursor: pointer;
 }
 
 .select-option-user.unvisible{
@@ -74,9 +84,13 @@
 
 .select-option-user-2{
   position:absolute;
-  top: 110px;
+  top: 90px;
 }
 
 .select-option-user.select{
   background-color: #eee;
+}
+
+.select-option-user.select:hover{
+  cursor: default;
 }

@@ -23,13 +23,13 @@ function createUserCard(user) {
                 <img src="../../assets/icons/Vector%201.png" alt="Vector" class="select-user__icon">
             </div>
 
-            <div class="select-option-user unvisible">
+            <div class="select-option-user unvisible ${setSelectedUser(user.role, 'SECRETARY')}" id="secretary">
                 <div class="select-user__text">
                     Секретарь
                 </div>
             </div>
 
-            <div class="select-option-user select-option-user-2 unvisible select">
+            <div class="select-option-user select-option-user-2 unvisible ${setSelectedUser(user.role, 'STUDENT')}" id="student">
                 <div class="select-user__text">
                     Студент
                 </div>
@@ -47,5 +47,11 @@ function getRole(user) {
             return 'Студент';
         case 'CHIEF_SECRETARY':
             return 'Секретарь БРСМ'
+    }
+}
+
+function setSelectedUser(userRole, currentRole) {
+    if(currentRole === userRole){
+        return 'select';
     }
 }

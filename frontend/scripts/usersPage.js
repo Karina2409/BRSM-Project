@@ -89,6 +89,7 @@ function renderUserList(list, users) {
             if (cards <= pageViewCards && !(cards > (users.length - nullUsersCount))) {
                 if (user.lastName !== null && user.firstName !== null && user.middleName !== null) {
                     const card = createUserCard(user);
+                    setSelectedUser(card);
                     list.append(card);
                     cards++;
                 }

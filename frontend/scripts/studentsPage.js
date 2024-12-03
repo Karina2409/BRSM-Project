@@ -72,7 +72,6 @@ document.addEventListener('DOMContentLoaded', function () {
             ? students
             : students.filter(student => student.studentFaculty === selectedFaculty);
 
-        console.log(filteredStudents);
         renderStudentList(list, filteredStudents);
     });
 });
@@ -116,7 +115,6 @@ function renderStudentList(list, students) {
 function addStudentsCard() {
     const list = document.querySelector('.students-list');
     pageViewCards += 13;
-    console.log(pageViewCards);
     renderStudentList(list, students);
 }
 
