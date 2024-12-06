@@ -3,12 +3,7 @@
 @import "buttons";
 @import "event-component";
 @import "student-check-component";
-
-.search-and-add{
-  display: flex;
-  align-items: center;
-  column-gap: 85px;
-}
+@import "students-info-event-card";
 
 .events-list{
   padding: 40px 0;

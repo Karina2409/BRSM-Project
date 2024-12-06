@@ -131,7 +131,7 @@ function filterStudents(query) {
     const filteredStudents = students.filter(student => {
         if (!(student.lastName == null || student.firstName == null ||
             student.middleName == null)) {
-            return student.lastName.toLowerCase().includes(query);
+            return student.lastName.toLowerCase().startsWith(query);
         }
 
     });

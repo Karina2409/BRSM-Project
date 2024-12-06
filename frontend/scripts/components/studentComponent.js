@@ -1,5 +1,3 @@
-//TODO: Изменить текст в элементе, заменить его на значения, полученные с сервера
-
 function createStudentCard(student, eventStudents) {
     const studentWrapper = document.createElement("div");
     studentWrapper.classList.add("student-item");
@@ -25,7 +23,6 @@ function createStudentCard(student, eventStudents) {
 }
 
 function isBrsmMember(student){
-    console.log(student)
     if(student.brsmMember){
         return `<pre><img src="../../assets/icons/BRSM_member.png" alt="BRSM Member" class="icon-check"> </pre>`
     }

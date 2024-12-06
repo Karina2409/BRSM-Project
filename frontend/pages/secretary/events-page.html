@@ -13,50 +13,19 @@
 <header class="header"></header>
 
 <main class="main">
-    <div class="search-and-add">
+    <div class="controls">
         <section class="search" id="search"></section>
         <div class="button-plus">+</div>
     </div>
 
     <div class="events-list">
-        <div class="event-card">
-            <div class="event-card__image-container">
-                <img src="../../assets/images/vozlozhenie%201.png" alt="Event Image" class="event-card__img">
-            </div>
-            <div class="event-card__info">
-                <h2 class="event-card__title">Возложение к памятнику</h2>
-                <div class="event-card__event-info">
-                    <div class="event-card__event-info__row">
-                        <p class="event-card__event-info__row-title">Дата:</p>
-                        <p class="event-card__event-info__row-text">23.10.2024</p>
-                    </div>
 
-                    <div class="event-card__event-info__row">
-                        <p class="event-card__event-info__row-title">Время:</p>
-                        <p class="event-card__event-info__row-text">09:00</p>
-                    </div>
+    </div>
 
-                    <div class="event-card__event-info__row">
-                        <p class="event-card__event-info__row-title">Место встречи: </p>
-                        <p class="event-card__event-info__row-text">Стелла</p>
-                    </div>
-
-                    <div class="event-card__event-info__row">
-                        <p class="event-card__event-info__row-title">Количество ОПТ:</p>
-                        <p class="event-card__event-info__row-text">2ч</p>
-                    </div>
-
-                    <div class="event-card__event-info__row">
-                        <p class="event-card__event-info__row-title">Ходатайство:</p>
-                        <p class="event-card__event-info__row-text">Для ходатайства</p>
-                    </div>
-                </div>
-            </div>
-
-            <button class="dark-blue-button">Изменить</button>
-        </div>
-
-
+    <div class="button__show-more__container">
+        <button class="empty-button show-more" onclick="addEventsCard()">
+            Показать еще
+        </button>
     </div>
 
 </main>
@@ -65,5 +34,6 @@
 
 <script src="../../scripts/components/searchComponent.js"></script>
 <script src="../../scripts/eventsPage.js"></script>
+<script src="../../scripts/components/eventComponent.js"></script>
 </body>
 </html>

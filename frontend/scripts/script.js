@@ -7,9 +7,9 @@ document.addEventListener('DOMContentLoaded', () => {
         arrow.addEventListener('click', goBack);
     }
 
-    // HTML для хедера с data-page для удобства обработки
     header.innerHTML = `
         <div class="header_container">
+            
             <nav class="header-items">
                 <ul class="header-list">
                     <li class="header-list__item active" data-page="students">
@@ -26,6 +26,9 @@ document.addEventListener('DOMContentLoaded', () => {
                     </li>
                     <li class="header-list__item" data-page="statistics">
                         Статистика
+                    </li>
+                    <li class="header-list__item" data-page="exit">
+                        Выход
                     </li>
                 </ul>
             </nav>

@@ -84,7 +84,6 @@ document.addEventListener('DOMContentLoaded', function () {
                     }
                 })
                 .then(student => {
-                    // Обновляем интерфейс
                     addStudentInfo(student);
                     generateEventsCount(student.events.length);
                     renderEventList(list, student.events);
@@ -165,8 +164,6 @@ function createEventCard(event) {
     eventWrapper.classList.add("students__event-card");
 
     eventWrapper.innerHTML = `
-        <img src="../../assets/images/vozlozhenie%201.png" alt="Event Image"
-             class="students__event-card__image">
         <div class="students__event-card__text-block">
             <div class="students__event-card__name__container">
                 <div class="students__event-card__name">
@@ -208,20 +205,3 @@ function renderEventList(list, events) {
         list.append(card);
     })
 }
-
-function getStudentsEvents(student, events) {
-    const eventIds = student.events_id;
-    for (let i = 0; i < eventIds.length; i++) {
-        studentsEvents[i] = getEventById(eventIds[i], events);
-    }
-    return studentsEvents;
-}
-
-function getEventById(i, events) {
-    for (event of events) {
-        if (i === event.event_id) {
-            return event;
-        }
-    }
-}
-

@@ -1,5 +1,6 @@
 function createEventCard (event){
     const eventWrapper = document.createElement("div");
+    eventWrapper.classList.add("students__event-card");
     eventWrapper.classList.add("event-card");
 
     eventWrapper.addEventListener('click', (e) => {
@@ -7,35 +8,36 @@ function createEventCard (event){
     });
 
     eventWrapper.innerHTML = `
-        <div class="event-card__image-container">
-            <img src="../../assets/images/vozlozhenie%201.png" alt="Event Image" class="event-card__img">
-        </div>
-        <div class="event-card__info">
-            <h2 class="event-card__title">${event.event_name}</h2>
+        <div class="students__event-card__text-block">
+            <div class="students__event-card__name__container">
+                <div class="students__event-card__name">
+                    ${event.eventName}
+                </div>
+            </div>
             <div class="event-card__event-info">
-                <div class="event-card__event-info__row">
-                    <p class="event-card__event-info__row-title">Дата:</p>
-                    <p class="event-card__event-info__row-text">${event.event_date}</p>
+                <div class="students__event-card__info__table_row">
+                    <p class="students__event-card__info__table_column main-column-td-event">Дата:</p>
+                    <p class="students__event-card__info__table_column">${event.eventDate}</p>
                 </div>
 
-                <div class="event-card__event-info__row">
-                    <p class="event-card__event-info__row-title">Время:</p>
-                    <p class="event-card__event-info__row-text">${event.event_time}</p>
+                <div class="students__event-card__info__table_row">
+                    <p class="students__event-card__info__table_column main-column-td-event">Время:</p>
+                    <p class="students__event-card__info__table_column">${event.eventTime}</p>
                 </div>
 
-                <div class="event-card__event-info__row">
-                    <p class="event-card__event-info__row-title">Место встречи: </p>
-                    <p class="event-card__event-info__row-text">${event.event_place}</p>
+                <div class="students__event-card__info__table_row">
+                    <p class="students__event-card__info__table_column main-column-td-event">Место встречи: </p>
+                    <p class="students__event-card__info__table_column">${event.eventPlace}</p>
                 </div>
 
-                <div class="event-card__event-info__row">
-                    <p class="event-card__event-info__row-title">Количество ОПТ:</p>
-                    <p class="event-card__event-info__row-text">${event.opt_count}ч</p>
+                <div class="students__event-card__info__table_row">
+                    <p class="students__event-card__info__table_column main-column-td-event">Количество ОПТ:</p>
+                    <p class="students__event-card__info__table_column">${event.optCount}ч</p>
                 </div>
 
                 <div class="event-card__event-info__row">
                     <p class="event-card__event-info__row-title">Ходатайство:</p>
-                    <p class="event-card__event-info__row-text">${event.for_petition ? 'Для ходатайства' : 'Не для ходатайства'}</p>
+                    <p class="event-card__event-info__row-text">${event.forPetition ? 'Для ходатайства' : 'Не для ходатайства'}</p>
                 </div>
             </div>
         </div>
@@ -53,4 +55,6 @@ function createEventNameComponent (event){
     return eventWrapper;
 }
 
-function openEventInfoPage(event){}
+function openEventInfoPage(event){
+    window.location.href = `../secretary/event-info-page.html?id=${event.eventId}`;
+}
