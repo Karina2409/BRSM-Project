@@ -26,4 +26,9 @@ public class StudentService implements IStudentService {
         return optionalStudent.orElse(null);
     }
 
+    @Override
+    public List<Student> getStudentsByEventId(Long eventId) {
+        return studentRepository.findStudentsByEventId(eventId);
+    }
+
 }

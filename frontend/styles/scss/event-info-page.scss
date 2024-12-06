@@ -1,0 +1,58 @@
+@import "style";
+@import "student-info-page";
+@import "student-component";
+@import "buttons";
+
+.events__students-list{
+  display: flex;
+  flex-direction: column;
+  row-gap: 24px;
+}
+
+.event-info__block{
+  display: flex;
+  flex-direction: column;
+  row-gap: 50px;
+}
+
+.event-info__table_block{
+  display: flex;
+  flex-direction: column;
+  row-gap: 15px;
+}
+
+.event-info__table_row{
+  display: flex;
+  height: 36px;
+  align-items: center;
+}
+
+.event-info__table_column{
+  font-size: 20px;
+}
+
+.event-info-page__students-info-block{
+  padding: 60px 0;
+}
+
+.events__students-list{
+  display: flex;
+  flex-wrap: wrap;
+  column-gap: 24px;
+  row-gap: 24px;
+}
+
+.event__main-column-td{
+  font-weight: 600;
+  min-width: 220px;
+}
+
+.event-info__image{
+  display: flex;
+  align-items: center;
+}
+
+.event_image{
+  width: 300px;
+  border: none;
+}

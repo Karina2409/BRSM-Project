@@ -53,4 +53,14 @@ public class AuthenticationController {
                 "role", role
         ));
     }
+
+    @PostMapping("/logout")
+    public ResponseEntity<Void> logout() {
+        Authentication authentication = SecurityContextHolder.getContext().getAuthentication();
+        if (authentication != null) {
+            SecurityContextHolder.clearContext();
+            logger.info("User logged out: {}", authentication.getName());
+        }
+        return ResponseEntity.ok().build();
+    }
 }

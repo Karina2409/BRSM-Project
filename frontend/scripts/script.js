@@ -84,6 +84,7 @@ function setActivePageFromURL() {
     else if (path.includes('events')) activePage = 'events';
     else if (path.includes('documentations')) activePage = 'documentation';
     else if (path.includes('statistics')) activePage = 'statistics';
+    else if (path.includes('exit')) activePage = 'exit';
 
     document.querySelectorAll('.header-list__item').forEach(item => {
         if (item.getAttribute('data-page') === activePage) {
@@ -97,19 +98,22 @@ function setActivePageFromURL() {
 function navigateToPage(page) {
     switch (page) {
         case 'students':
-            window.location.href = `../secretary/students-page.html`;
+            window.location.href = `../students/students-page.html`;
             break;
         case 'users':
-            window.location.href = `../secretary/users-page.html`;
+            window.location.href = `../users/users-page.html`;
             break;
         case 'events':
-            window.location.href = `../secretary/events-page.html`;
+            window.location.href = `../events/events-page.html`;
             break;
         case 'documentation':
-            window.location.href = `../secretary/documentations-page.html`;
+            window.location.href = `../documentation/documentations-page.html`;
             break;
         case 'statistics':
-            window.location.href = `../secretary/statistics-page.html`;
+            window.location.href = `../statistics/statistics-page.html`;
+            break;
+        case 'exit':
+            logOut();
             break;
         default:
             console.error('Неизвестная страница:', page);
@@ -118,4 +122,27 @@ function navigateToPage(page) {
 
 function goBack() {
     window.history.back();
+}
+
+async function logOut() {
+    const token = localStorage.getItem("authToken");
+    try {
+        const response = await fetch('http://localhost:8080/brsm/auth/logout', {
+            method: 'POST',
+            headers: {
+                'Content-Type': 'application/json',
+                'Authorization': `Bearer ${token}`
+            },
+        });
+
+        if (response.ok) {
+            localStorage.setItem('authToken', null);
+            window.location.href = '../index.html';
+        } else {
+            alert('Ошибка авторизации')
+        }
+    } catch (error) {
+        console.error('Ошибка: ', error);
+        alert('Ошибка сети');
+    }
 }

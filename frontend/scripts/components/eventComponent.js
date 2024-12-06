@@ -1,4 +1,4 @@
-function createEventCard (event){
+function createEventCard(event) {
     const eventWrapper = document.createElement("div");
     eventWrapper.classList.add("students__event-card");
     eventWrapper.classList.add("event-card");
@@ -48,13 +48,6 @@ function createEventCard (event){
     return eventWrapper;
 }
 
-function createEventNameComponent (event){
-    const eventWrapper = document.createElement("div");
-    eventWrapper.classList.add("event-name-card");
-    eventWrapper.innerHTML = `${event.event_name}`
-    return eventWrapper;
-}
-
-function openEventInfoPage(event){
-    window.location.href = `../secretary/event-info-page.html?id=${event.eventId}`;
+function openEventInfoPage(event) {
+    window.location.href = `../events/event-info-page.html?id=${event.eventId}`;
 }

@@ -2,9 +2,11 @@ package org.brsm_system_server.controller;
 
 import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
+import org.brsm_system_server.dto.EventDTO;
 import org.brsm_system_server.dto.StudentDTO;
 import org.brsm_system_server.entity.Event;
 import org.brsm_system_server.entity.Student;
+import org.brsm_system_server.mapper.EventMapper;
 import org.brsm_system_server.mapper.StudentMapper;
 import org.brsm_system_server.service.interfaces.IEventService;
 import org.brsm_system_server.service.interfaces.IStudentService;
@@ -44,8 +46,8 @@ public class StudentController {
 
 
     @GetMapping("/{studentId}/events")
-    public List<Event> getEventsByStudentId(@PathVariable Long studentId) {
-        return eventService.getEventsByStudentId(studentId);
+    public List<EventDTO> getEventsByStudentId(@PathVariable Long studentId) {
+        List<Event> events = eventService.getEventsByStudentId(studentId);
+        return events.stream().map(EventMapper::toDto).toList();
     }
-
 }

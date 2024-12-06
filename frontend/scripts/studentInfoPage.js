@@ -100,31 +100,31 @@ function addStudentInfo(student) {
 
     studentInfoWrapper.innerHTML = `
         <div class="student-info__image">
-                <img src="../../assets/images/фото.JPG" alt="Student photo" class="student_image">
-            </div>
-            <div class="student-info__block">
-                <div class="student-info__table_block">
-                    <div class="student-info__table_row">
-                        <div class="student-info__table_column main-column-td">ФИО</div>
-                        <div class="student-info__table_column">${student.lastName} ${student.firstName} ${student.middleName}</div>
-                    </div>
-                    <div class="student-info__table_row">
-                        <div class="student-info__table_column main-column-td">Группа</div>
-                        <div class="student-info__table_column">${student.groupNumber}</div>
-                    </div>
-                    <div class="student-info__table_row">
-                        <div class="student-info__table_column main-column-td">Телеграмм</div>
-                        <div class="student-info__table_column">${isNull(student.telegram)}</div>
-                    </div>
-                    <div class="student-info__table_row">
-                        <div class="student-info__table_column main-column-td">Номер телефона</div>
-                        <div class="student-info__table_column">${isNull(student.phoneNumber)}</div>
-                    </div>
+            <img src="../../assets/images/фото.JPG" alt="Student photo" class="student_image">
+        </div>
+        <div class="student-info__block">
+            <div class="student-info__table_block">
+                <div class="student-info__table_row">
+                    <div class="student-info__table_column main-column-td">ФИО</div>
+                    <div class="student-info__table_column">${student.lastName} ${student.firstName} ${student.middleName}</div>
                 </div>
-                <div class="student-events-number">
-                    
+                <div class="student-info__table_row">
+                    <div class="student-info__table_column main-column-td">Группа</div>
+                    <div class="student-info__table_column">${student.groupNumber}</div>
+                </div>
+                <div class="student-info__table_row">
+                    <div class="student-info__table_column main-column-td">Телеграмм</div>
+                    <div class="student-info__table_column">${isNull(student.telegram)}</div>
+                </div>
+                <div class="student-info__table_row">
+                    <div class="student-info__table_column main-column-td">Номер телефона</div>
+                    <div class="student-info__table_column">${isNull(student.phoneNumber)}</div>
                 </div>
             </div>
+            <div class="student-events-number">
+                
+            </div>
+        </div>
     `;
 }
 

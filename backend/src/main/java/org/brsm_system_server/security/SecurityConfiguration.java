@@ -36,10 +36,12 @@ public class SecurityConfiguration {
                         .requestMatchers("/brsm/auth/authenticate",
                                 "/brsm/auth/signUp",
                                 "/students/{studentId}/events",
-                                "/students/{studentId}")
+                                "/students/{studentId}",
+                                "/events/{eventId}")
                         .permitAll()
                         .requestMatchers(HttpMethod.GET, "/students/get-all").hasAnyAuthority("SECRETARY", "CHIEF_SECRETARY")
                         .requestMatchers(HttpMethod.GET, "/users").hasAuthority("CHIEF_SECRETARY")
+                        .requestMatchers(HttpMethod.GET, "/events/get-all").hasAnyAuthority("SECRETARY", "CHIEF_SECRETARY")
 //                        .requestMatchers(HttpMethod.GET, "/students/**").hasAuthority("SECRETARY")
 //
                         .anyRequest().authenticated())

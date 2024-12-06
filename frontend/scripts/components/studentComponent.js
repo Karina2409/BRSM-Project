@@ -32,7 +32,7 @@ function isBrsmMember(student){
 }
 
 function openStudentInfoPage(student) {
-    window.location.href = `../secretary/student-info-page.html?id=${student.studentId}`;
+    window.location.href = `../students/student-info-page.html?id=${student.studentId}`;
 }
 
 function generateEventsCount(eventsCount) {

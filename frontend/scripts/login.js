@@ -66,9 +66,9 @@ function redirectUserByRole(role) {
     if (role === 'STUDENT') {
         window.location.href = '/pages/student/main-page.html';
     } else if (role === 'SECRETARY') {
-        window.location.href = '/pages/secretary/students-page.html';
+        window.location.href = '../pages/students/students-page.html';
     } else if (role === 'CHIEF_SECRETARY') {
-        window.location.href = '/pages/secretary/students-page.html';
+        window.location.href = '../pages/students/students-page.html';
     } else {
         alert('Неизвестная роль');
     }
