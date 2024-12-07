@@ -1,6 +1,8 @@
 let events = [];
 let pastEvents = [];
 
+const createButton = document.querySelector('.create-event');
+
 (async function checkAccess() {
     const token = localStorage.getItem("authToken");
     if (!token) {
@@ -134,3 +136,7 @@ function filterEvents(query) {
 
     renderEventsList(list, filteredEvents);
 }
+
+createButton.addEventListener('click', () => {
+    window.location.href = "./create-event-page.html";
+});

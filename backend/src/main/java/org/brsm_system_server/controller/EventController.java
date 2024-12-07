@@ -62,23 +62,16 @@ public class EventController {
             System.out.println(event.getEventDate().after(currentDate));
             if (event.getEventDate().after(currentDate)) {
                 event.setEventName(updateEvent.getEventName());
-                System.out.println("Name good");
                 if (updateEvent.getEventDate() != null) {
                     DateTimeFormatter formatter = DateTimeFormatter.ofPattern("EEE MMM dd HH:mm:ss zzz yyyy", Locale.ENGLISH);
                     LocalDate formattedDate = LocalDate.parse(updateEvent.getEventDate().toString(), formatter);
                     event.setEventDate(java.sql.Date.valueOf(formattedDate));
-                    System.out.println("Date good");
                 }
                 event.setEventTime(updateEvent.getEventTime());
-                System.out.println("Time good");
                 event.setEventPlace(updateEvent.getEventPlace());
-                System.out.println("Place good");
                 event.setStudentCount(updateEvent.getStudentCount());
-                System.out.println("Count good");
                 event.setOptCount(updateEvent.getOptCount());
-                System.out.println("Opt good");
                 event.setForPetition(updateEvent.isForPetition());
-                System.out.println("For petition good");
                 eventService.createEvent(event);
                 return ResponseEntity.ok(event);
             } else {
@@ -101,6 +94,13 @@ public class EventController {
     @DeleteMapping("/delete/{eventId}")
     public ResponseEntity<Void> deleteEvent(@PathVariable Long eventId) {
         return eventService.deleteEventById(eventId);
+    }
+
+    @PreAuthorize("hasAnyAuthority('SECRETARY', 'CHIEF_SECRETARY')")
+    @PostMapping("/post")
+    public ResponseEntity<Event> createEvent(@RequestBody Event event) {
+        Event createdEvent = eventService.createEvent(event);
+        return ResponseEntity.ok(createdEvent);
     }
 
 }

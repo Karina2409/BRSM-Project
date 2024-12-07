@@ -8,5 +8,73 @@
 </head>
 <body>
 
+<header class="header"></header>
+
+<main class="main">
+    <img src="../../assets/icons/arrow%201.png" alt="Arrow" class="arrow">
+
+    <section class="create-event-page__info-block info-block">
+        <div class="create-event__info info">
+            <div class="event-info__image">
+                <img src="../../assets/icons/brsm-icon.png" alt="BRSM icon" class="edit-event__brsm-photo">
+            </div>
+
+            <div class="create-event__block">
+                <div class="create-event__form">
+                    <div class="create-event__table_row">
+                        <div class="create-event__table_column event__main-column-td">Название</div>
+                        <div class="create-event__table_column">
+                            <input type="text" class="input create-event__input" name="eventName" required>
+                        </div>
+                    </div>
+                    <div class="create-event__table_row">
+                        <div class="create-event__table_column event__main-column-td">Дата</div>
+                        <div class="create-event__table_column">
+                            <input type="date" class="input create-event__input" name="eventDate" min="" id="eventDate" required>
+                        </div>
+                    </div>
+                    <div class="create-event__table_row">
+                        <div class="create-event__table_column event__main-column-td">Время</div>
+                        <div class="create-event__table_column">
+                            <input type="time" class="input create-event__input" name="eventTime" required>
+                        </div>
+                    </div>
+                    <div class="create-event__table_row">
+                        <div class="create-event__table_column event__main-column-td">Место</div>
+                        <div class="create-event__table_column">
+                            <input type="text" class="input create-event__input" name="eventPlace" required>
+                        </div>
+                    </div>
+                    <div class="create-event__table_row">
+                        <div class="create-event__table_column event__main-column-td">Количество студентов</div>
+                        <div class="create-event__table_column">
+                            <input type="number" class="input create-event__input" name="studentCount"  min="0" required>
+                        </div>
+                    </div>
+                    <div class="create-event__table_row">
+                        <div class="create-event__table_column event__main-column-td">Количество ОПТ</div>
+                        <div class="create-event__table_column">
+                            <input type="number" class="input create-event__input" name="optCount" min="0" required>
+                        </div>
+                    </div>
+                    <div class="create-event__table_row">
+                        <div class="create-event__table_column event__main-column-td">Для ходатайства</div>
+                        <div class="custom-checkbox">
+                            <input type="checkbox" id="petition" name="forPetition" class="custom-checkbox__input">
+                            <label for="petition" class="custom-checkbox__label"></label>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <div class="dark-blue-button save-button">Создать</div>
+        </div>
+    </section>
+</main>
+
+<footer class="footer"></footer>
+
+<script src="../../scripts/script.js"></script>
+<script src="../../scripts/createEventPage.js"></script>
 </body>
 </html>

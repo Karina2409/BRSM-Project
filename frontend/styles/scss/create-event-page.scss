@@ -1,3 +1,47 @@
 @import "style";
 @import "events-page";
 @import "buttons";
+
+.info-block{
+  padding: 60px 0;
+  width: 100%;
+}
+
+.create-event__info{
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  row-gap: 80px;
+}
+
+.create-event__block{
+  display: flex;
+  flex-direction: column;
+  row-gap: 50px;
+}
+
+.create-event__form{
+  width: 600px;
+  display: flex;
+  flex-direction: column;
+  row-gap: 15px;
+}
+
+.create-event__table_row{
+  display: flex;
+  align-items: center;
+}
+
+.create-event__table_column{
+  width: 100%;
+}
+.create-event__input{
+  width: 100%;
+}
+
+.event__main-column-td{
+  font-weight: 600;
+  min-width: 164px;
+  max-width: 164px;
+}
+

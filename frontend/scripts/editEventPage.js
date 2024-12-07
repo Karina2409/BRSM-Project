@@ -115,42 +115,56 @@ function addEventEditInfo(event) {
                 <div class="edit-event__table_row">
                     <div class="edit-event__table_column event__main-column-td">Дата</div>
                     <div class="edit-event__table_column">
-                        <input type="text" class="input edit-event__input" name="eventDate" value="${event.eventDate}">
+                        <input type="date" class="input edit-event__input" name="eventDate" value="${event.eventDate}" min="" id="eventDate" required>
                     </div>
                 </div>
                 <div class="edit-event__table_row">
                     <div class="edit-event__table_column event__main-column-td">Время</div>
                     <div class="edit-event__table_column">
-                        <input type="text" class="input edit-event__input" name="eventTime" value="${event.eventTime}">
+                        <input type="time" class="input edit-event__input" name="eventTime" value="${event.eventTime}" required>
                     </div>
                 </div>
                 <div class="edit-event__table_row">
                     <div class="edit-event__table_column event__main-column-td">Место</div>
                     <div class="edit-event__table_column">
-                        <input type="text" class="input edit-event__input" name="eventPlace" value="${event.eventPlace.replace(/"/g, '&quot;')}">
+                        <input type="text" class="input edit-event__input" name="eventPlace" value="${event.eventPlace.replace(/"/g, '&quot;')}" required>
                     </div>
                 </div>
                 <div class="edit-event__table_row">
                     <div class="edit-event__table_column event__main-column-td">Количество студентов</div>
                     <div class="edit-event__table_column">
-                        <input type="text" class="input edit-event__input" name="studentCount" value="${event.studentCount}">
+                        <input type="number" class="input edit-event__input" name="studentCount" value="${event.studentCount}" min="0" required>
                     </div>
                 </div>
                 <div class="edit-event__table_row">
                     <div class="edit-event__table_column event__main-column-td">Количество ОПТ</div>
                     <div class="edit-event__table_column">
-                        <input type="text" class="input edit-event__input" name="optCount" value="${event.optCount}">
+                        <input type="number" class="input edit-event__input" name="optCount" value="${event.optCount}" min="0" required>
                     </div>
                 </div>
                 <div class="edit-event__table_row">
                     <div class="edit-event__table_column event__main-column-td">Для ходатайства</div>
-                    <div class="edit-event__table_column">
-                        <input type="text" class="input edit-event__input" name="optCount" value="${event.optCount}">
-                    </div>
+                    <div class="custom-checkbox">
+                            <input type="checkbox" id="petition" name="forPetition" class="custom-checkbox__input" ${event.forPetition ? 'checked' : ''}>
+                            <label for="petition" class="custom-checkbox__label"></label>
+                        </div>
                 </div>
             </div>
         </div>
-    `
+    `;
+
+    const dateInput = document.getElementById("eventDate");
+    const today = new Date().toISOString().split("T")[0]; // Получаем текущую дату в формате YYYY-MM-DD
+    dateInput.setAttribute("min", today);
+
+    const numberInputs = document.querySelectorAll('input[type="number"]');
+    numberInputs.forEach(input => {
+        input.addEventListener("input", (e) => {
+            if (e.target.value < 0) {
+                e.target.value = 0;
+            }
+        });
+    });
 }
 
 function renderStudentsList(list, students) {
@@ -175,6 +189,7 @@ saveButton.addEventListener('click', async () => {
         const eventPlace = document.querySelector('.edit-event__input[value][name="eventPlace"]').value;
         const studentCount = document.querySelector('.edit-event__input[value][name="studentCount"]').value;
         const optCount = document.querySelector('.edit-event__input[value][name="optCount"]').value;
+        const forPetition = document.querySelector('.custom-checkbox__input[name="forPetition"]').checked;
 
         const updatedEvent = {
             eventId,
@@ -184,9 +199,11 @@ saveButton.addEventListener('click', async () => {
             eventPlace,
             studentCount,
             optCount,
-            forPetition: event.forPetition,
+            forPetition,
             students: students
         };
+
+        console.log(updatedEvent);
 
         const response = await fetch(`http://localhost:8080/events/event/update/${eventId}`, {
             method: 'PUT',
