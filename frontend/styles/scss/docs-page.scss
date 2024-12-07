@@ -1,3 +1,31 @@
 @import "style";
 @import "document-component";
 @import "event-component";
+
+.controls{
+  column-gap: 66px;
+}
+
+.documentation__control{
+  width: 100%;
+
+}
+.documentation__control.active:hover{
+  cursor: default;
+  background-color: $dark-blue;
+}
+
+.documentation__control:hover{
+  cursor: pointer;
+}
+
+.controls__container{
+  display: flex;
+  flex-direction: column;
+  row-gap: 10px;
+}
+
+.controls__line{
+  height: 3px;
+  background-color: $dark-blue;
+}

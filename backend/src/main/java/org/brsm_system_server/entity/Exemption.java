@@ -21,7 +21,7 @@ public class Exemption {
     private String exemptionName;
 
     @Column(columnDefinition = "DATE", name = "exemption_date")
-    @JsonFormat(pattern = "yyyy-MM-dd")
+    @JsonFormat(pattern = "yyyy-MM-dd", timezone = "Europe/Minsk")
     private Date exemptionDate;
 
     @Column(name = "students_faculty")

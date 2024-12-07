@@ -173,7 +173,7 @@ function createEventCard(event) {
             <div class="students__event-card__info">
                 <div class="students__event-card__info__table_row">
                     <div class="students__event-card__info__table_column main-column-td-event">Дата:</div>
-                    <div class="students__event-card__info__table_column">${event.eventDate}</div>
+                    <div class="students__event-card__info__table_column">${formatDate(event.eventDate)}</div>
                 </div>
                 <div class="students__event-card__info__table_row">
                     <div class="students__event-card__info__table_column main-column-td-event">Время:</div>

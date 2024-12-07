@@ -30,8 +30,8 @@
 }
 
 .document-card__info__row__title{
-  min-width: 146px;
-  max-width: 146px;
+  min-width: 120px;
+  max-width: 120px;
   font-weight: 600;
   font-size: 15px;
   word-wrap: break-word;
@@ -40,6 +40,9 @@
 .document-card__info__row__text{
   font-weight: 400;
   font-size: 15px;
+  text-wrap: wrap;
+  width: 100%;
+  overflow: hidden;
 }
 
 .document-card__buttons{

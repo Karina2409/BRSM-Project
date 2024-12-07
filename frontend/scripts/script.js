@@ -107,7 +107,7 @@ function navigateToPage(page) {
             window.location.href = `../events/events-page.html`;
             break;
         case 'documentation':
-            window.location.href = `../documentation/documentations-page.html`;
+            window.location.href = `../documentation/exemptions-page.html`;
             break;
         case 'statistics':
             window.location.href = `../statistics/statistics-page.html`;
@@ -179,4 +179,12 @@ function closeDeleteModal() {
     document.body.style.paddingRight = `0px`;
     modal.classList.remove('visible');
     modal.classList.add('invisible');
+}
+
+function formatDate(dateString) {
+    const date = new Date(dateString);
+    const day = String(date.getDate()).padStart(2, '0');
+    const month = String(date.getMonth() + 1).padStart(2, '0'); // Месяцы начинаются с 0
+    const year = date.getFullYear();
+    return `${day}.${month}.${year}`; // Формат ДД.ММ.ГГГГ
 }

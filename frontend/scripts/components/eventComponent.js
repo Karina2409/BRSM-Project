@@ -22,7 +22,7 @@ function createEventCard(event, pastEvents) {
             <div class="event-card__event-info">
                 <div class="students__event-card__info__table_row">
                     <p class="students__event-card__info__table_column main-column-td-event">Дата:</p>
-                    <p class="students__event-card__info__table_column">${event.eventDate}</p>
+                    <p class="students__event-card__info__table_column">${formatDate(event.eventDate)}</p>
                 </div>
 
                 <div class="students__event-card__info__table_row">

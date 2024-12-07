@@ -1,0 +1,18 @@
+@import "style";
+@import "buttons";
+@import "docs-page";
+@import "search-component";
+
+.main{
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  row-gap: 30px;
+}
+
+.exemptions-list{
+  display: flex;
+  flex-wrap: wrap;
+  row-gap: 30px;
+  column-gap: 24px;
+}
