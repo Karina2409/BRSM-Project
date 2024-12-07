@@ -12,6 +12,7 @@ public class EventMapper {
                 event.getEventDate(),
                 event.getEventTime(),
                 event.getEventPlace(),
+                event.getStudentCount(),
                 event.getOptCount(),
                 event.isForPetition()
         );

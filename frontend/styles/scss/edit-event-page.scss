@@ -1,0 +1,65 @@
+@import "style";
+@import "buttons";
+@import "student-component";
+@import "events-page";
+
+.info-block{
+  padding: 60px 0;
+  width: 100%;
+}
+
+.edit-event__info{
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  row-gap: 115px;
+}
+
+.edit-event__block{
+  display: flex;
+  flex-direction: column;
+  row-gap: 50px;
+}
+
+.edit-event__form{
+  width: 600px;
+  display: flex;
+  flex-direction: column;
+  row-gap: 15px;
+}
+
+.edit-event__table_row{
+  display: flex;
+  align-items: center;
+}
+
+.edit-event__table_column{
+  width: 100%;
+}
+.edit-event__input{
+  width: 100%;
+}
+
+.event__main-column-td{
+  font-weight: 600;
+  min-width: 164px;
+  max-width: 164px;
+}
+
+.event-info__image{
+  display: flex;
+  align-items: center;
+}
+
+.events__students-list{
+  display: flex;
+  flex-direction: column;
+  row-gap: 24px;
+  width: 100%;
+}
+
+.edit-event__controls{
+  display: flex;
+  column-gap: 30px;
+  justify-content: center;
+}

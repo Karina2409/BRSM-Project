@@ -20,6 +20,7 @@ public class EventDTO {
     @JsonFormat(pattern = "HH:mm", timezone = "Europe/Minsk")
     private Time eventTime;
     private String eventPlace;
+    private int studentCount;
     private int optCount;
     private boolean forPetition;
 }

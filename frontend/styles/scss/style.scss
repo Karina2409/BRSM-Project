@@ -2,6 +2,7 @@ $dark-blue: #024E68;
 $light-blue: #5DACD6;
 $placeholder-color: #719CAA;
 $gray-blue: #B2C5CB;
+$overlay: rgba(24, 28, 41, 0.8);
 
 $montserrat: "Montserrat", sans-serif;
 
@@ -16,7 +17,7 @@ $montserrat: "Montserrat", sans-serif;
   margin: 0 auto;
   top: 92px;
   position: relative;
-  padding: 0 0 120px 0;
+  padding: 0 0 180px 0;
 }
 
 .input {
@@ -54,6 +55,51 @@ $montserrat: "Montserrat", sans-serif;
 
 .filter__container:hover{
   cursor: pointer;
+}
+
+.modal__yes-or-no{
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  width: 100%;
+  height: 100%;
+  position: fixed;
+  top: 0;
+  left: 0;
+  background-color: $overlay;
+}
+
+.modal__yes-or-no.invisible{
+  visibility: hidden;
+}
+
+.modal__yes-or-no.visible{
+  visibility: visible;
+}
+
+.modal__yes-or-no__container{
+  position: relative;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  padding: 40px 30px;
+  background-color: #ffffff;
+  border-radius: 15px;
+  border: 4px solid $dark-blue;
+  color: $dark-blue;
+  width: 400px;
+  row-gap: 30px;
+}
+
+.modal__yes-or-no__heading{
+  font-weight: 700;
+  font-size: 20px;
+}
+
+.controls__yes-or-no{
+  display: flex;
+  justify-content: space-around;
 }
 
 
@@ -109,6 +155,8 @@ $montserrat: "Montserrat", sans-serif;
 
 .arrow {
   position: absolute;
+  top: 30px;
+  left: -123px;
 }
 
 .arrow:hover {

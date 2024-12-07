@@ -1,4 +1,5 @@
 let events = [];
+let pastEvents = [];
 
 (async function checkAccess() {
     const token = localStorage.getItem("authToken");
@@ -57,7 +58,27 @@ document.addEventListener("DOMContentLoaded", function () {
             })
             .then(data => {
                 events = data;
-                renderEventsList(list, events);
+                fetch('http://localhost:8080/events/past', {
+                    method: 'GET',
+                    headers: {
+                        'Content-Type': 'application/json',
+                        'Authorization': `Bearer ${token}`,
+                    }
+                })
+                    .then(response => {
+                        if (!response.ok) {
+                            throw new Error('Ошибка запроса: ' + response.statusText);
+                        }
+                        return response.json();
+                    })
+                    .then(data => {
+                        pastEvents = data;
+                        renderEventsList(list, events, pastEvents);
+                    })
+                    .catch(error => {
+                        console.error('Ошибка мероприятий:', error);
+                    })
+
             })
             .catch(error => {
                 console.error('Ошибка мероприятий:', error);
@@ -67,7 +88,7 @@ document.addEventListener("DOMContentLoaded", function () {
 
 let pageViewCards = 6;
 
-function renderEventsList(list, events) {
+function renderEventsList(list, events, pastEvents) {
     list.innerHTML = '';
     const button = document.querySelector('.show-more');
     if (events.length > pageViewCards) {
@@ -81,7 +102,7 @@ function renderEventsList(list, events) {
     while (cards <= pageViewCards && events.length >= cards) {
         events.forEach(event => {
             if (cards <= pageViewCards && !(cards > events.length)) {
-                const card = createEventCard(event);
+                const card = createEventCard(event, pastEvents);
                 list.append(card);
                 cards++;
             }

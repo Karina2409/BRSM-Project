@@ -42,6 +42,9 @@ public class SecurityConfiguration {
                         .requestMatchers(HttpMethod.GET, "/students/get-all").hasAnyAuthority("SECRETARY", "CHIEF_SECRETARY")
                         .requestMatchers(HttpMethod.GET, "/users").hasAuthority("CHIEF_SECRETARY")
                         .requestMatchers(HttpMethod.GET, "/events/get-all").hasAnyAuthority("SECRETARY", "CHIEF_SECRETARY")
+                        .requestMatchers(HttpMethod.PUT, "/events/event/update/{eventId}").hasAnyAuthority("SECRETARY", "CHIEF_SECRETARY")
+                        .requestMatchers(HttpMethod.GET, "/events/past").hasAnyAuthority("SECRETARY", "CHIEF_SECRETARY")
+                        .requestMatchers(HttpMethod.DELETE, "/events/delete/{eventId}").hasAnyAuthority("SECRETARY", "CHIEF_SECRETARY")
 //                        .requestMatchers(HttpMethod.GET, "/students/**").hasAuthority("SECRETARY")
 //
                         .anyRequest().authenticated())

@@ -1,10 +1,15 @@
-function createEventCard(event) {
+function createEventCard(event, pastEvents) {
     const eventWrapper = document.createElement("div");
     eventWrapper.classList.add("students__event-card");
     eventWrapper.classList.add("event-card");
 
     eventWrapper.addEventListener('click', (e) => {
-        openEventInfoPage(event);
+        if(e.target.closest(".dark-blue-button")) {
+            openEditEventPage(event);
+        }
+        else if(!e.target.closest(".gray-blue-button")) {
+            openEventInfoPage(event);
+        }
     });
 
     eventWrapper.innerHTML = `
@@ -42,7 +47,7 @@ function createEventCard(event) {
             </div>
         </div>
 
-        <button class="dark-blue-button">Изменить</button>
+        <button class="${isEventDone(event, pastEvents)}">Изменить</button>
     `;
 
     return eventWrapper;
@@ -50,4 +55,17 @@ function createEventCard(event) {
 
 function openEventInfoPage(event) {
     window.location.href = `../events/event-info-page.html?id=${event.eventId}`;
+}
+
+function openEditEventPage(event){
+    window.location.href = `../events/edit-event-page.html?id=${event.eventId}`;
+}
+
+function isEventDone(event, pastEvents){
+    for (const event1 of pastEvents) {
+        if(event1.eventId === event.eventId){
+            return 'gray-blue-button';
+        }
+    }
+    return 'dark-blue-button';
 }

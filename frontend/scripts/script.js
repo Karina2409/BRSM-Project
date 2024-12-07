@@ -146,3 +146,37 @@ async function logOut() {
         alert('Ошибка сети');
     }
 }
+
+const modal = document.querySelector(".modal__yes-or-no");
+const closeModal = document.querySelector(".modal__close-button");
+const modalNo = document.querySelector(".controls__no");
+const modalYes = document.querySelector(".controls__yes");
+
+function openDeleteModal(deleteItem){
+    modal.classList.add("visible");
+    modal.classList.remove("invisible");
+    document.body.style.overflow = 'hidden';
+
+    modal.addEventListener('click', (e) => {
+        if(e.target === modal) {
+            closeDeleteModal()
+        }
+    })
+
+    closeModal.addEventListener('click', closeDeleteModal);
+
+    modalNo.addEventListener('click', closeDeleteModal);
+
+    modalYes.addEventListener('click', deleteItem);
+
+
+}
+
+
+
+function closeDeleteModal() {
+    document.body.style.overflow = '';
+    document.body.style.paddingRight = `0px`;
+    modal.classList.remove('visible');
+    modal.classList.add('invisible');
+}

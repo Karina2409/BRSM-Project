@@ -1,0 +1,58 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>БРСМ БГУИР</title>
+    <link type="Image/x-icon" href="../../assets/icons/brsm-icon.png" rel="icon">
+    <link rel="stylesheet" href="../../styles/css/edit-event-page.css">
+</head>
+<body>
+<header class="header"></header>
+
+<main class="main">
+    <img src="../../assets/icons/arrow%201.png" alt="Arrow" class="arrow">
+
+    <section class="edit-event-page__info-block info-block">
+        <div class="edit-event__info info">
+
+        </div>
+    </section>
+
+    <!--    <section class="edit-student-list">-->
+    <!--        <div class="dark-blue-button">Изменить список студентов</div>-->
+    <!--    </section>-->
+
+    <section class="event-info-page__students-info-block">
+        <div class="events__students-list">
+        </div>
+    </section>
+
+    <section class="edit-event__controls">
+        <div class="empty-button delete-event">Удалить<br>мероприятие</div>
+        <div class="dark-blue-button save-event-changes">Сохранить<br>изменения</div>
+    </section>
+
+    <section class="modal__yes-or-no invisible">
+        <div class="modal__yes-or-no__container">
+            <div class="modal__close-button">
+                <svg width="40" height="40" viewBox="0 0 40 40" fill="none" xmlns="http://www.w3.org/2000/svg">
+                    <path d="M30 10L10 30" stroke="#181C29" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" />
+                    <path d="M10 10L30 30" stroke="#181C29" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" />
+                </svg>
+            </div>
+            <div class="modal__yes-or-no__heading">Вы точно хотите удалить?</div>
+            <div class="controls__yes-or-no">
+                <div class="controls__yes empty-button">Да</div>
+                <div class="controls__no dark-blue-button">Нет</div>
+            </div>
+        </div>
+    </section>
+</main>
+
+<footer class="footer"></footer>
+
+<script src="../../scripts/script.js"></script>
+<script src="../../scripts/editEventPage.js"></script>
+<script src="../../scripts/components/studentComponent.js"></script>
+</body>
+</html>

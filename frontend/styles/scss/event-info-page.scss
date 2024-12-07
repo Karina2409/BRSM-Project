@@ -1,12 +1,14 @@
 @import "style";
 @import "student-info-page";
 @import "student-component";
+@import "events-page";
 @import "buttons";
 
 .events__students-list{
   display: flex;
   flex-direction: column;
   row-gap: 24px;
+  width: 100%;
 }
 
 .event-info__block{
@@ -29,17 +31,6 @@
 
 .event-info__table_column{
   font-size: 20px;
-}
-
-.event-info-page__students-info-block{
-  padding: 60px 0;
-}
-
-.events__students-list{
-  display: flex;
-  flex-wrap: wrap;
-  column-gap: 24px;
-  row-gap: 24px;
 }
 
 .event__main-column-td{
