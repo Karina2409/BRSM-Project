@@ -30,4 +30,10 @@ public class ExemptionController {
     public ResponseEntity<Void> deleteExemption(@PathVariable Long exemptionId) {
         return exemptionService.deleteExemptionById(exemptionId);
     }
+
+    @PreAuthorize("hasAnyAuthority('SECRETARY', 'CHIEF_SECRETARY')")
+    @PostMapping("/download/{exemptionId}")
+    public ResponseEntity<Void> downloadExemption(@PathVariable Long exemptionId) {
+        return exemptionService.downloadExemption(exemptionId);
+    }
 }

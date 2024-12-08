@@ -108,11 +108,19 @@ function renderExemptionsList(list, exemptions){
     }
 
     const deleteButtons = document.querySelectorAll('.delete-button');
+    const downloadButtons = document.querySelectorAll('.download-button');
 
     deleteButtons.forEach((button) => {
         button.addEventListener('click', async (e) => {
             const exemptionId = e.target.dataset.id;
             openDeleteModal(deleteExemption, exemptionId);
+        })
+    })
+
+    downloadButtons.forEach((button) => {
+        button.addEventListener('click', async (e) => {
+            const exemptionId = e.target.dataset.id;
+            downloadExemption(exemptionId);
         })
     })
 
@@ -144,4 +152,24 @@ async function deleteExemption(exemptionId){
     }
     window.location.href = "./exemptions-page.html";
     modal.addEventListener('click', closeDeleteModal)
+}
+
+async function downloadExemption(exemptionId){
+    try{
+        const token = localStorage.getItem('authToken');
+        const response = await fetch(`http://localhost:8080/exemptions/download/${exemptionId}`, {
+            method: 'POST',
+            headers: {
+                'Content-Type': 'application/json',
+                'Authorization': `Bearer ${token}`,
+            },
+        });
+        if (!response.ok) {
+            throw new Error(`Ошибка сохранения: ${response.statusText}`);
+        }
+    }
+    catch (error) {
+        console.error('Ошибка при удалении освобождения:', error);
+    }
+    alert("Освобождение сохранено в папку D:/BRSM project/документация/освобождения")
 }

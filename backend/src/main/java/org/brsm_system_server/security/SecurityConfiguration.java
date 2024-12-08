@@ -48,6 +48,7 @@ public class SecurityConfiguration {
                         .requestMatchers(HttpMethod.POST, "/events/post").hasAnyAuthority("SECRETARY", "CHIEF_SECRETARY")
                         .requestMatchers(HttpMethod.GET, "/exemptions/get-all").hasAnyAuthority("SECRETARY", "CHIEF_SECRETARY")
                         .requestMatchers(HttpMethod.DELETE, "/exemptions/delete/{exemptionId}").hasAnyAuthority("SECRETARY", "CHIEF_SECRETARY")
+                        .requestMatchers(HttpMethod.POST, "/exemptions/download/{exemptionId}").hasAnyAuthority("SECRETARY", "CHIEF_SECRETARY")
 //                        .requestMatchers(HttpMethod.GET, "/students/**").hasAuthority("SECRETARY")
 //
                         .anyRequest().authenticated())

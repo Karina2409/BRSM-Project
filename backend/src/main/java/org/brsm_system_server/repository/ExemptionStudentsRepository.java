@@ -1,13 +1,19 @@
 package org.brsm_system_server.repository;
 
 import org.brsm_system_server.entity.Exemption;
+import org.brsm_system_server.entity.Student;
 import org.springframework.data.jpa.repository.JpaRepository;
 import org.springframework.data.jpa.repository.Modifying;
 import org.springframework.data.jpa.repository.Query;
 import org.springframework.data.repository.query.Param;
 import org.springframework.transaction.annotation.Transactional;
 
+import java.util.Set;
+
 public interface ExemptionStudentsRepository extends JpaRepository<Exemption, Long> {
+
+    @Query("SELECT e.students FROM Exemption e WHERE e.exemptionId = :exemptionId")
+    Set<Student> findStudentsByExemptionId(@Param("exemptionId") Long exemptionId);
 
     @Modifying
     @Transactional

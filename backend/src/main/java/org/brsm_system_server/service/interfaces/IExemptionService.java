@@ -8,4 +8,5 @@ import java.util.List;
 public interface IExemptionService {
     List<Exemption> getAllExemptions();
     ResponseEntity<Void> deleteExemptionById(Long exemptionId);
+    ResponseEntity<Void> downloadExemption(Long exemptionId);
 }
