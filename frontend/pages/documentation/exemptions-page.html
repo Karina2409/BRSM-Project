@@ -3,7 +3,6 @@
 <head>
     <meta charset="UTF-8">
     <title>БРСМ БГУИР</title>
-    <script src="../../scripts/script.js"></script>
     <link rel="stylesheet" href="../../styles/css/exemptions-page.css">
     <link type="Image/x-icon" href="../../assets/icons/brsm-icon.png" rel="icon">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
@@ -33,6 +32,21 @@
         </button>
     </div>
 
+    <section class="modal__yes-or-no invisible">
+        <div class="modal__yes-or-no__container">
+            <div class="modal__close-button">
+                <svg width="40" height="40" viewBox="0 0 40 40" fill="none" xmlns="http://www.w3.org/2000/svg">
+                    <path d="M30 10L10 30" stroke="#181C29" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" />
+                    <path d="M10 10L30 30" stroke="#181C29" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" />
+                </svg>
+            </div>
+            <div class="modal__yes-or-no__heading">Вы точно хотите удалить?</div>
+            <div class="controls__yes-or-no">
+                <div class="controls__yes empty-button">Да</div>
+                <div class="controls__no dark-blue-button">Нет</div>
+            </div>
+        </div>
+    </section>
 </main>
 
 <footer class="footer"></footer>
@@ -41,5 +55,6 @@
 <script src="../../scripts/components/searchComponent.js"></script>
 <script src="../../scripts/docsPage.js"></script>
 <script src="../../scripts/components/exemptionComponent.js"></script>
+<script src="../../scripts/script.js"></script>
 </body>
 </html>

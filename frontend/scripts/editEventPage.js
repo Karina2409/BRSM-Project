@@ -224,15 +224,14 @@ saveButton.addEventListener('click', async () => {
 });
 
 deleteButton.addEventListener('click', async () => {
-
-    openDeleteModal(deleteEvent);
+    const urlParams = new URLSearchParams(window.location.search);
+    const eventId = urlParams.get('id');
+    openDeleteModal(deleteEvent, eventId);
 })
 
-async function deleteEvent() {
+async function deleteEvent(eventId) {
     try{
         const token = localStorage.getItem('authToken');
-        const urlParams = new URLSearchParams(window.location.search);
-        const eventId = urlParams.get('id');
         const response = await fetch(`http://localhost:8080/events/delete/${eventId}`, {
             method: 'DELETE',
             headers: {

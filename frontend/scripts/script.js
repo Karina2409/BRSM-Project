@@ -152,7 +152,7 @@ const closeModal = document.querySelector(".modal__close-button");
 const modalNo = document.querySelector(".controls__no");
 const modalYes = document.querySelector(".controls__yes");
 
-function openDeleteModal(deleteItem){
+function openDeleteModal(deleteItem, itemId){
     modal.classList.add("visible");
     modal.classList.remove("invisible");
     document.body.style.overflow = 'hidden';
@@ -167,9 +167,9 @@ function openDeleteModal(deleteItem){
 
     modalNo.addEventListener('click', closeDeleteModal);
 
-    modalYes.addEventListener('click', deleteItem);
-
-
+    modalYes.addEventListener('click', () => {
+        deleteItem(itemId);
+    });
 }
 
 
@@ -184,7 +184,7 @@ function closeDeleteModal() {
 function formatDate(dateString) {
     const date = new Date(dateString);
     const day = String(date.getDate()).padStart(2, '0');
-    const month = String(date.getMonth() + 1).padStart(2, '0'); // Месяцы начинаются с 0
+    const month = String(date.getMonth() + 1).padStart(2, '0');
     const year = date.getFullYear();
-    return `${day}.${month}.${year}`; // Формат ДД.ММ.ГГГГ
+    return `${day}.${month}.${year}`;
 }

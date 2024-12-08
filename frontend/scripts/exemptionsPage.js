@@ -65,9 +65,26 @@ document.addEventListener("DOMContentLoaded", function() {
     }
 })
 
-function filterExemptions(exemption) {}
+function filterExemptions(query) {
+    const list = document.querySelector('.exemptions-list');
 
-let pageViewCards = 6;
+    if(!list) {
+        return;
+    }
+
+    if (!query) {
+        renderExemptionsList(list, exemptions);
+        return;
+    }
+
+    const filteredExemptions = exemptions.filter(exemption => {
+        return exemption.eventName.toLowerCase().startsWith(query);
+    });
+
+    renderExemptionsList(list, filteredExemptions);
+}
+
+let pageViewCards = 9;
 
 function renderExemptionsList(list, exemptions){
     list.innerHTML = '';
@@ -89,10 +106,42 @@ function renderExemptionsList(list, exemptions){
             }
         })
     }
+
+    const deleteButtons = document.querySelectorAll('.delete-button');
+
+    deleteButtons.forEach((button) => {
+        button.addEventListener('click', async (e) => {
+            const exemptionId = e.target.dataset.id;
+            openDeleteModal(deleteExemption, exemptionId);
+        })
+    })
+
 }
 
 function addExemptionsCard(){
     const list = document.querySelector('.exemptions-list');
     pageViewCards += 6;
     renderExemptionsList(list, exemptions);
+}
+
+async function deleteExemption(exemptionId){
+    try{
+        const token = localStorage.getItem('authToken');
+        const response = await fetch(`http://localhost:8080/exemptions/delete/${exemptionId}`, {
+            method: 'DELETE',
+            headers: {
+                'Content-Type': 'application/json',
+                'Authorization': `Bearer ${token}`,
+            },
+        });
+
+        if (!response.ok) {
+            throw new Error(`Ошибка сохранения: ${response.statusText}`);
+        }
+    }
+    catch (error) {
+        console.error('Ошибка при удалении освобождения:', error);
+    }
+    window.location.href = "./exemptions-page.html";
+    modal.addEventListener('click', closeDeleteModal)
 }

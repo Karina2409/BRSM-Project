@@ -5,10 +5,9 @@ import org.brsm_system_server.entity.Exemption;
 import org.brsm_system_server.mapper.ExemptionMapper;
 import org.brsm_system_server.service.interfaces.IExemptionService;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.http.ResponseEntity;
 import org.springframework.security.access.prepost.PreAuthorize;
-import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RestController;
+import org.springframework.web.bind.annotation.*;
 
 import java.util.List;
 
@@ -24,5 +23,11 @@ public class ExemptionController {
     public List<ExemptionDTO> getExemptions() {
         List<Exemption> exemptions = exemptionService.getAllExemptions();
         return exemptions.stream().map(ExemptionMapper::toDto).toList();
+    }
+
+    @PreAuthorize("hasAnyAuthority('SECRETARY', 'CHIEF_SECRETARY')")
+    @DeleteMapping("/delete/{exemptionId}")
+    public ResponseEntity<Void> deleteExemption(@PathVariable Long exemptionId) {
+        return exemptionService.deleteExemptionById(exemptionId);
     }
 }

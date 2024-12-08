@@ -23,10 +23,11 @@ function createExemptionCard(exemption) {
         </div>
 
         <div class="document-card__buttons">
-            <button class="dark-blue-button document-card__button download-button">Скачать</button>
-            <button class="empty-button document-card__button delete-button">Удалить</button>
+            <button class="dark-blue-button document-card__button download-button" data-id="${exemption.exemptionId}">Скачать</button>
+            <button class="empty-button document-card__button delete-button" data-id="${exemption.exemptionId}">Удалить</button>
         </div>
     `;
 
     return exemptionWrapper;
 }
+
