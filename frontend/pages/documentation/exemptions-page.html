@@ -19,7 +19,7 @@
 
     <div class="controls">
         <section class="search" id="search"></section>
-        <div class="button-plus create-event">+</div>
+        <div class="button-plus create-exemption">+</div>
     </div>
 
     <div class="exemptions-list">
@@ -32,7 +32,7 @@
         </button>
     </div>
 
-    <section class="modal__yes-or-no invisible">
+    <section class="modal__overlay invisible modal__yes_or_no">
         <div class="modal__yes-or-no__container">
             <div class="modal__close-button">
                 <svg width="40" height="40" viewBox="0 0 40 40" fill="none" xmlns="http://www.w3.org/2000/svg">
@@ -47,6 +47,32 @@
             </div>
         </div>
     </section>
+
+    <section class="modal__overlay invisible modal__choose_event">
+        <div class="choose_modal">
+            <img src="../../assets/icons/arrow%201.png" alt="Arrow" class="arrow back-to-docs-page">
+            <div class="choose_modal__text-block__container">
+                <div class="choose_modal__heading">Выберите мероприятие</div>
+                <section class="search-event">
+                    <div class="search-wrapper">
+                        <input type="text" class="search-input" placeholder="Введите название мероприятия">
+                        <button class="search-button" type="submit">
+                            <img src="../../assets/icons/search.svg" alt="Search" class="search-img">
+                            Искать
+                        </button>
+                    </div>
+                </section>
+
+                <div class="choose_modal__list choose_modal__events-list">
+
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <section class="modal__overlay invisible modal__choose_students">
+
+    </section>
 </main>
 
 <footer class="footer"></footer>
@@ -56,5 +82,6 @@
 <script src="../../scripts/docsPage.js"></script>
 <script src="../../scripts/components/exemptionComponent.js"></script>
 <script src="../../scripts/script.js"></script>
+<script src="../../scripts/components/eventMiniComponent.js"></script>
 </body>
 </html>

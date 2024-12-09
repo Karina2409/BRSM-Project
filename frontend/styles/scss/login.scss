@@ -31,7 +31,11 @@ span {
 
 .reg-button{
   width: fit-content;
-  height: 54px;
+}
+
+.reg-button:hover{
+  cursor: pointer;
+  border: 4px solid #ffffff;
 }
 
 a {

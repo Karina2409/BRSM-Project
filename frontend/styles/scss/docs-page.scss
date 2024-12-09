@@ -8,8 +8,9 @@
 
 .documentation__control{
   width: 100%;
-
+  transition: background-color 0.3s;
 }
+
 .documentation__control.active:hover{
   cursor: default;
   background-color: $dark-blue;
@@ -17,6 +18,8 @@
 
 .documentation__control:hover{
   cursor: pointer;
+  background-color: $placeholder-color;
+  transition: background-color 0.3s;
 }
 
 .controls__container{
@@ -28,4 +31,16 @@
 .controls__line{
   height: 3px;
   background-color: $dark-blue;
+}
+
+.mini__event-card{
+  border: 5px solid $light-blue;
+  border-radius: 30px;
+  padding: 15px 40px;
+  font-weight: 700;
+  font-size: 24px;
+}
+
+.mini__event-card__students{
+  width: 802px;
 }

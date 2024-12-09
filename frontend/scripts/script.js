@@ -82,7 +82,7 @@ function setActivePageFromURL() {
     let activePage = 'students';
     if (path.includes('users')) activePage = 'users';
     else if (path.includes('events')) activePage = 'events';
-    else if (path.includes('documentations')) activePage = 'documentation';
+    else if (path.includes('documentation')) activePage = 'documentation';
     else if (path.includes('statistics')) activePage = 'statistics';
     else if (path.includes('exit')) activePage = 'exit';
 
@@ -137,7 +137,7 @@ async function logOut() {
 
         if (response.ok) {
             localStorage.setItem('authToken', null);
-            window.location.href = '../index.html';
+            window.location.href = '../../index.html';
         } else {
             alert('Ошибка авторизации')
         }
@@ -147,39 +147,42 @@ async function logOut() {
     }
 }
 
-const modal = document.querySelector(".modal__yes-or-no");
-const closeModal = document.querySelector(".modal__close-button");
-const modalNo = document.querySelector(".controls__no");
-const modalYes = document.querySelector(".controls__yes");
+document.addEventListener('DOMContentLoaded', () => {
+    const modal = document.querySelector(".modal__yes_or_no");
+    const closeModal = document.querySelector(".modal__close-button");
+    const modalNo = document.querySelector(".controls__no");
+    const modalYes = document.querySelector(".controls__yes");
 
-function openDeleteModal(deleteItem, itemId){
-    modal.classList.add("visible");
-    modal.classList.remove("invisible");
-    document.body.style.overflow = 'hidden';
+    function openDeleteModal(deleteItem, itemId){
+        modal.classList.add("visible");
+        modal.classList.remove("invisible");
+        document.body.style.overflow = 'hidden';
 
-    modal.addEventListener('click', (e) => {
-        if(e.target === modal) {
-            closeDeleteModal()
-        }
-    })
+        modal.addEventListener('click', (e) => {
+            if(e.target === modal) {
+                closeDeleteModal()
+            }
+        })
 
-    closeModal.addEventListener('click', closeDeleteModal);
+        closeModal.addEventListener('click', closeDeleteModal);
 
-    modalNo.addEventListener('click', closeDeleteModal);
+        modalNo.addEventListener('click', closeDeleteModal);
 
-    modalYes.addEventListener('click', () => {
-        deleteItem(itemId);
-    });
-}
+        modalYes.addEventListener('click', () => {
+            deleteItem(itemId);
+        });
+    }
 
+    function closeDeleteModal() {
+        document.body.style.overflow = '';
+        document.body.style.paddingRight = `0px`;
+        modal.classList.remove('visible');
+        modal.classList.add('invisible');
+    }
 
+    window.openDeleteModal = openDeleteModal;
+})
 
-function closeDeleteModal() {
-    document.body.style.overflow = '';
-    document.body.style.paddingRight = `0px`;
-    modal.classList.remove('visible');
-    modal.classList.add('invisible');
-}
 
 function formatDate(dateString) {
     const date = new Date(dateString);

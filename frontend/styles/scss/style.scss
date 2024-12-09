@@ -2,7 +2,7 @@ $dark-blue: #024E68;
 $light-blue: #5DACD6;
 $placeholder-color: #719CAA;
 $gray-blue: #B2C5CB;
-$overlay: rgba(24, 28, 41, 0.8);
+$overlay: rgb(154, 154, 154, 0.8);
 
 $montserrat: "Montserrat", sans-serif;
 
@@ -57,7 +57,7 @@ $montserrat: "Montserrat", sans-serif;
   cursor: pointer;
 }
 
-.modal__yes-or-no{
+.modal__overlay{
   display: flex;
   flex-direction: column;
   justify-content: center;
@@ -70,12 +70,13 @@ $montserrat: "Montserrat", sans-serif;
   background-color: $overlay;
 }
 
-.modal__yes-or-no.invisible{
+.modal__overlay.invisible{
   visibility: hidden;
 }
 
-.modal__yes-or-no.visible{
+.modal__overlay.visible{
   visibility: visible;
+  z-index: 11;
 }
 
 .modal__yes-or-no__container{
@@ -138,6 +139,42 @@ $montserrat: "Montserrat", sans-serif;
 
 .custom-checkbox__label:hover::before {
   border-color: $dark-blue;
+}
+
+.choose_modal{
+  width: 1030px;
+  border: 4px solid #024e68;
+  border-radius: 15px;
+  padding: 60px 100px 60px 120px;
+  max-height: 835px;
+  background-color: #ffffff;
+  position: relative;
+  overflow: hidden;
+}
+
+.choose_modal__heading{
+  font-weight: 700;
+  font-size: 28px;
+  text-align: center;
+}
+
+.choose_modal__text-block__container{
+  display: flex;
+  flex-direction: column;
+  row-gap: 30px;
+  overflow-y: auto;
+  max-height: 715px;
+  flex: 1;
+}
+
+.choose_modal__text-block__container__students{
+  align-items: center;
+}
+
+.choose_modal__list{
+  display: flex;
+  flex-direction: column;
+  row-gap: 10px;
 }
 
 // HEADER STYLES
