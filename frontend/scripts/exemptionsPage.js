@@ -229,8 +229,43 @@ function renderEventsListExemption(list, events) {
     })
 }
 
-function openSelectStudentsModal(event) {
+const searchWrapper = document.querySelector('.search-wrapper');
+const searchInput = searchWrapper.querySelector('.search-input');
+const searchButton = searchWrapper.querySelector('.search-button');
 
+const performSearch = () => {
+    const query = searchInput.value.trim().toLowerCase();
+    filterEvents(query);
+};
+
+searchButton.addEventListener('click', performSearch);
+
+searchInput.addEventListener('keydown', (event) => {
+    if (event.key === 'Enter') {
+        performSearch();
+    }
+});
+
+function filterEvents(query) {
+    const list = document.querySelector('.choose_modal__events-list');
+
+    if (!list) {
+        return;
+    }
+
+    if (!query) {
+        renderEventsListExemption(list, exemptions);
+        return;
+    }
+
+    const filteredEvents = pastEvents.filter(event => {
+        return event.eventName.toLowerCase().startsWith(query);
+    });
+
+    renderEventsListExemption(list, filteredEvents);
+}
+
+function openSelectStudentsModal(event) {
     const token = localStorage.getItem("authToken");
     fetch(`http://localhost:8080/events/${event.eventId}/students`, {
         method: 'GET',
@@ -342,6 +377,43 @@ function createSelectStudentModal(event) {
             selectStudentModal.remove();
         });
     }
+
+    submitButton.addEventListener('click', async () => {
+        const selectedStudents = Array.from(checkboxes)
+            .filter(checkbox => checkbox.checked)
+            .map(checkbox => parseInt(checkbox.id.replace('student-', '')));
+
+        if (selectedStudents.length === 0) {
+            alert("Выберите хотя бы одного студента.");
+            return;
+        }
+
+        try {
+            const token = localStorage.getItem("authToken");
+            const response = await fetch(`http://localhost:8080/exemptions/post/${event.eventId}`, {
+                method: 'POST',
+                headers: {
+                    'Content-Type': 'application/json',
+                    'Authorization': `Bearer ${token}`,
+                },
+                body: JSON.stringify({ studentIds: selectedStudents }),
+            });
+
+            if (!response.ok) {
+                throw new Error(`Ошибка запроса: ${response.statusText}`);
+            }
+
+            alert('Освобождение успешно создано!');
+            selectStudentModal.remove();
+        } catch (error) {
+            console.error('Ошибка при создании освобождения:', error);
+            alert('Не удалось создать освобождение.');
+        }
+
+        chooseStudentsModal.classList.add('invisible');
+        chooseStudentsModal.classList.remove('visible');
+        window.location.href = "./exemptions-page.html";
+    });
 
     return selectStudentModal;
 

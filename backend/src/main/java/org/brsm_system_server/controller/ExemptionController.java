@@ -7,9 +7,12 @@ import org.brsm_system_server.service.interfaces.IExemptionService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.ResponseEntity;
 import org.springframework.security.access.prepost.PreAuthorize;
+import org.springframework.web.bind.MissingServletRequestParameterException;
 import org.springframework.web.bind.annotation.*;
 
 import java.util.List;
+import java.util.Map;
+import java.util.Set;
 
 @RestController
 @RequestMapping("/exemptions")
@@ -23,6 +26,18 @@ public class ExemptionController {
     public List<ExemptionDTO> getExemptions() {
         List<Exemption> exemptions = exemptionService.getAllExemptions();
         return exemptions.stream().map(ExemptionMapper::toDto).toList();
+    }
+
+    @PreAuthorize("hasAnyAuthority('SECRETARY', 'CHIEF_SECRETARY')")
+    @PostMapping("/post/{eventId}")
+    public ResponseEntity<Void> createExemption(@PathVariable("eventId") Long eventId,
+                                                @RequestBody Map<String, Set<Long>> request) throws MissingServletRequestParameterException {
+        Set<Long> studentIds = request.get("studentIds");
+        if (studentIds == null || studentIds.isEmpty()) {
+            throw new MissingServletRequestParameterException("studentIds", "Set<Long>");
+        }
+        exemptionService.saveExemption(eventId, studentIds);
+        return ResponseEntity.ok().build();
     }
 
     @PreAuthorize("hasAnyAuthority('SECRETARY', 'CHIEF_SECRETARY')")
