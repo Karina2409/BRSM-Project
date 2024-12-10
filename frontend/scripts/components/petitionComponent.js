@@ -24,8 +24,8 @@ function createPetitionCard(petition) {
         </div>
 
         <div class="document-card__buttons">
-            <button class="dark-blue-button document-card__button" data-id="${petition.petitionId}">Скачать</button>
-            <button class="empty-button document-card__button" data-id="${petition.petitionId}">Удалить</button>
+            <button class="dark-blue-button document-card__button download-button" data-id="${petition.petitionId}">Скачать</button>
+            <button class="empty-button document-card__button delete-button" data-id="${petition.petitionId}">Удалить</button>
         </div>
     `;
 

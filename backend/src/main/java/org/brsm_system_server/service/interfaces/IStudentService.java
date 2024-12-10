@@ -9,5 +9,6 @@ public interface IStudentService {
     List<Student> findAllStudents();
     Student getStudentById(Long id);
     List<Student> getStudentsByEventId(Long eventId);
+    List<Student> findEligibleStudents();
 
 }

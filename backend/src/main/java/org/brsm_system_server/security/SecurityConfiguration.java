@@ -55,6 +55,10 @@ public class SecurityConfiguration {
                         .requestMatchers(HttpMethod.POST, "/reports/post/month").hasAnyAuthority("SECRETARY", "CHIEF_SECRETARY")
                         .requestMatchers(HttpMethod.POST, "/reports/download/{reportId}").hasAnyAuthority("SECRETARY", "CHIEF_SECRETARY")
                         .requestMatchers(HttpMethod.GET, "/petitions/get-all").hasAnyAuthority("SECRETARY", "CHIEF_SECRETARY")
+                        .requestMatchers(HttpMethod.POST, "/petitions/download/{petitionId}").hasAnyAuthority("SECRETARY", "CHIEF_SECRETARY")
+                        .requestMatchers(HttpMethod.DELETE, "/petitions/delete/{petitionId}").hasAnyAuthority("SECRETARY", "CHIEF_SECRETARY")
+                        .requestMatchers(HttpMethod.GET, "/petitions/eligible").hasAnyAuthority("SECRETARY", "CHIEF_SECRETARY")
+                        .requestMatchers(HttpMethod.POST, "/petitions/post/{studentId}").hasAnyAuthority("SECRETARY", "CHIEF_SECRETARY")
 //                        .requestMatchers(HttpMethod.GET, "/students/**").hasAuthority("SECRETARY")
 //
                         .anyRequest().authenticated())

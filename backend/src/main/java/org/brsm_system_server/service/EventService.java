@@ -44,6 +44,11 @@ public class EventService implements IEventService {
     }
 
     @Override
+    public List<Event> getEventByStudentIdPetition(Long studentId){
+        return eventRepository.findPetitionEventsByStudentId(studentId);
+    }
+
+    @Override
     public List<Event> getPastEvents() {
         return eventRepository.findByEventDateBefore(new Date());
     }

@@ -12,4 +12,5 @@ public interface IEventService {
     Event createEvent(Event event);
     List<Event> getPastEvents();
     ResponseEntity<Void> deleteEventById(Long event_id);
+    List<Event> getEventByStudentIdPetition(Long studentId);
 }

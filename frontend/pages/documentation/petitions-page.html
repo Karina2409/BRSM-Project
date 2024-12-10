@@ -17,6 +17,11 @@
 
   </div>
 
+  <div class="controls">
+    <section class="search" id="search"></section>
+    <div class="button-plus create-petition">+</div>
+  </div>
+
   <div class="petitions-list documentation-list"></div>
 
   <div class="button__show-more__container">
@@ -25,6 +30,43 @@
     </button>
   </div>
 
+  <section class="modal__overlay invisible modal__yes_or_no">
+    <div class="modal__yes-or-no__container">
+      <div class="modal__close-button">
+        <svg width="40" height="40" viewBox="0 0 40 40" fill="none" xmlns="http://www.w3.org/2000/svg">
+          <path d="M30 10L10 30" stroke="#181C29" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" />
+          <path d="M10 10L30 30" stroke="#181C29" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" />
+        </svg>
+      </div>
+      <div class="modal__yes-or-no__heading">Вы точно хотите удалить?</div>
+      <div class="controls__yes-or-no">
+        <div class="controls__yes empty-button">Да</div>
+        <div class="controls__no dark-blue-button">Нет</div>
+      </div>
+    </div>
+  </section>
+
+  <section class="modal__overlay invisible modal__choose_student">
+    <div class="choose_modal">
+      <img src="../../assets/icons/arrow%201.png" alt="Arrow" class="arrow back-to-docs-page">
+      <div class="choose_modal__text-block__container">
+        <section class="search-student">
+          <div class="search-wrapper">
+            <input type="text" class="search-input" placeholder="Введите фамилию студента">
+            <button class="search-button" type="submit">
+              <img src="../../assets/icons/search.svg" alt="Search" class="search-img">
+              Искать
+            </button>
+          </div>
+        </section>
+
+        <div class="choose_modal__list choose_modal__students-list">
+
+        </div>
+      </div>
+    </div>
+  </section>
+
 </main>
 
 <footer class="footer"></footer>
@@ -32,5 +74,6 @@
 <script src="../../scripts/docsPage.js"></script>
 <script src="../../scripts/components/petitionComponent.js"></script>
 <script src="../../scripts/petitionsPage.js"></script>
+<script src="../../scripts/components/searchComponent.js"></script>
 </body>
 </html>

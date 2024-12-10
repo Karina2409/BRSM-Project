@@ -1,9 +1,36 @@
 @import "style";
 @import "buttons";
 @import "docs-page";
+@import "search-component";
 
 .main{
   display: flex;
   flex-direction: column;
   row-gap: 30px;
+}
+
+.arrow{
+  left: 45px;
+  top: 20px;
+}
+
+.choose_modal__student-item{
+  border: 5px solid #5dacd6;
+  border-radius: 30px;
+  padding: 10px 40px;
+  font-weight: 700;
+  font-size: 24px;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  width: 100%;
+}
+
+.choose_modal__student-item:hover{
+  cursor: pointer;
+}
+
+.student__group-number{
+  font-weight: 400;
+  font-size: 15px;
 }
