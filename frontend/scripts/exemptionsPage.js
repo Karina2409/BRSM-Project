@@ -5,7 +5,6 @@ let students = [];
 const addButton = document.querySelector('.create-exemption');
 const chooseEventModal = document.querySelector('.modal__choose_event');
 const chooseStudentsModal = document.querySelector('.modal__choose_students');
-const searchField = document.querySelector('.search-event');
 const eventsList = document.querySelector('.choose_modal__events-list');
 
 (async function checkAccess() {

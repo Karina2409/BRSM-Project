@@ -57,6 +57,17 @@ $montserrat: "Montserrat", sans-serif;
   cursor: pointer;
 }
 
+.controls__filter{
+  height: 44px;
+  width: 150px;
+  border: 3px solid $dark-blue;
+  border-radius: 10px;
+  color: #024E68;
+  font-size: 16px;
+  font-weight: 500;
+  padding: 0 0 0 5px;
+}
+
 .modal__overlay{
   display: flex;
   flex-direction: column;

@@ -14,15 +14,52 @@
 <main class="main">
 
     <div class="controls__container">
-
     </div>
 
+    <div class="controls_report">
+        <div class="controls__filter__container">
+            <select name="dormitory" id="dormitory" class="controls__filter">
+                <option value="non-choose" selected>Не выбрано</option>
+                <option value="1">1</option>
+                <option value="2">2</option>
+                <option value="3">3</option>
+                <option value="4">4</option>
+                <option value="5">5</option>
+            </select>
+        </div>
+        <button class="dark-blue-button create-report">Сформировать</button>
+    </div>
 
+    <div class="reports-list documentation-list"></div>
+
+    <div class="button__show-more__container">
+        <button class="empty-button show-more" onclick="addReportsCard()">
+            Показать еще
+        </button>
+    </div>
+
+    <section class="modal__overlay invisible modal__yes_or_no">
+        <div class="modal__yes-or-no__container">
+            <div class="modal__close-button">
+                <svg width="40" height="40" viewBox="0 0 40 40" fill="none" xmlns="http://www.w3.org/2000/svg">
+                    <path d="M30 10L10 30" stroke="#181C29" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" />
+                    <path d="M10 10L30 30" stroke="#181C29" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" />
+                </svg>
+            </div>
+            <div class="modal__yes-or-no__heading">Вы точно хотите удалить?</div>
+            <div class="controls__yes-or-no">
+                <div class="controls__yes empty-button">Да</div>
+                <div class="controls__no dark-blue-button">Нет</div>
+            </div>
+        </div>
+    </section>
 
 </main>
 
 <footer class="footer"></footer>
 
 <script src="../../scripts/docsPage.js"></script>
+<script src="../../scripts/reportsPage.js"></script>
+<script src="../../scripts/components/reportComponent.js"></script>
 </body>
 </html>

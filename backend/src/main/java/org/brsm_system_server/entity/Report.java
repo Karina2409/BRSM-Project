@@ -24,7 +24,7 @@ public class Report {
     private int dormNumber;
 
     @Column(columnDefinition = "DATE", name = "report_date")
-    @JsonFormat(pattern = "yyyy-MM-dd")
+    @JsonFormat(pattern = "yyyy-MM-dd", timezone = "Europe/Minsk")
     private Date reportDate;
 
     @ManyToMany(mappedBy = "reports")

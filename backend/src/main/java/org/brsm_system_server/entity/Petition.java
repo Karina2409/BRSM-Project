@@ -20,7 +20,7 @@ public class Petition {
     private String petitionName;
 
     @Column(columnDefinition = "DATE", name = "petition_date")
-    @JsonFormat(pattern = "yyyy-MM-dd")
+    @JsonFormat(pattern = "yyyy-MM-dd", timezone = "Europe/Minsk")
     private Date petitionDate;
 
     @Column(name = "student_faculty")

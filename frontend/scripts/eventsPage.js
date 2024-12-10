@@ -115,7 +115,7 @@ function renderEventsList(list, events, pastEvents) {
 function addEventsCard() {
     const list = document.querySelector('.events-list');
     pageViewCards += 6;
-    renderEventsList(list, events);
+    renderEventsList(list, events, pastEvents);
 }
 
 function filterEvents(query) {
