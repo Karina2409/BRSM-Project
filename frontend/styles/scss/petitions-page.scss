@@ -1,3 +1,9 @@
 @import "style";
 @import "buttons";
 @import "docs-page";
+
+.main{
+  display: flex;
+  flex-direction: column;
+  row-gap: 30px;
+}

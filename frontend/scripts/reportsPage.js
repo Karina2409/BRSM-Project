@@ -59,7 +59,7 @@ document.addEventListener("DOMContentLoaded", function () {
                 renderReportsList(list, reports);
             })
             .catch(error => {
-                console.error('Ошибка мероприятий:', error);
+                console.error('Ошибка докладных:', error);
             })
     }
 
