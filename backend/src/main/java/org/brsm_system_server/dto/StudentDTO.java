@@ -21,4 +21,5 @@ public class StudentDTO {
     private boolean isBrsmMember;
     private String phoneNumber;
     private String telegram;
+    private byte[] image;
 }

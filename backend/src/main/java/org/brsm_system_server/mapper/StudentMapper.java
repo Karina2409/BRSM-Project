@@ -21,7 +21,8 @@ public class StudentMapper {
                 eventService.getEventsByStudentId(student.getStudentId()).size(),
                 student.isBrsmMember(),
                 student.getPhoneNumber(),
-                student.getTelegram());
+                student.getTelegram(),
+                student.getImage());
     }
 
     public static Student toEntity(StudentDTO studentDTO) {

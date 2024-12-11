@@ -28,4 +28,9 @@ public interface StudentReportRepository extends JpaRepository<Report, Long> {
     @Query(value = "DELETE FROM student_report WHERE student_id = :studentId AND report_id = :reportId", nativeQuery = true)
     void removeStudentFromReport(@Param("studentId") Long studentId, @Param("reportId") Long reportId);
 
+    @Modifying
+    @Transactional
+    @Query(value = "DELETE FROM student_report WHERE student_id = :studentId", nativeQuery = true)
+    void deleteAllStudentReports(@Param("studentId") Long studentId);
+
 }

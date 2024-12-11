@@ -3,17 +3,16 @@ package org.brsm_system_server.controller;
 import org.brsm_system_server.dto.UserDTO;
 import org.brsm_system_server.entity.Student;
 import org.brsm_system_server.entity.User;
+import org.brsm_system_server.entity.enums.RoleEnum;
 import org.brsm_system_server.mapper.UserMapper;
 import org.brsm_system_server.service.interfaces.IUserService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.ResponseEntity;
 import org.springframework.security.access.prepost.PreAuthorize;
-import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.PathVariable;
-import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RestController;
+import org.springframework.web.bind.annotation.*;
 
 import java.util.List;
+import java.util.Map;
 
 @RestController
 @RequestMapping("/users")
@@ -40,6 +39,22 @@ public class UserController {
             return ResponseEntity.ok(student);
         } else {
             return ResponseEntity.notFound().build();
+        }
+    }
+
+    @PreAuthorize("hasAnyAuthority('CHIEF_SECRETARY')")
+    @PatchMapping("/{userId}/role")
+    public ResponseEntity<Void> changeUserRole(@PathVariable Long userId, @RequestBody Map<String, String> payload) {
+        String role = payload.get("role");
+        if (role == null) {
+            return ResponseEntity.badRequest().build();
+        }
+        try {
+            RoleEnum newRole = RoleEnum.valueOf(role);
+            userService.changeUserRole(userId, newRole);
+            return ResponseEntity.ok().build();
+        } catch (IllegalArgumentException e) {
+            return ResponseEntity.badRequest().build();
         }
     }
 

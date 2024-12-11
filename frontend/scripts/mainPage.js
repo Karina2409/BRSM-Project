@@ -116,7 +116,7 @@ function renderEventsList(list, events, studentEvents) {
     while (cards <= pageViewEventsCards && events.length >= cards) {
         events.forEach(event => {
             if (cards <= pageViewEventsCards && !(cards > events.length)) {
-                const card = createEventStudentCard(event, studentEvents);
+                const card = createEventStudentCard(event, studentEvents, isEventAvailableF);
                 card.addEventListener('click', (e) => {
                     if(e.target.closest(".dark-blue-button")) {
                         takePartInEvent(event.eventId);
@@ -130,6 +130,15 @@ function renderEventsList(list, events, studentEvents) {
             }
         })
     }
+}
+
+function isEventAvailableF(event, studentEvents){
+    for (const event1 of studentEvents) {
+        if(event1.eventId === event.eventId){
+            return true;
+        }
+    }
+    return false;
 }
 
 function addEventsCard() {

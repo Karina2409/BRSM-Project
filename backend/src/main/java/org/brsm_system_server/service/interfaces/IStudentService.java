@@ -10,5 +10,6 @@ public interface IStudentService {
     Student getStudentById(Long id);
     List<Student> getStudentsByEventId(Long eventId);
     List<Student> findEligibleStudents();
+    Student createStudent(Student student);
 
 }

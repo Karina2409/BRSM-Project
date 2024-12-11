@@ -1,2 +1,155 @@
 @import "style";
 @import "buttons";
+@import "event-student-component";
+
+.main{
+  display: flex;
+  flex-direction: column;
+  row-gap: 60px;
+}
+
+.controls{
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+
+.info-block{
+  position: relative;
+  padding: 60px 0;
+  width: 100%;
+}
+
+.info{
+  display: flex;
+  column-gap: 116px;
+  align-items: center;
+  padding-top: 30px;
+}
+
+.student-info__image{
+  display: flex;
+  align-items: center;
+}
+
+.student_image{
+  width: 300px;
+  border-radius: 150px;
+  border: none;
+}
+
+.student-info__block{
+  display: flex;
+  flex-direction: column;
+  row-gap: 50px;
+}
+
+.student-info__table_block{
+  display: flex;
+  flex-direction: column;
+  row-gap: 15px;
+}
+
+.student-info__table_row{
+  display: flex;
+  height: 36px;
+  align-items: center;
+}
+
+.student-info__table_column{
+  font-size: 20px;
+}
+
+.main-column-td{
+  font-weight: 600;
+  width: 164px;
+}
+
+.student-events-number{
+  display: flex;
+  column-gap: 10px;
+}
+
+.brsm-card{
+  height: 70px;
+}
+
+.student-info-page__events-info-block{
+  padding: 30px 0;
+}
+
+.students__events-list{
+  display: flex;
+  flex-wrap: wrap;
+  column-gap: 24px;
+  row-gap: 24px;
+}
+
+.students__event-card{
+  border: 4px solid $light-blue;
+  border-radius: 20px;
+  padding: 20px;
+  width: 328px;
+  box-sizing: border-box;
+  display: flex;
+  flex-direction: column;
+  row-gap: 35px;
+}
+
+.students__event-card__image{
+  width: 100%;
+  border-radius: 20px;
+}
+
+.students__event-card__text-block{
+  display: flex;
+  flex-direction: column;
+  row-gap: 30px;
+}
+
+.students__event-card__name__container{
+  display: flex;
+  align-items: center;
+  height: 87px;
+}
+
+.students__event-card__name{
+  display: -webkit-box;
+  -webkit-line-clamp: 3;
+  -webkit-box-orient: vertical;
+  overflow: hidden;
+  text-overflow: ellipsis;
+  font-weight: 700;
+  font-size: 24px;
+
+}
+
+.students__event-card__info{
+  display: flex;
+  flex-direction: column;
+  row-gap: 20px;
+}
+
+.students__event-card__info__table_row{
+  display: flex;
+  align-items: center;
+  height: 20px;
+  column-gap: 15px;
+}
+
+.students__event-card__info__table_column{
+  display: -webkit-box;
+  -webkit-line-clamp: 2;
+  -webkit-box-orient: vertical;
+  overflow: hidden;
+  text-overflow: ellipsis;
+}
+
+.main-column-td-event{
+  font-weight: 600;
+  min-width: 146px;
+}
+
+.invisible{
+  display: none;
+}

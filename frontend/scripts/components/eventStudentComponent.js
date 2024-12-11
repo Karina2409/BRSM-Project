@@ -1,4 +1,4 @@
-function createEventStudentCard(event, studentEvents) {
+function createEventStudentCard(event, studentEvents, isEventAvailableF) {
     const eventWrapper = document.createElement("div");
     eventWrapper.classList.add("students__event-card");
     eventWrapper.classList.add("event-card");
@@ -46,14 +46,7 @@ function createEventStudentCard(event, studentEvents) {
     return eventWrapper;
 }
 
-function isEventAvailableF(event, studentEvents){
-    for (const event1 of studentEvents) {
-        if(event1.eventId === event.eventId){
-            return true;
-        }
-    }
-    return false;
-}
+
 
 async function takePartInEvent(eventId){
     const studentId = localStorage.getItem("studentId");

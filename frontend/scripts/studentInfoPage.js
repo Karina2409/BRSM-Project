@@ -97,10 +97,10 @@ document.addEventListener('DOMContentLoaded', function () {
 
 function addStudentInfo(student) {
     const studentInfoWrapper = document.querySelector('.student-info');
-
+    const imageSrc = `data:image/jpeg;base64,${student.image}`;
     studentInfoWrapper.innerHTML = `
         <div class="student-info__image">
-            <img src="../../assets/images/фото.JPG" alt="Student photo" class="student_image">
+            <img src="${imageSrc}" alt="Student photo" class="student_image">
         </div>
         <div class="student-info__block">
             <div class="student-info__table_block">

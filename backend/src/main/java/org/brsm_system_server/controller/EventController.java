@@ -85,7 +85,7 @@ public class EventController {
         }
     }
 
-    @PreAuthorize("hasAnyAuthority('SECRETARY', 'CHIEF_SECRETARY')")
+    @PreAuthorize("hasAnyAuthority('SECRETARY', 'CHIEF_SECRETARY', 'STUDENT')")
     @GetMapping("/past")
     public ResponseEntity<List<EventDTO>> getPastEvents() {
         List<Event> pastEvents = eventService.getPastEvents();

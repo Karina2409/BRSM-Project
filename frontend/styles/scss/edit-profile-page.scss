@@ -1,0 +1,68 @@
+@import "style";
+@import "buttons";
+
+.info-block{
+  padding: 60px 0;
+  width: 100%;
+}
+
+.edit-student__info{
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  row-gap: 115px;
+}
+
+.edit-student__block{
+  display: flex;
+  flex-direction: column;
+  row-gap: 50px;
+}
+
+.edit-student__form{
+  width: 600px;
+  display: flex;
+  flex-direction: column;
+  row-gap: 15px;
+}
+
+.dormitory-fields{
+  display: flex;
+  flex-direction: column;
+  row-gap: 15px;
+}
+
+.edit-student__table_row{
+  display: flex;
+  align-items: center;
+}
+
+.edit-student__table_column{
+  width: 100%;
+}
+.edit-student__input{
+  width: 100%;
+}
+
+.student__main-column-td{
+  font-weight: 600;
+  min-width: 164px;
+  max-width: 164px;
+}
+
+.student-info__image{
+  display: flex;
+  align-items: center;
+}
+
+.edit-student__photo{
+  width: 300px;
+  height: 302px;
+  border-radius: 200px;
+}
+
+.edit-student__control{
+  display: flex;
+  align-items: center;
+  flex-direction: column;
+}

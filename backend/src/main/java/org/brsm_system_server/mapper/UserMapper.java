@@ -17,6 +17,7 @@ public class UserMapper {
             student = userService.findStudentById(user.getUserId());
 
             return new UserDTO(
+                    user.getUserId(),
                     student.getLastName(),
                     student.getFirstName(),
                     student.getMiddleName(),
@@ -27,6 +28,7 @@ public class UserMapper {
             secretary = userService.findSecretaryById(user.getUserId());
 
             return new UserDTO(
+                    user.getUserId(),
                     secretary.getLastName(),
                     secretary.getFirstName(),
                     secretary.getMiddleName(),

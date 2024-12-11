@@ -11,31 +11,44 @@ function createUserCard(user) {
     const userWrapper = document.createElement("div");
     userWrapper.classList.add("user-card");
 
-    userWrapper.innerHTML = `
-        <div class="user-card__user-name">
-            ${user.lastName} ${user.firstName} ${user.middleName}
-        </div>
-        <div class="selection__wrapper">
+    if (user.role === 'CHIEF_SECRETARY') {
+        userWrapper.innerHTML = `
+            <div class="user-card__user-name">
+                ${user.lastName} ${user.firstName} ${user.middleName}
+            </div>
             <div class="select-user">
                 <div class="select-user__text">
                     ${getRole(user)}
                 </div>
-                <img src="../../assets/icons/Vector%201.png" alt="Vector" class="select-user__icon">
             </div>
-
-            <div class="select-option-user unvisible ${setSelectedUser(user.role, 'SECRETARY')}" id="secretary">
-                <div class="select-user__text">
-                    Секретарь
+        `;
+    }
+    else{
+        userWrapper.innerHTML = `
+            <div class="user-card__user-name">
+                ${user.lastName} ${user.firstName} ${user.middleName}
+            </div>
+            <div class="selection__wrapper">
+                <div class="select-user">
+                    <div class="select-user__text">
+                        ${getRole(user)}
+                    </div>
+                    <img src="../../assets/icons/Vector%201.png" alt="Vector" class="select-user__icon">
+                </div>
+                <div class="select-option-user unvisible ${setSelectedUser(user.role, 'SECRETARY')}" id="secretary" onclick="changeRole(${user.id}, 'SECRETARY')">
+                    <div class="select-user__text">
+                        Секретарь
+                    </div>
+                </div>
+                <div class="select-option-user select-option-user-2 unvisible ${setSelectedUser(user.role, 'STUDENT')}" id="student" onclick="changeRole(${user.id}, 'STUDENT')">
+                    <div class="select-user__text">
+                        Студент
+                    </div>
                 </div>
             </div>
+        `
+    }
 
-            <div class="select-option-user select-option-user-2 unvisible ${setSelectedUser(user.role, 'STUDENT')}" id="student">
-                <div class="select-user__text">
-                    Студент
-                </div>
-            </div>
-        </div>
-    `
     return userWrapper;
 }
 
@@ -46,12 +59,37 @@ function getRole(user) {
         case 'STUDENT':
             return 'Студент';
         case 'CHIEF_SECRETARY':
-            return 'Секретарь БРСМ'
+            return 'Секретарь БРСМ';
+        default:
+            return 'Неизвестная роль';
     }
 }
 
 function setSelectedUser(userRole, currentRole) {
-    if(currentRole === userRole){
-        return 'select';
+    return currentRole === userRole ? 'select' : '';
+}
+const token = localStorage.getItem("authToken");
+async function changeRole(userId, newRole) {
+    const payload = { role: newRole };
+
+    try {
+        const response = await fetch(`http://localhost:8080/users/${userId}/role`, {
+            method: 'PATCH',
+            headers: {
+                'Content-Type': 'application/json',
+                'Authorization': `Bearer ${token}`,
+            },
+            body: JSON.stringify(payload),
+        });
+
+        if (response.ok) {
+            alert('Роль успешно изменена!');
+            location.reload();
+        } else {
+            alert('Ошибка при изменении роли!');
+        }
+    } catch (error) {
+        console.error('Ошибка при отправке запроса:', error);
+        alert('Ошибка подключения к серверу.');
     }
 }

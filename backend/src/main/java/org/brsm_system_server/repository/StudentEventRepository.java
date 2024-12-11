@@ -23,4 +23,9 @@ public interface StudentEventRepository extends JpaRepository<Student, Long> {
     @Transactional
     @Query(value = "DELETE FROM students_has_events WHERE students_student_id = :studentId AND events_event_id = :eventId", nativeQuery = true)
     void removeEventFromStudent(@Param("studentId") Long studentId, @Param("eventId") Long eventId);
+
+    @Modifying
+    @Transactional
+    @Query(value = "DELETE FROM students_has_events WHERE students_student_id = :studentId", nativeQuery = true)
+    void deleteAllStudentEvents(@Param("studentId") Long studentId);
 }

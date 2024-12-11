@@ -44,4 +44,8 @@ public class StudentService implements IStudentService {
                 .collect(Collectors.toList());
     }
 
+    @Override
+    public Student createStudent(Student student) {
+        return studentRepository.save(student);
+    }
 }
