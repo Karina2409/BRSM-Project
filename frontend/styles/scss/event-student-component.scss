@@ -1,0 +1,99 @@
+@import "style";
+
+.event-name-card{
+  border: 5px solid $light-blue;
+  border-radius: 30px;
+  padding: 20px 40px;
+  font-weight: 700;
+  font-size: 24px;
+  height: 62px;
+  display: flex;
+  align-items: center;
+}
+
+.event-card{
+  border: 4px solid $light-blue;
+  border-radius: 20px;
+  padding: 20px;
+  width: 328px;
+  display: flex;
+  flex-direction: column;
+  row-gap: 35px;
+  align-items: center;
+}
+
+.event-card:hover{
+  cursor: pointer;
+}
+
+.event-card__info{
+  display: flex;
+  flex-direction: column;
+  row-gap: 30px;
+}
+
+.students__event-card__text-block{
+  display: flex;
+  flex-direction: column;
+  row-gap: 30px;
+}
+
+.students__event-card__name{
+  display: -webkit-box;
+  -webkit-line-clamp: 3;
+  -webkit-box-orient: vertical;
+  overflow: hidden;
+  text-overflow: ellipsis;
+  font-weight: 700;
+  font-size: 28px;
+  height: 68px;
+}
+
+.students__event-card__name__container{
+  display: flex;
+  align-items: center;
+  height: 87px;
+}
+
+.event-card__event-info{
+  display: flex;
+  flex-direction: column;
+  row-gap: 20px;
+}
+
+.event-card__event-info__row{
+  display: flex;
+  column-gap: 15px;
+  align-items: center;
+}
+
+.event-card__event-info__row-title{
+  min-width: 146px;
+  font-weight: 600;
+  font-size: 16px;
+}
+
+.event-card__event-info__row-text{
+  font-weight: 400;
+  font-size: 16px;
+}
+
+.edit-student-list{
+  display: flex;
+  justify-content: right;
+}
+
+.event-info-page__students-info-block{
+  padding: 30px 0;
+}
+
+.events__students-list{
+  display: flex;
+  flex-wrap: wrap;
+  column-gap: 24px;
+  row-gap: 24px;
+}
+
+.gray-blue-button:hover{
+  cursor: pointer;
+}

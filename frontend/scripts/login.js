@@ -19,6 +19,8 @@ document.addEventListener('DOMContentLoaded', () => {
                 if (response.ok) {
                     const data = await response.json();
                     localStorage.setItem('authToken', data.token);
+                    localStorage.setItem('userRole', data.role);
+                    localStorage.setItem('userId', data.id);
 
                     const userRole = data.role;
                     redirectUserByRole(userRole);

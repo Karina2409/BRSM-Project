@@ -11,9 +11,95 @@
 <body>
 
 <header class="header"></header>
-<main class="main"></main>
+<main class="main">
+    <h1>Статистика посещаемости мероприятий</h1>
+    <div class="controls">
+        <label for="period" class="statistics__label">Выберите промежуток</label>
+        <select id="period" class="controls__filter">
+            <option value="month">Месяц</option>
+            <option value="semester">Семестр</option>
+            <option value="year">Год</option>
+        </select>
+    </div>
+
+    <canvas id="eventChart"></canvas>
+</main>
 <footer class="footer"></footer>
 
 <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+<script>
+    const fetchDataAndRenderChart = async () => {
+        const period = document.getElementById('period').value;
+        let statistics = {};
+        try {
+            const token = localStorage.getItem("authToken");
+            const response = await fetch(`http://localhost:8080/events/eventStatistics?period=${period}`, {
+                method: 'GET',
+                headers: {
+                    'Content-Type': 'application/json',
+                    'Authorization': `Bearer ${token}`,
+                }
+            });
+
+            if (!response.ok) {
+                throw new Error('Ошибка запроса: ' + response.statusText);
+            }
+
+            const data = await response.json();
+            statistics = data;
+
+            const labels = Object.keys(statistics);
+            const values = Object.values(statistics);
+
+            const ctx = document.getElementById('eventChart').getContext('2d');
+
+            if (window.eventChart instanceof Chart) {
+                window.eventChart.destroy();
+            }
+
+            window.eventChart = new Chart(ctx, {
+                type: 'pie',
+                data: {
+                    labels: labels,
+                    datasets: [{
+                        label: 'Event Attendance',
+                        data: values,
+                        backgroundColor: [
+                            '#B0EBB4', //ИЭФ
+                            '#EE4E4E', //ФИБ
+                            '#BE9FE1', //ФИТУ
+                            '#FFD95A', //ФКП
+                            '#C4E4FF', //ФКСИС
+                            "#FFA27F", //ФРЭ
+                            "#6F4E37", //ВФ
+                        ],
+                        hoverOffset: 4
+                    }]
+                },
+                options: {
+                    responsive: true,
+                    plugins: {
+                        legend: {
+                            position: 'top',
+                        },
+                        tooltip: {
+                            callbacks: {
+                                label: function (tooltipItem) {
+                                    return `${tooltipItem.label}: ${tooltipItem.raw}`;
+                                }
+                            }
+                        }
+                    }
+                }
+            });
+        } catch (error) {
+            console.error('Error fetching event statistics:', error);
+        }
+    };
+
+    document.getElementById('period').addEventListener('change', fetchDataAndRenderChart);
+
+    window.onload = fetchDataAndRenderChart;
+</script>
 </body>
 </html>

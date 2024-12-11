@@ -44,6 +44,7 @@ public class SecurityConfiguration {
                         .requestMatchers(HttpMethod.GET, "/events/get-all").hasAnyAuthority("SECRETARY", "CHIEF_SECRETARY")
                         .requestMatchers(HttpMethod.PUT, "/events/event/update/{eventId}").hasAnyAuthority("SECRETARY", "CHIEF_SECRETARY")
                         .requestMatchers(HttpMethod.GET, "/events/past").hasAnyAuthority("SECRETARY", "CHIEF_SECRETARY")
+                        .requestMatchers(HttpMethod.GET, "/events/eventStatistics").hasAnyAuthority("SECRETARY", "CHIEF_SECRETARY")
                         .requestMatchers(HttpMethod.DELETE, "/events/delete/{eventId}").hasAnyAuthority("SECRETARY", "CHIEF_SECRETARY")
                         .requestMatchers(HttpMethod.POST, "/events/post").hasAnyAuthority("SECRETARY", "CHIEF_SECRETARY")
                         .requestMatchers(HttpMethod.GET, "/exemptions/get-all").hasAnyAuthority("SECRETARY", "CHIEF_SECRETARY")
@@ -59,6 +60,12 @@ public class SecurityConfiguration {
                         .requestMatchers(HttpMethod.DELETE, "/petitions/delete/{petitionId}").hasAnyAuthority("SECRETARY", "CHIEF_SECRETARY")
                         .requestMatchers(HttpMethod.GET, "/petitions/eligible").hasAnyAuthority("SECRETARY", "CHIEF_SECRETARY")
                         .requestMatchers(HttpMethod.POST, "/petitions/post/{studentId}").hasAnyAuthority("SECRETARY", "CHIEF_SECRETARY")
+
+                        .requestMatchers(HttpMethod.GET, "/events/upcoming").hasAuthority("STUDENT")
+                        .requestMatchers(HttpMethod.GET, "/secretaries/get-all").hasAuthority("STUDENT")
+                        .requestMatchers(HttpMethod.GET, "/users/student/{userId}").hasAuthority("STUDENT")
+                        .requestMatchers(HttpMethod.POST, "/se/{studentId}/events/{eventId}").hasAuthority("STUDENT")
+                        .requestMatchers(HttpMethod.DELETE, "/se/remove/student/{studentId}/event/{eventId}").hasAuthority("STUDENT")
 //                        .requestMatchers(HttpMethod.GET, "/students/**").hasAuthority("SECRETARY")
 //
                         .anyRequest().authenticated())

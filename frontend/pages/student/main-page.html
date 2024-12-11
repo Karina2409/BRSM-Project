@@ -3,10 +3,51 @@
 <head>
     <meta charset="UTF-8">
     <title>БРСМ БГУИР</title>
+    <script src="../../scripts/script.js"></script>
+    <link rel="stylesheet" href="../../styles/css/main-page.css">
     <link type="Image/x-icon" href="../../assets/icons/brsm-icon.png" rel="icon">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
 </head>
 <body>
 
+<header class="header"></header>
+
+<main class="main">
+    <section class="events-section" id="events-block">
+        <div class="heading_with_hr">
+            <h1 class="main__heading">Мероприятия</h1>
+            <hr class="controls__line">
+        </div>
+
+        <div class="events-list"></div>
+
+        <div class="button__show-more__container">
+            <button class="empty-button show-more-events show-more" onclick="addEventsCard()">
+                Все мероприятия
+            </button>
+        </div>
+    </section>
+
+    <section class="secretaries-section" id="secretaries-block">
+        <div class="heading_with_hr">
+            <h1 class="main__heading">Секретари</h1>
+            <hr class="controls__line">
+        </div>
+
+        <div class="secretaries-list"></div>
+
+        <div class="button__show-more__container">
+            <button class="empty-button show-more-secretaries show-more" onclick="addSecretariesCard()">
+                Все секретари
+            </button>
+        </div>
+    </section>
+</main>
+
+<footer class="footer"></footer>
+
+<script src="../../scripts/mainPage.js"></script>
+<script src="../../scripts/components/eventStudentComponent.js"></script>
+<script src="../../scripts/components/secretaryCard.js"></script>
 </body>
 </html>

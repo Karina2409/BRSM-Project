@@ -3,37 +3,93 @@ document.addEventListener('DOMContentLoaded', () => {
     const footer = document.querySelector('footer');
     const arrow = document.querySelector('.arrow');
 
+    const userRole = localStorage.getItem('userRole');
+
+    if (!userRole) {
+        console.error('Роль пользователя не определена');
+        return;
+    }
+
+    const templates = {
+        CHIEF_SECRETARY: `
+            <div class="header_container">
+                <nav class="header-items">
+                    <ul class="header-list">
+                        <li class="header-list__item active" data-page="students">
+                            Студенты
+                        </li>
+                        <li class="header-list__item" data-page="users">
+                            Пользователи
+                        </li>
+                        <li class="header-list__item" data-page="events">
+                            Мероприятия
+                        </li>
+                        <li class="header-list__item" data-page="documentation">
+                            Документация
+                        </li>
+                        <li class="header-list__item" data-page="statistics">
+                            Статистика
+                        </li>
+                        <li class="header-list__item" data-page="exit">
+                            Выход
+                        </li>
+                    </ul>
+                </nav>
+            </div>
+        `,
+        SECRETARY: `
+            <div class="header_container">
+                <nav class="header-items">
+                    <ul class="header-list">
+                        <li class="header-list__item active" data-page="students">
+                            Студенты
+                        </li>
+                        <li class="header-list__item active" data-page="events">
+                            Мероприятия
+                        </li>
+                        <li class="header-list__item" data-page="documentation">
+                            Документация
+                        </li>
+                        <li class="header-list__item" data-page="statistics">
+                            Статистика
+                        </li>
+                        <li class="header-list__item" data-page="exit">
+                            Выход
+                        </li>
+                    </ul>
+                </nav>
+            </div>
+        `,
+        STUDENT: `
+            <div class="header_container">
+                <nav class="header-items">
+                    <ul class="header-list">
+                        <li class="header-list__item active" data-page="main">
+                            Главная
+                        </li>
+                        <li class="header-list__item active" data-page="events-student">
+                            Мероприятия
+                        </li>
+                        <li class="header-list__item" data-page="secretaries">
+                            Секретари
+                        </li>
+                        <li class="header-list__item" data-page="profile">
+                            Профиль
+                        </li>
+                        <li class="header-list__item" data-page="exit">
+                            Выход
+                        </li>
+                    </ul>
+                </nav>
+            </div>
+        `
+    };
+
     if (arrow) {
         arrow.addEventListener('click', goBack);
     }
 
-    header.innerHTML = `
-        <div class="header_container">
-            
-            <nav class="header-items">
-                <ul class="header-list">
-                    <li class="header-list__item active" data-page="students">
-                        Студенты
-                    </li>
-                    <li class="header-list__item" data-page="users">
-                        Пользователи
-                    </li>
-                    <li class="header-list__item" data-page="events">
-                        Мероприятия
-                    </li>
-                    <li class="header-list__item" data-page="documentation">
-                        Документация
-                    </li>
-                    <li class="header-list__item" data-page="statistics">
-                        Статистика
-                    </li>
-                    <li class="header-list__item" data-page="exit">
-                        Выход
-                    </li>
-                </ul>
-            </nav>
-        </div>
-    `;
+    header.innerHTML = templates[userRole] || '<p>Ошибка: неизвестная роль</p>';
 
     footer.innerHTML = `
         <div class="footer_container">
@@ -85,6 +141,8 @@ function setActivePageFromURL() {
     else if (path.includes('documentation')) activePage = 'documentation';
     else if (path.includes('statistics')) activePage = 'statistics';
     else if (path.includes('exit')) activePage = 'exit';
+    else if (path.includes('main')) activePage = 'main';
+    else if (path.includes('profile')) activePage = 'profile';
 
     document.querySelectorAll('.header-list__item').forEach(item => {
         if (item.getAttribute('data-page') === activePage) {
@@ -96,27 +154,36 @@ function setActivePageFromURL() {
 }
 
 function navigateToPage(page) {
-    switch (page) {
-        case 'students':
-            window.location.href = `../students/students-page.html`;
-            break;
-        case 'users':
-            window.location.href = `../users/users-page.html`;
-            break;
-        case 'events':
-            window.location.href = `../events/events-page.html`;
-            break;
-        case 'documentation':
-            window.location.href = `../documentation/exemptions-page.html`;
-            break;
-        case 'statistics':
-            window.location.href = `../statistics/statistics-page.html`;
-            break;
-        case 'exit':
-            logOut();
-            break;
-        default:
+    const anchorMapping = {
+        'events-student': 'events-block', // ID блока на странице main
+        'secretaries': 'secretaries-block' // ID блока на странице main
+    };
+
+    if (page === 'exit') {
+        logOut();
+        return;
+    }
+
+    if (anchorMapping[page]) {
+        // Если якорь привязан к странице main
+        window.location.href = `../student/main-page.html#${anchorMapping[page]}`;
+    } else {
+        // Переход на стандартные страницы
+        const pagePaths = {
+            'students': '../students/students-page.html',
+            'users': '../users/users-page.html',
+            'events': '../events/events-page.html',
+            'documentation': '../documentation/exemptions-page.html',
+            'statistics': '../statistics/statistics-page.html',
+            'main': '../student/main-page.html',
+            'profile': '../student/profile-page.html'
+        };
+
+        if (pagePaths[page]) {
+            window.location.href = pagePaths[page];
+        } else {
             console.error('Неизвестная страница:', page);
+        }
     }
 }
 

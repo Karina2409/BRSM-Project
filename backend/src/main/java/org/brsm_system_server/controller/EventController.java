@@ -4,6 +4,7 @@ import org.brsm_system_server.dto.EventDTO;
 import org.brsm_system_server.dto.StudentDTO;
 import org.brsm_system_server.entity.Event;
 import org.brsm_system_server.entity.Student;
+import org.brsm_system_server.entity.enums.FacultyEnum;
 import org.brsm_system_server.mapper.StudentMapper;
 import org.brsm_system_server.service.interfaces.IEventService;
 import org.brsm_system_server.service.interfaces.IStudentService;
@@ -19,6 +20,7 @@ import java.time.format.DateTimeFormatter;
 import java.util.Date;
 import java.util.List;
 import java.util.Locale;
+import java.util.Map;
 
 @RestController
 @RequestMapping("/events")
@@ -103,4 +105,16 @@ public class EventController {
         return ResponseEntity.ok(createdEvent);
     }
 
+    @PreAuthorize("hasAnyAuthority('SECRETARY', 'CHIEF_SECRETARY')")
+    @GetMapping("/eventStatistics")
+    public Map<FacultyEnum, Long> getEventStatistics(@RequestParam String period) {
+        Date[] dateRange = eventService.getDateRange(period);
+        System.out.println(eventService.countStudentsByFacultyBetweenDates(dateRange[0], dateRange[1]));
+        return eventService.countStudentsByFacultyBetweenDates(dateRange[0], dateRange[1]);
+    }
+
+    @GetMapping("/upcoming")
+    public List<Event> getUpcomingEventsWithAvailableSlots() {
+        return eventService.getUpcomingEventsWithAvailableSlots();
+    }
 }

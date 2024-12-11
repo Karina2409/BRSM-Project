@@ -1,1 +1,17 @@
 @import "style";
+
+.main{
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  row-gap: 30px;
+}
+
+.statistics__label{
+  font-size: 20px;
+}
+
+#eventChart {
+  max-width: 600px;
+  max-height: 600px;
+}

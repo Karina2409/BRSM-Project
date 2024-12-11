@@ -1,0 +1,86 @@
+@import "style";
+@import "buttons";
+@import "event-student-component";
+
+.main {
+  display: flex;
+  flex-direction: column;
+  row-gap: 70px;
+  padding-bottom: 50px;
+  top: 0;
+}
+
+.main__heading {
+  font-weight: 700;
+  font-size: 32px;
+  text-transform: uppercase;
+}
+
+.events-section {
+  display: flex;
+  flex-direction: column;
+  row-gap: 40px;
+  padding-top: 92px;
+}
+
+.events-list {
+  display: flex;
+  flex-wrap: wrap;
+  row-gap: 30px;
+  column-gap: 24px;
+}
+
+.secretaries-section{
+  display: flex;
+  flex-direction: column;
+  row-gap: 40px;
+}
+
+.secretaries-list{
+  display: flex;
+  flex-direction: column;
+  row-gap: 30px;
+}
+
+.secretary-card{
+  display: flex;
+  border: 5px solid #5dacd6;
+  border-radius: 30px;
+  padding: 20px 40px;
+  width: 100%;
+  align-items: center;
+  justify-content: space-between;
+}
+
+.secretary-image{
+  height: 138px;
+  width: 138px;
+  border-radius: 100px;
+  background-size: cover;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.fio-and-photo{
+  display: flex;
+  column-gap: 30px;
+  align-items: center;
+}
+
+.secretary-info{
+  display: flex;
+  flex-direction: column;
+  row-gap: 17px;
+}
+
+.secretary-dop-info{
+  display: flex;
+  flex-direction: column;
+  row-gap: 3px;
+}
+
+.secretary-name{
+  font-weight: 700;
+  font-size: 31px;
+}

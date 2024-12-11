@@ -12,12 +12,16 @@ $montserrat: "Montserrat", sans-serif;
   box-sizing: border-box;
 }
 
+html{
+  scroll-behavior: smooth;
+}
+
 .main {
   width: 1032px;
   margin: 0 auto;
   top: 92px;
   position: relative;
-  padding: 0 0 180px 0;
+  padding: 0 0 120px 0;
 }
 
 .input {
@@ -45,6 +49,11 @@ $montserrat: "Montserrat", sans-serif;
   display: flex;
   align-items: center;
   column-gap: 40px;
+}
+
+.controls__line{
+  height: 3px;
+  background-color: $dark-blue;
 }
 
 .filter__container{
@@ -256,7 +265,7 @@ $montserrat: "Montserrat", sans-serif;
   font-weight: 400;
   font-size: 15px;
   height: 100px;
-  position: fixed;
+  position: relative;
   bottom: 0;
   width: 100%;
 }

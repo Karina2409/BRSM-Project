@@ -1,17 +1,18 @@
 package org.brsm_system_server.service;
 
 import org.brsm_system_server.entity.Event;
+import org.brsm_system_server.entity.enums.FacultyEnum;
 import org.brsm_system_server.repository.EventRepository;
 import org.brsm_system_server.repository.StudentEventRepository;
+import org.brsm_system_server.repository.StudentRepository;
 import org.brsm_system_server.service.interfaces.IEventService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.domain.Sort;
 import org.springframework.http.ResponseEntity;
 import org.springframework.stereotype.Service;
 
-import java.util.Date;
-import java.util.List;
-import java.util.Optional;
+import java.util.*;
+import java.util.stream.Collectors;
 
 @Service
 public class EventService implements IEventService {
@@ -21,6 +22,9 @@ public class EventService implements IEventService {
 
     @Autowired
     private StudentEventRepository studentEventRepository;
+
+    @Autowired
+    private StudentRepository studentRepository;
 
     @Override
     public List<Event> findAllEvents(){
@@ -63,5 +67,49 @@ public class EventService implements IEventService {
         } else {
             return ResponseEntity.notFound().build();
         }
+    }
+
+    @Override
+    public Map<FacultyEnum, Long> countStudentsByFacultyBetweenDates(Date startDate, Date endDate) {
+        List<Object[]> results = studentRepository.countStudentsByFacultyBetweenDates(startDate, endDate);
+        return results.stream().collect(Collectors.toMap(
+                result -> (FacultyEnum) result[0],
+                result -> (Long) result[1]
+        ));
+    }
+
+    @Override
+    public Date[] getDateRange(String period) {
+        Calendar calendar = Calendar.getInstance();
+        Date endDate = calendar.getTime();
+        Date startDate = null;
+
+        switch (period) {
+            case "month":
+                calendar.add(Calendar.MONTH, -1);
+                startDate = calendar.getTime();
+                break;
+            case "semester":
+                int month = calendar.get(Calendar.MONTH);
+                if (month < Calendar.SEPTEMBER && month >= Calendar.JANUARY) {
+                    calendar.set(Calendar.MONTH, Calendar.JANUARY);
+                } else {
+                    calendar.set(Calendar.MONTH, Calendar.SEPTEMBER);
+                }
+                calendar.set(Calendar.DAY_OF_MONTH, 1);
+                startDate = calendar.getTime();
+                break;
+            case "year":
+                calendar.add(Calendar.YEAR, -1);
+                startDate = calendar.getTime();
+                break;
+        }
+        return new Date[]{startDate, endDate};
+    }
+
+    @Override
+    public List<Event> getUpcomingEventsWithAvailableSlots() {
+        Date currentDate = new Date();
+        return eventRepository.findUpcomingEventsWithAvailableSlots(currentDate);
     }
 }
