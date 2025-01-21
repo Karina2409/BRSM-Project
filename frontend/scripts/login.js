@@ -1,5 +1,20 @@
 document.addEventListener('DOMContentLoaded', () => {
     const signInForm = document.getElementById('signInForm');
+    if (signInForm) {
+        const emailInput = signInForm.querySelector('input[type="email"]');
+        const passwordInput = signInForm.querySelector('input[type="password"]');
+        if (emailInput) emailInput.value = '';
+        if (passwordInput) passwordInput.value = '';
+    }
+
+    const signUpForm = document.getElementById('signUpForm');
+    if (signUpForm) {
+        const emailInput = signUpForm.querySelector('#email');
+        const passwordInput = signUpForm.querySelector('#password');
+        if (emailInput) emailInput.value = '';
+        if (passwordInput) passwordInput.value = '';
+    }
+
     if(signInForm) {
         signInForm.addEventListener('submit', async (e) => {
             e.preventDefault();
@@ -34,7 +49,6 @@ document.addEventListener('DOMContentLoaded', () => {
         })
     }
 
-    const signUpForm = document.getElementById('signUpForm');
     if(signUpForm) {
         signUpForm.addEventListener('submit', async (e) => {
             e.preventDefault();

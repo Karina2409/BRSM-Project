@@ -24,4 +24,6 @@ public interface StudentRepository extends JpaRepository<Student, Long> {
             "WHERE e.eventDate BETWEEN :startDate AND :endDate " +
             "GROUP BY s.studentFaculty")
     List<Object[]> countStudentsByFacultyBetweenDates(@Param("startDate") Date startDate, @Param("endDate") Date endDate);
-}
+
+    boolean existsByLastNameAndFirstNameAndMiddleNameAndGroupNumber(
+            String lastName, String firstName, String middleName, String groupNumber);}

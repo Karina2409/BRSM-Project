@@ -126,7 +126,7 @@ function filterEvents(query) {
     }
 
     if (!query) {
-        renderEventsList(list, events);
+        renderEventsList(list, events, pastEvents);
         return;
     }
 
@@ -134,7 +134,7 @@ function filterEvents(query) {
         return event.eventName.toLowerCase().startsWith(query);
     });
 
-    renderEventsList(list, filteredEvents);
+    renderEventsList(list, filteredEvents, pastEvents);
 }
 
 createButton.addEventListener('click', () => {

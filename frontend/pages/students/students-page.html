@@ -1,12 +1,12 @@
 <!DOCTYPE html>
 <html lang="en" data-path="/students">
 <head>
-    <meta charset="UTF-8">
-    <title>БРСМ БГУИР</title>
-    <link rel="stylesheet" href="../../styles/css/students-page.css">
-    <script src="../../scripts/script.js"></script>
-    <link type="Image/x-icon" href="../../assets/icons/brsm-icon.png" rel="icon">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta charset="UTF-8">
+  <title>БРСМ БГУИР</title>
+  <link rel="stylesheet" href="../../styles/css/students-page.css">
+  <script src="../../scripts/script.js"></script>
+  <link type="Image/x-icon" href="../../assets/icons/brsm-icon.png" rel="icon">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
 </head>
 <body>
 
@@ -16,41 +16,58 @@
 
 <main class="main">
 
-    <div class="page">
-        <section class="controls">
-        <section class="search" id="search"></section>
-        <div class="controls__filter__container">
-            <select name="faculty" id="faculty" class="controls__filter">
-                <option value="not-choosen" selected>Не выбрано</option>
-                <option value="ФКП">ФКП</option>
-                <option value="ФИТУ">ФИТУ</option>
-                <option value="ФРЭ">ФРЭ</option>
-                <option value="ФКСИС">ФКСИС</option>
-                <option value="ИЭФ">ИЭФ</option>
-                <option value="ФИБ">ФИБ</option>
-                <option value="ВФ">ВФ</option>
-            </select>
-        </div>
-        <!--        TODO: сделать добавление студента-->
-        <!--        <div class="button-plus">+</div>-->
+  <div class="page">
+    <section class="controls">
+      <section class="search" id="search"></section>
+      <div class="controls__filter__container">
+        <select name="faculty" id="faculty" class="controls__filter">
+          <option value="not-choosen" selected>Не выбрано</option>
+          <option value="ФКП">ФКП</option>
+          <option value="ФИТУ">ФИТУ</option>
+          <option value="ФРЭ">ФРЭ</option>
+          <option value="ФКСИС">ФКСИС</option>
+          <option value="ИЭФ">ИЭФ</option>
+          <option value="ФИБ">ФИБ</option>
+          <option value="ВФ">ВФ</option>
+        </select>
+      </div>
+      <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1024 1024">
+        <g fill="none" stroke="#024E68" stroke-width="80" stroke-linecap="round" stroke-linejoin="round">
+          <path d="M192 576v288c0 44.18 35.82 80 80 80h480c44.18 0 80-35.82 80-80V576"/>
+          <path d="M512 160v480"/>
+          <path d="M320 432l192 192 192-192"/>
+        </g>
+      </svg>
+      <!--        TODO: сделать добавление студента-->
+      <!--        <div class="button-plus">+</div>-->
     </section>
-        <section class="students-list">
+    <section class="students-list">
 
-        </section>
-        <div class="button__show-more__container">
-            <button class="empty-button show-more" onclick="addStudentsCard()">
-                Показать еще
-            </button>
-        </div>
-
+    </section>
+    <div class="button__show-more__container">
+      <button class="empty-button show-more" onclick="addStudentsCard()">
+        Показать еще
+      </button>
     </div>
+
+  </div>
 
 </main>
 <footer class="footer"></footer>
+<div class="import-popup">
+  <div class="import-popup__info">
+    <p>Выберите таблицу:</p>
+    <form id="uploadForm">
+      <input type="file" id="fileInput" accept=".csv, .xlsx" required />
+      <button type="submit">Загрузить</button>
+    </form>
+  </div>
+</div>
 <script src="../../scripts/components/searchComponent.js"></script>
 <script src="../../scripts/components/studentComponent.js"></script>
 <script src="../../scripts/studentsPage.js"></script>
 <script src="../../scripts/script.js"></script>
+<script src="../../scripts/upload.js"></script>
 
 </body>
 </html>
