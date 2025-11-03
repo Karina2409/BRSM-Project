@@ -189,7 +189,164 @@ User-Flow диаграмма страницы Пользователи
 
 ### Безопасность
 
-Описать подходы, использованные для обеспечения безопасности, включая описание процессов аутентификации и авторизации с примерами кода из репозитория сервера
+В рамках реализации серверной части программной системы был разработан модуль безопасности, обеспечивающий аутентификацию и авторизацию пользователей. Система разработана по микросервисной архитектуре и включает следующие сервисы:
+1. API Gateway – единая точка входа в систему, выполняет проверку JWT-токена.
+2. Security-service – сервис аутентификации пользователей, генерации JWT и управления учётными записями.
+3. Eureka Discovery Service – сервис для регистрации и обнаружения микросервисов.
+
+Для аутентификации и авторизации используются компоненты, перечисленные в таблице ниже.
+
+Таблица 1.1 – Компоненты, используемые для аутентификации и авторизации
+
+| Компонент                   |                     Назначение                     |
+|-----------------------------|:--------------------------------------------------:|
+| JJWT (Java JWT)             |         Создание, парсинг и валидация JWT          |
+| Spring Security	            |  Используется для контроля доступа и безопасности  |
+| Spring Cloud Gateway	       |     Центральная точка входа, проверка токенов      |
+| Spring Cloud Netflix Eureka |       Сервис-регистрация и сервис-дискавери        |
+| BCrypt PasswordEncoder      | Хеширование паролей (устойчиво к атакам перебора)  |
+
+Для реализации безопасности использовались компоненты `Spring Security` и сторонняя библиотека `JSON Web Tokens (jjwt)`. Пароли хранятся в базе данных в виде хэш-значений, полученных с помощью алгоритма `BCrypt`. На рисунке представлен пример записи в таблице из БД с хэшированным паролем.
+
+![img.png](assets/img.png)
+
+Аутентификация – это процесс проверки логина и пароля пользователя и выдачи токена доступа. За механизм аутентификации отвечает сервис `security-service`. Компоненты, реализованные в `security-service` представлены в таблице.
+
+| Компонент      |                                 Описание                                 |
+|----------------|:------------------------------------------------------------------------:|
+| User           |              Сущность (entity) пользователя, хранимая в БД               |
+| UserRepository |                Обеспечивает доступ к данным пользователей                |
+| AuthController |           Содержит точки входа «/auth/login» и «/auth/create»            |
+| AuthService    | Содержит логику проверки пароля, вызывает метод для генерации JWT токена |
+| JwtService     |                 Отвечает за формирование и проверку JWT                  |
+
+Ниже представлен код генерации токена.
+
+```java
+public String generateToken(String username, String role, Integer studentId) {
+    return Jwts.builder()
+            .setClaims(Map.of(
+                    "role", role,
+                    "studentId", studentId
+            ))
+            .setSubject(username)
+            .setIssuedAt(new Date())
+            .setExpiration(new Date(System.currentTimeMillis() + expiration))
+            .signWith(getSigningKey(), SignatureAlgorithm.HS256)
+            .compact();
+}
+```
+
+Для генерации токена использовался секретный ключ, хранящийся в конфигурации, а также алгоритм подписи токена `HS256` (`HMAC` + `SHA-256`). У токена задано время жизни.
+Ниже представлен метод из сервиса `AuthService` для авторизации пользователя.
+
+```java
+public String login(LoginRequest request) {
+    User user = userRepository.findByLogin(request.getLogin())
+            .orElseThrow(() -> new RuntimeException("User not found"));
+
+    if (!passwordEncoder.matches(request.getPassword(), user.getPasswordHash())) {
+        throw new RuntimeException("Invalid credentials");
+    }
+
+    return jwtService.generateToken(user.getLogin(), user.getRole().name(), user.getStudentId());
+}
+```
+
+Для повышения безопасности, был реализован централизованный контроль доступа на стороне `Gateway`, что позволяет защитить микросервисы ещё до передачи запроса в backend-логику. Функции, реализованные в фильтре в `api-gateway`:
+1 Проверка `JWT`-токена (фильтр проверяет подпись и сроки токена).
+
+```java
+private String extractToken(ServerWebExchange exchange) {
+    String auth = exchange.getRequest().getHeaders().getFirst("Authorization");
+    return (auth != null && auth.startsWith("Bearer ")) ? auth.substring(7) : null;
+}
+
+private Claims parseToken(String token) {
+    return Jwts.parserBuilder()
+       .setSigningKey(Keys.hmacShaKeyFor(Decoders.BASE64.decode(SECRET)))
+       .build()
+       .parseClaimsJws(token)
+       .getBody();
+}
+```
+
+2 Выделение данных пользователя (извлекает роли, логин).
+
+```java
+Claims claims = parseToken(token);
+String role = claims.get("role", String.class);
+```
+
+3 Ролевая авторизация (контролирует доступ по маршрутам, указанным в коллекции `PATH_ROLES`, заданной в компоненте).
+
+```java
+private static final Map<String, Set<String>> PATH_ROLES = Map.of(
+        "/auth/create", Set.of("CHIEF_SECRETARY")
+);
+
+private boolean hasAccess(String path, String role) {
+    return PATH_ROLES.entrySet().stream()
+            .filter(entry -> pathMatches(path, entry.getKey()))
+            .anyMatch(entry -> entry.getValue().contains(role));
+}
+
+private boolean pathMatches(String path, String pattern) {
+    if (pattern.endsWith("/**")) {
+        String prefix = pattern.substring(0, pattern.length() - 3);
+        return path.startsWith(prefix);
+    }
+    return path.equals(pattern) || path.startsWith(pattern + "/");
+}
+```
+
+4 Генерация ошибок (возвращает 401 в случае, если токен не найден или он не корректный, 403 в случае, если доступ запрещен из-за некорректной роли).
+
+```java
+private Mono<Void> unauthorized(ServerWebExchange exchange, String msg) {
+    exchange.getResponse().setStatusCode(HttpStatus.UNAUTHORIZED);
+    exchange.getResponse().getHeaders().add("Content-Type", "application/json");
+    return exchange.getResponse().writeWith(Mono.just(
+            exchange.getResponse().bufferFactory().wrap(
+                    ("{\"error\": \"" + msg + "\"}").getBytes()
+            )
+    ));
+}
+
+private Mono<Void> forbidden(ServerWebExchange exchange, String msg) {
+    exchange.getResponse().setStatusCode(HttpStatus.FORBIDDEN);
+    exchange.getResponse().getHeaders().add("Content-Type", "application/json");
+    return exchange.getResponse().writeWith(Mono.just(
+            exchange.getResponse().bufferFactory().wrap(
+                    ("{\"error\": \"" + msg + "\"}").getBytes()
+            )
+    ));
+}
+```
+
+Регистрация пользователя происходит секретарем, сам пользователь не может зарегистрироваться. Ниже представлен метод в контроллере для регистрации пользователя.
+
+```java
+@PostMapping("/create")
+public ResponseEntity<?> createUser(@RequestBody RegisterRequest request) {
+    return ResponseEntity.ok(authService.createUser(request));
+}
+```
+
+Ниже представлен метод из сервиса `AuthService` для создания пользователя.
+
+```java
+public String createUser(RegisterRequest request) {
+    User user = new User();
+    user.setLogin(request.getLogin());
+    user.setPasswordHash(passwordEncoder.encode(request.getPassword()));
+    user.setRole(Role.STUDENT);
+    user.setStudentId(request.getStudentId());
+
+    userRepository.save(user);
+    return "User registered successfully";
+}
+```
 
 ### Оценка качества кода
 
