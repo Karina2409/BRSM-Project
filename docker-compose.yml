@@ -210,5 +210,5 @@ volumes:
 # Network
 # ==========================
 networks:
-  ${NETWORK_NAME}:
-    name: ${NETWORK_NAME}
+  brsm-network:
+    name: brsm-network
