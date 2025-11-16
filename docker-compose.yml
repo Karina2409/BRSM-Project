@@ -1,0 +1,214 @@
+version: "3.9"
+
+services:
+
+  # ==========================
+  # EUREKA SERVICE DISCOVERY
+  # ==========================
+  eureka:
+    image: karina2409/eureka:latest
+    container_name: eureka
+    ports:
+      - "${EUREKA_PORT}:${EUREKA_PORT}"
+    environment:
+      EUREKA_CLIENT_REGISTER_WITH_EUREKA: "false"
+      EUREKA_CLIENT_FETCH_REGISTRY: "false"
+    healthcheck:
+      test: ["CMD", "curl", "-f", "http://localhost:${EUREKA_PORT}"]
+      interval: 15s
+      timeout: 5s
+      retries: 5
+    networks:
+      - ${NETWORK_NAME}
+    restart: unless-stopped
+
+
+  # ==========================
+  # API GATEWAY
+  # ==========================
+  api-gateway:
+    image: karina2409/api-gateway:latest
+    container_name: api-gateway
+    depends_on:
+      eureka:
+        condition: service_healthy
+    ports:
+      - "${API_GATEWAY_PORT}:${API_GATEWAY_PORT}"
+    environment:
+      - EUREKA_CLIENT_SERVICEURL_DEFAULTZONE=http://eureka:${EUREKA_PORT}/eureka/
+    healthcheck:
+      test: ["CMD", "curl", "-f", "http://localhost:${API_GATEWAY_PORT}/actuator/health"]
+      interval: 20s
+      timeout: 5s
+      retries: 5
+    networks:
+      - ${NETWORK_NAME}
+    restart: unless-stopped
+
+
+  # ==========================
+  #   MICROSERVICES
+  # ==========================
+  data-service:
+    image: karina2409/data-service:latest
+    container_name: data-service
+    depends_on:
+      eureka:
+        condition: service_healthy
+    environment:
+      EUREKA_CLIENT_SERVICEURL_DEFAULTZONE: "http://eureka:${EUREKA_PORT}/eureka"
+    networks:
+      - ${NETWORK_NAME}
+    restart: unless-stopped
+
+  security-service:
+    image: karina2409/security-service:latest
+    container_name: security-service
+    depends_on:
+      db_users:
+        condition: service_healthy
+      eureka:
+        condition: service_healthy
+    environment:
+      SPRING_DATASOURCE_URL: "jdbc:postgresql://db_users:5432/${POSTGRES_DB_USERS}"
+      SPRING_DATASOURCE_USERNAME: "${POSTGRES_USER}"
+      SPRING_DATASOURCE_PASSWORD: "${POSTGRES_PASSWORD}"
+      EUREKA_CLIENT_SERVICEURL_DEFAULTZONE: "http://eureka:${EUREKA_PORT}/eureka"
+    networks:
+      - ${NETWORK_NAME}
+    restart: unless-stopped
+
+  documents-service:
+    image: karina2409/documents-service:latest
+    container_name: documents-service
+    depends_on:
+      db_documents:
+        condition: service_healthy
+      eureka:
+        condition: service_healthy
+    environment:
+      SPRING_DATASOURCE_URL: "jdbc:postgresql://db_documents:5432/${POSTGRES_DB_DOCS}"
+      SPRING_DATASOURCE_USERNAME: "${POSTGRES_USER}"
+      SPRING_DATASOURCE_PASSWORD: "${POSTGRES_PASSWORD}"
+      EUREKA_CLIENT_SERVICEURL_DEFAULTZONE: "http://eureka:${EUREKA_PORT}/eureka"
+    networks:
+      - ${NETWORK_NAME}
+    restart: unless-stopped
+
+  academics-service:
+    image: karina2409/academics-service:latest
+    container_name: academics-service
+    depends_on:
+      db_core:
+        condition: service_healthy
+      eureka:
+        condition: service_healthy
+    environment:
+      SPRING_DATASOURCE_URL: "jdbc:postgresql://db_core:5432/${POSTGRES_DB_CORE}"
+      SPRING_DATASOURCE_USERNAME: "${POSTGRES_USER}"
+      SPRING_DATASOURCE_PASSWORD: "${POSTGRES_PASSWORD}"
+      EUREKA_CLIENT_SERVICEURL_DEFAULTZONE: "http://eureka:${EUREKA_PORT}/eureka"
+    networks:
+      - ${NETWORK_NAME}
+    restart: unless-stopped
+
+
+  # ==========================
+  # FRONTEND (Angular + Nginx)
+  # ==========================
+  frontend:
+    image: karina2409/brsm-frontend:latest
+    container_name: frontend
+    ports:
+      - "${FRONTEND_PORT}:${FRONTEND_PORT}"
+    depends_on:
+      api-gateway:
+        condition: service_started
+    networks:
+      - ${NETWORK_NAME}
+    restart: unless-stopped
+
+
+  # ==========================
+  # DATABASES (PostgreSQL)
+  # ==========================
+  db_core:
+    image: postgres:15-alpine
+    container_name: db_core
+    environment:
+      POSTGRES_USER: ${POSTGRES_USER}
+      POSTGRES_PASSWORD: ${POSTGRES_PASSWORD}
+      POSTGRES_DB: ${POSTGRES_DB_CORE}
+    volumes:
+      - pg_core_data:/var/lib/postgresql/data
+    healthcheck:
+      test: ["CMD-SHELL", "pg_isready -U ${POSTGRES_USER}"]
+      interval: 10s
+      timeout: 5s
+      retries: 5
+    networks:
+      - ${NETWORK_NAME}
+    restart: unless-stopped
+
+  db_users:
+    image: postgres:15-alpine
+    container_name: db_users
+    environment:
+      POSTGRES_USER: ${POSTGRES_USER}
+      POSTGRES_PASSWORD: ${POSTGRES_PASSWORD}
+      POSTGRES_DB: ${POSTGRES_DB_USERS}
+    volumes:
+      - pg_users_data:/var/lib/postgresql/data
+    healthcheck:
+      test: ["CMD-SHELL", "pg_isready -U ${POSTGRES_USER}"]
+      interval: 10s
+      timeout: 5s
+      retries: 5
+    networks:
+      - ${NETWORK_NAME}
+    restart: unless-stopped
+
+  db_documents:
+    image: postgres:15-alpine
+    container_name: db_documents
+    environment:
+      POSTGRES_USER: ${POSTGRES_USER}
+      POSTGRES_PASSWORD: ${POSTGRES_PASSWORD}
+      POSTGRES_DB: ${POSTGRES_DB_DOCS}
+    volumes:
+      - pg_documents_data:/var/lib/postgresql/data
+    healthcheck:
+      test: ["CMD-SHELL", "pg_isready -U ${POSTGRES_USER}"]
+      interval: 10s
+      timeout: 5s
+      retries: 5
+    networks:
+      - ${NETWORK_NAME}
+    restart: unless-stopped
+
+  jaeger:
+    image: jaegertracing/all-in-one:latest
+    container_name: jaeger
+    ports:
+      - "${JAEGER_PORT}:${JAEGER_PORT}"
+      - "4318:4318"
+      - "14268:14268"
+      - "14250:14250"
+    networks:
+      - ${NETWORK_NAME}
+
+
+# ==========================
+# Volumes
+# ==========================
+volumes:
+  pg_core_data:
+  pg_users_data:
+  pg_documents_data:
+
+# ==========================
+# Network
+# ==========================
+networks:
+  ${NETWORK_NAME}:
+    name: ${NETWORK_NAME}
