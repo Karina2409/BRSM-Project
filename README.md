@@ -426,11 +426,210 @@ public String createUser(RegisterRequest request) {
 
 ### Unit-тесты
 
-Представить код тестов для пяти методов и его пояснение
+Были реализованы unit-тесты для сервисного и контроллерного слоёв микросервиса AcademicsService.
+
+Тестирование выполнено с использованием JUnit 5, Mockito и Spring Boot Test.
+
+| Название метода                           | Описание                                                             | Результат выполнения |
+|-------------------------------------------|----------------------------------------------------------------------|----------------------|
+| `findAllActiveEvents_returnsActiveEvents` | Получение списка активных (не удалённых) мероприятий                 | Успешно              |
+| `findAllUpcoming_returnsUpcomingEvents`   | Получение предстоящих мероприятий                                    | Успешно              |
+| `findByIdActive_returnsEventWhenExists`   | Поиск мероприятия по идентификатору                                  | Успешно              |
+| `findAllDeleted_returnsDeletedEvents`     | Получение списка удалённых мероприятий                               | Успешно              |
+| `getAllEvents_returnsActiveEvents`        | Проверка корректной обработки запроса получения активных мероприятий | Успешно              |
+
+Код тестов сервисного слоя.
+
+```java
+@ExtendWith(MockitoExtension.class)
+public class EventServiceImplTest {
+    @Mock
+    private EventRepository eventRepository;
+
+    @InjectMocks
+    private EventServiceImpl eventService;
+
+    @Test
+    void findAllActiveEvents_returnsActiveEvents() {
+        Event event = new Event();
+        event.setDeleted(false);
+
+        when(eventRepository.findAllByDeletedFalseOrderByEventDateAscEventTimeAsc())
+                .thenReturn(List.of(event));
+
+        List<Event> result = eventService.findAllActiveEvents();
+
+        assertEquals(1, result.size());
+        verify(eventRepository)
+                .findAllByDeletedFalseOrderByEventDateAscEventTimeAsc();
+    }
+
+    @Test
+    void findAllUpcoming_returnsUpcomingEvents() {
+        Event event = new Event();
+        event.setDeleted(false);
+
+        when(eventRepository.findAllUpcomingNotDeleted())
+                .thenReturn(List.of(event));
+
+        List<Event> result = eventService.findAllUpcoming();
+
+        assertEquals(1, result.size());
+        verify(eventRepository).findAllUpcomingNotDeleted();
+    }
+
+    @Test
+    void findByIdActive_returnsEventWhenExists() {
+        Event event = new Event();
+        event.setEventId(1);
+        event.setDeleted(false);
+
+        when(eventRepository.findByEventIdAndDeletedFalse(1))
+                .thenReturn(Optional.of(event));
+
+        Optional<Event> result = eventService.findByIdActive(1);
+
+        assertTrue(result.isPresent());
+        assertEquals(1, result.get().getEventId());
+        verify(eventRepository).findByEventIdAndDeletedFalse(1);
+    }
+
+    @Test
+    void findAllDeleted_returnsDeletedEvents() {
+        Event event = new Event();
+        event.setDeleted(true);
+
+        when(eventRepository.findAllByDeletedTrueOrderByEventDateDesc())
+                .thenReturn(List.of(event));
+
+        List<Event> result = eventService.findAllDeleted();
+
+        assertEquals(1, result.size());
+        verify(eventRepository)
+                .findAllByDeletedTrueOrderByEventDateDesc();
+    }
+}
+```
 
 ### Интеграционные тесты
 
-Представить код тестов и его пояснение
+Тестирование выполняется с использованием аннотаций `@SpringBootTest` и `@AutoConfigureMockMvc`.
+
+Для каждого теста используется транзакция с автоматическим откатом.
+
+| Название метода                                  | Описание                                                      | Результат выполнения |
+|--------------------------------------------------|---------------------------------------------------------------|----------------------|
+| `getAllEvents_shouldReturnEventsFromDatabase`    | Проверка получения списка активных мероприятий из базы данных | Успешно              |
+| `getUpcomingEvents_shouldReturnOnlyFutureEvents` | Проверка фильтрации предстоящих мероприятий                   | Успешно              |
+| `getEventById_shouldReturnEvent_whenExists`      | Получение мероприятия по ID при наличии записи                | Успешно              |
+| `getEventById_shouldReturn404_whenNotExists`     | Обработка запроса при отсутствии записи                       | Успешно              |
+| `getDeletedEvents_shouldReturnOnlyDeletedEvents` | Получение только удалённых мероприятий                        | Успешно              |
+
+Код интеграционных тестов.
+
+```java
+@SpringBootTest
+@AutoConfigureMockMvc
+@Transactional
+@ActiveProfiles("test")
+public class EventControllerIT {
+
+    @Autowired
+    private MockMvc mockMvc;
+
+    @Autowired
+    private EventRepository eventRepository;
+
+    @Test
+    void getAllEvents_shouldReturnEventsFromDatabase() throws Exception {
+        Event event = new Event();
+        event.setEventName("Integration Event");
+        event.setDeleted(false);
+        event.setEventDate(LocalDate.now().plusDays(1));
+        event.setEventTime(LocalTime.of(12, 0));
+
+        eventRepository.save(event);
+
+        mockMvc.perform(get("/academics/events"))
+                .andExpect(status().isOk())
+                .andExpect(jsonPath("$[*].eventName")
+                        .value(hasItem("Integration Event")));
+    }
+
+    @Test
+    void getUpcomingEvents_shouldReturnOnlyFutureEvents() throws Exception {
+        Event futureEvent = new Event();
+        futureEvent.setEventName("Future Event");
+        futureEvent.setDeleted(false);
+        futureEvent.setEventDate(LocalDate.now().plusDays(2));
+        futureEvent.setEventTime(LocalTime.of(10, 0));
+
+        Event pastEvent = new Event();
+        pastEvent.setEventName("Past Event");
+        pastEvent.setDeleted(false);
+        pastEvent.setEventDate(LocalDate.now().minusDays(1));
+        pastEvent.setEventTime(LocalTime.of(10, 0));
+
+        eventRepository.save(futureEvent);
+        eventRepository.save(pastEvent);
+
+        mockMvc.perform(get("/academics/events/upcoming"))
+                .andExpect(status().isOk())
+                .andExpect(jsonPath("$[*].eventName")
+                        .value(hasItem("Future Event")))
+                .andExpect(jsonPath("$[*].eventName")
+                        .value(org.hamcrest.Matchers.not(hasItem("Past Event"))));
+    }
+
+    @Test
+    void getEventById_shouldReturnEvent_whenExists() throws Exception {
+        Event event = new Event();
+        event.setEventName("Single Event");
+        event.setDeleted(false);
+        event.setEventDate(LocalDate.now().plusDays(1));
+        event.setEventTime(LocalTime.of(15, 0));
+
+        Event saved = eventRepository.save(event);
+
+        mockMvc.perform(get("/academics/events/" + saved.getEventId()))
+                .andExpect(status().isOk())
+                .andExpect(jsonPath("$.eventName").value("Single Event"));
+    }
+
+    @Test
+    void getEventById_shouldReturn404_whenNotExists() throws Exception {
+        mockMvc.perform(get("/academics/events/99999"))
+                .andExpect(status().isNotFound());
+    }
+
+    @Test
+    void getDeletedEvents_shouldReturnOnlyDeletedEvents() throws Exception {
+        Event deletedEvent = new Event();
+        deletedEvent.setEventName("Deleted Event");
+        deletedEvent.setDeleted(true);
+        deletedEvent.setEventDate(LocalDate.now().minusDays(1));
+        deletedEvent.setEventTime(LocalTime.of(10, 0));
+
+        Event activeEvent = new Event();
+        activeEvent.setEventName("Active Event");
+        activeEvent.setDeleted(false);
+        activeEvent.setEventDate(LocalDate.now().plusDays(1));
+        activeEvent.setEventTime(LocalTime.of(10, 0));
+
+        eventRepository.save(deletedEvent);
+        eventRepository.save(activeEvent);
+
+        mockMvc.perform(get("/academics/events/deleted"))
+                .andExpect(status().isOk())
+                .andExpect(jsonPath("$[*].eventName")
+                        .value(hasItem("Deleted Event")))
+                .andExpect(jsonPath("$[*].eventName")
+                        .value(org.hamcrest.Matchers.not(hasItem("Active Event"))));
+    }
+}
+```
+
+![Testing](assets/Testing.png)
 
 ---
 
